@@ -13,6 +13,7 @@ namespace Adventum.Source
     {
         public static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        World gameWorld;
         
 
 
@@ -49,7 +50,9 @@ namespace Adventum.Source
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
-            Core.Resource.ResourceManager.LoadContent(Content);
+            ResourceManager.LoadContent(Content);
+
+            gameWorld = new World();
         }
 
 
@@ -75,7 +78,7 @@ namespace Adventum.Source
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            gameWorld.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -93,7 +96,7 @@ namespace Adventum.Source
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(ResourceManager.GetTexture("test"), Vector2.Zero, Color.White);
+            gameWorld.Draw(spriteBatch);
 
             spriteBatch.End();
 

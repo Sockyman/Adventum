@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Bumble.Source.Util
+namespace Adventum.Source.Util
 {
     public class DeltaTime : GameTime
     {
