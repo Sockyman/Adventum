@@ -10,12 +10,15 @@ namespace Adventum.Source.Core
     public class World
     {
         private EntityManager entityManager;
+        public Player player;
 
         public World()
         {
             entityManager = new EntityManager();
 
-            entityManager.CreateEntity(new Entity(new Vector2(12f)));
+            Entity playerEntity = entityManager.CreateEntity(new Entity(new Vector2(12f)));
+            player = new Player(this);
+            player.charcter = playerEntity;
         }
 
 
