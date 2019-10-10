@@ -8,6 +8,9 @@ namespace Adventum.Source.Entities
 {
     public class Entity
     {
+        public const float MaxMovementSpeed = 200;
+
+
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; private set; }
         public Texture2D Sprite { get; protected set; }
@@ -38,6 +41,13 @@ namespace Adventum.Source.Entities
             Vector2 direction = angle.ToVector(velocity);
 
             Velocity += direction;
+        }
+
+
+        public virtual void Move(Vector2 angle, float speed)
+        {
+            if (angle.LengthSquared() != 0)
+                Position += Angle.FromVector(angle).ToVector(speed);
         }
     }
 }
