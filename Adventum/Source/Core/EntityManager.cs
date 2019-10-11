@@ -24,6 +24,7 @@ namespace Adventum.Source.Core
         public Entity CreateEntity(Entity entity)
         {
             entitiesToAdd.Add(entity);
+            World.collisionWorld.CreateActor(entity);
             return entity;
         }
 

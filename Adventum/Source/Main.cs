@@ -12,8 +12,10 @@ namespace Adventum.Source
     public class Main : Game
     {
         public static GraphicsDeviceManager graphics;
+        public static World gameWorld;
         SpriteBatch spriteBatch;
-        World gameWorld;
+        RenderTarget2D renderTarget;
+        
         
 
 
@@ -21,6 +23,13 @@ namespace Adventum.Source
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+
+            graphics.IsFullScreen = true;
+
+            IsFixedTimeStep = false;
         }
 
 
@@ -48,6 +57,7 @@ namespace Adventum.Source
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            renderTarget = new RenderTarget2D(GraphicsDevice, 640, 360);
 
 
             ResourceManager.LoadContent(Content);
@@ -92,12 +102,17 @@ namespace Adventum.Source
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.SetRenderTarget(renderTarget);
 
-
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             gameWorld.Draw(spriteBatch);
 
+            spriteBatch.End();
+
+            GraphicsDevice.SetRenderTarget(null);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
             spriteBatch.End();
 
 
