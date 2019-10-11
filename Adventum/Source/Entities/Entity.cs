@@ -2,27 +2,48 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
+using Adventum.Source.Core.Resource;
 using Adventum.Source.Util;
+using Adventum.Source.Core.Collision;
 
 namespace Adventum.Source.Entities
 {
-    public class Entity : IActorTarget
+    public class Entity : ICollidable
     {
         public const float MaxMovementSpeed = 200;
 
 
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
-        public RectangleF BoundingBox { get; set; }
+        public Rectangle BoundingBox { get; set; }
+        public Rectangle CollisionMask
+        {
+            get
+            {
+                Rectangle mask = BoundingBox;
+                mask.Location += Position.ToPoint();
+                return mask;
+            }
+        }
+
         public Texture2D Sprite { get; protected set; }
+        public Point Origin { get; protected set; }
         
 
         public Entity(Vector2 position)
         {
             Position = position;
 
-            Sprite = Core.Resource.ResourceManager.GetTexture("humanBase");
+            SetSprite("humanBase", new Point(16));
+        }
+
+
+        protected void SetSprite(string name, Point bounds)
+        {
+            Sprite = ResourceManager.GetTexture(name);
+
+            Origin = new Point(Sprite.Width / 2, Sprite.Height);
+            BoundingBox = new Rectangle(Origin.X - bounds.X / 2, Origin.Y - bounds.Y / 2, Origin.X + bounds.X / 2, Origin.Y + bounds.Y / 2);
         }
 
 
@@ -35,13 +56,9 @@ namespace Adventum.Source.Entities
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, Position, Color.White);
-        }
+            spriteBatch.Draw(Sprite, Position, color: Color.White, origin: Origin.ToVector2(), layerDepth: Position.Y / 360);
 
-
-        public virtual void OnCollision(CollisionInfo collisionInfo)
-        {
-            
+            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
         }
 
 

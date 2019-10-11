@@ -8,7 +8,7 @@ namespace Adventum.Source.Core.Resource
 {
     public static class ResourceManager
     {
-        private static string[] texturesToLoad = { "test", "humanBase" };
+        private static string[] texturesToLoad = { "test", "humanBase", "pixel" };
         private static Dictionary<string, Texture2D> texturesLoaded;
 
 
