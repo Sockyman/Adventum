@@ -62,6 +62,12 @@ namespace Adventum.Source.Entities
         }
 
 
+        public virtual void OnCollision(ICollidable other)
+        {
+
+        }
+
+
         public virtual void ApplyDirecionalVelocity(Angle angle, float velocity)
         {
             Vector2 direction = angle.ToVector(velocity);
