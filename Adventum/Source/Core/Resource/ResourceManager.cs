@@ -8,34 +8,43 @@ namespace Adventum.Source.Core.Resource
 {
     public static class ResourceManager
     {
-        private static string[] texturesToLoad = { "test", "humanBase", "pixel" };
+        public static ContentManager content;
+
+        private static string[] texturesToLoad = { };
         private static Dictionary<string, Texture2D> texturesLoaded;
 
 
         public static void LoadContent(ContentManager content)
         {
-            texturesLoaded = LoadContentType<Texture2D>(content, "Texture", texturesToLoad);
+            ResourceManager.content = content;
+
+            texturesLoaded = LoadContentType<Texture2D>("Texture", texturesToLoad);
         }
 
 
-        private static Dictionary<string, T> LoadContentType<T>(ContentManager content, string rootFolder, string[] filesToLoad)
+        private static Dictionary<string, T> LoadContentType<T>(string rootFolder, string[] filesToLoad)
         {
             Dictionary<string, T> resourcesLoaded = new Dictionary<string, T>();
 
             foreach (string name in filesToLoad)
             {
-                try
-                {
-                    T resource = content.Load<T>(rootFolder + "/" + name);
-                    resourcesLoaded[name] = resource;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Resource: " + rootFolder + "/" + name + ", failed to load.");
-                }
+                LoadItem<T>(rootFolder, name, resourcesLoaded);
             }
 
             return resourcesLoaded;
+        }
+
+        private static void LoadItem<T>(string rootFolder, string name, Dictionary<string, T> resourceMap)
+        {
+            try
+            {
+                T resource = content.Load<T>(rootFolder + "/" + name);
+                resourceMap[name] = resource;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Resource: " + rootFolder + @"\" + name + ", failed to load.");
+            }
         }
 
 
@@ -48,6 +57,11 @@ namespace Adventum.Source.Core.Resource
             }
             else
             {
+                LoadItem<Texture2D>("Texture", name, texturesLoaded);
+                if (texturesLoaded.ContainsKey(name))
+                {
+                    return texturesLoaded[name];
+                }
                 return new Texture2D(Main.graphics.GraphicsDevice, 32, 32);
             }
         }
