@@ -10,6 +10,8 @@ namespace Adventum.Source.Core
 {
     public class World
     {
+        public static Random random;
+
         public static EntityManager entityManager;
 
         public Player player;
@@ -17,15 +19,21 @@ namespace Adventum.Source.Core
 
         public World()
         {
+            random = new Random();
+
             entityManager = new EntityManager();
             input = new Input();
 
 
             {
-                Entity playerEntity = entityManager.CreateEntity(new Entity(new Vector2(32f)));
-                entityManager.CreateEntity(new Entity(new Vector2(100f)));
+                Entity playerEntity = entityManager.CreateEntity(new Entity(new Vector2(200f)));
                 player = new Player(this, input);
                 player.player = playerEntity;
+
+                for (int i = 0; i < 10000; i++)
+                {
+                    entityManager.CreateEntity(new Entity(new Vector2(random.Next(640), random.Next(360))));
+                }
             }
         }
 

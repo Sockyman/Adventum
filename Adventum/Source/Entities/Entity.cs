@@ -58,7 +58,7 @@ namespace Adventum.Source.Entities
         {
             spriteBatch.Draw(Sprite, Position, color: Color.White, origin: Origin.ToVector2(), layerDepth: Position.Y / 360);
 
-            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
+            //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
         }
 
 
