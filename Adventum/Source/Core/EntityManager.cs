@@ -24,13 +24,18 @@ namespace Adventum.Source.Core
         public Entity CreateEntity(Entity entity)
         {
             entitiesToAdd.Add(entity);
+            World.collisionManager.AddCollider(entity);
             return entity;
         }
 
 
         public void RemoveEntity(Entity entity)
         {
-            entitiesToRemove.Add(entity);
+            if (EntityExists(entity))
+            {
+                entitiesToRemove.Add(entity);
+                World.collisionManager.RemoveCollider(entity);
+            }
         }
 
 
@@ -50,18 +55,7 @@ namespace Adventum.Source.Core
                 e.Update(delta);
             }
 
-            foreach (Entity e in entitiesToAdd)
-            {
-                entities.Add(e);
-            }
-
-            foreach (Entity e in entitiesToRemove)
-            {
-                entities.Remove(e);
-            }
-
-            entitiesToAdd.Clear();
-            entitiesToRemove.Clear();
+            Utils.SyncLists<Entity>(entities, entitiesToAdd, entitiesToRemove);
         }
 
 

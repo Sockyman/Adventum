@@ -25,8 +25,6 @@ namespace Adventum.Source.Core
 
         public void Update(DeltaTime delta)
         {
-            player.jitter = false;
-
             Vector2 movement = new Vector2();
             movement.X += input.CheckAxis(Keys.A, Keys.D);
             movement.Y += input.CheckAxis(Keys.W, Keys.S);

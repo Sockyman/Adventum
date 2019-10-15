@@ -34,6 +34,7 @@ namespace Adventum.Source.Core.Resource
             return resourcesLoaded;
         }
 
+
         private static void LoadItem<T>(string rootFolder, string name, Dictionary<string, T> resourceMap)
         {
             try
@@ -43,7 +44,7 @@ namespace Adventum.Source.Core.Resource
             }
             catch (Exception)
             {
-                Console.WriteLine("Resource: " + rootFolder + @"\" + name + ", failed to load.");
+                Console.WriteLine("Resource: " + rootFolder + "\\" + name + ", failed to load.");
             }
         }
 

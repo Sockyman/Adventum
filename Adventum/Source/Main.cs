@@ -27,7 +27,7 @@ namespace Adventum.Source
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
 
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
 
             IsFixedTimeStep = false;
         }
@@ -87,6 +87,7 @@ namespace Adventum.Source
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
 
             gameWorld.Update(gameTime);
 

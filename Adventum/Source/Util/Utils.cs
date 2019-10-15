@@ -23,5 +23,22 @@ namespace Adventum.Source.Util
 
             return toDampen * sign;
         }
+
+
+        public static void SyncLists<T>(List<T> objects, List<T> toAdd, List<T> toRemove)
+        {
+            foreach (T t in toAdd)
+            {
+                objects.Add(t);
+            }
+
+            foreach (T t in toRemove)
+            {
+                objects.Remove(t);
+            }
+
+            toAdd.Clear();
+            toRemove.Clear();
+        }
     }
 }

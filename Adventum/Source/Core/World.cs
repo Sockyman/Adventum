@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Adventum.Source.Entities;
 using Adventum.Source.Util;
 using Adventum.Source.Core.IO;
+using Adventum.Source.Core.Collision;
 
 namespace Adventum.Source.Core
 {
@@ -13,6 +15,7 @@ namespace Adventum.Source.Core
         public static Random random;
 
         public static EntityManager entityManager;
+        public static CollisionManager collisionManager;
 
         public Player player;
         public Input input;
@@ -21,6 +24,7 @@ namespace Adventum.Source.Core
         {
             random = new Random();
 
+            collisionManager = new CollisionManager();
             entityManager = new EntityManager();
             input = new Input();
 
@@ -30,7 +34,7 @@ namespace Adventum.Source.Core
                 player = new Player(this, input);
                 player.player = playerEntity;
 
-                for (int i = 0; i < 10000; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     entityManager.CreateEntity(new Entity(new Vector2(random.Next(640), random.Next(360))));
                 }
@@ -43,9 +47,16 @@ namespace Adventum.Source.Core
             DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
 
             entityManager.Update(delta);
+            collisionManager.Update(delta);
 
             input.Update();
             player.Update(delta);
+
+            if (input.KeyCheckPressed(Keys.F11))
+            {
+                Main.graphics.IsFullScreen = !Main.graphics.IsFullScreen;
+                Main.graphics.ApplyChanges();
+            }
         }
 
 

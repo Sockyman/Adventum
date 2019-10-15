@@ -12,6 +12,7 @@ namespace Adventum.Source.Entities
     {
         public const float MaxMovementSpeed = 200;
 
+        protected Random random;
 
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
@@ -28,13 +29,20 @@ namespace Adventum.Source.Entities
 
         public Texture2D Sprite { get; protected set; }
         public Point Origin { get; protected set; }
+
+
+        int tempTest;
         
 
         public Entity(Vector2 position)
         {
+            random = new Random();
+
             Position = position;
 
             SetSprite("humanBase", new Point(16));
+
+            tempTest = random.Next(1000);
         }
 
 
@@ -64,7 +72,7 @@ namespace Adventum.Source.Entities
 
         public virtual void OnCollision(ICollidable other)
         {
-
+            Console.WriteLine(tempTest);
         }
 
 

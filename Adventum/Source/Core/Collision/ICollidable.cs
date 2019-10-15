@@ -7,9 +7,12 @@ namespace Adventum.Source.Core.Collision
     {
         Vector2 Position { get; set; }
 
+
         Rectangle BoundingBox { get; set; }
+        
 
         Rectangle CollisionMask { get; }
+
 
         void OnCollision(ICollidable other);
     }
