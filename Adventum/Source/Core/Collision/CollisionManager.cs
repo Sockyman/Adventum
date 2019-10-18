@@ -31,8 +31,8 @@ namespace Adventum.Source.Core.Collision
                 {
                     if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask) && colliders[i] != colliders[j])
                     {
-                        colliders[i].OnCollision(colliders[j]);
-                        colliders[j].OnCollision(colliders[i]);
+                        colliders[i].OnCollision(new CollisionData(colliders[j]));
+                        colliders[j].OnCollision(new CollisionData(colliders[i]));
                     }
                 }
             }

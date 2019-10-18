@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Adventum.Source.Entities;
 using Adventum.Source.Util;
+using Adventum.Source.World;
 
 namespace Adventum.Source.Core
 {
@@ -24,7 +25,7 @@ namespace Adventum.Source.Core
         public Entity CreateEntity(Entity entity)
         {
             entitiesToAdd.Add(entity);
-            World.collisionManager.AddCollider(entity);
+            GameWorld.collisionManager.AddCollider(entity);
             return entity;
         }
 
@@ -34,7 +35,7 @@ namespace Adventum.Source.Core
             if (EntityExists(entity))
             {
                 entitiesToRemove.Add(entity);
-                World.collisionManager.RemoveCollider(entity);
+                GameWorld.collisionManager.RemoveCollider(entity);
             }
         }
 

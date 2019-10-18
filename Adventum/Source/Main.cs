@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Adventum.Source.Core;
 using Adventum.Source.Core.Resource;
+using Adventum.Source.World;
 
 namespace Adventum.Source
 {
@@ -12,7 +13,7 @@ namespace Adventum.Source
     public class Main : Game
     {
         public static GraphicsDeviceManager graphics;
-        public static World gameWorld;
+        public static GameWorld gameWorld;
         SpriteBatch spriteBatch;
         RenderTarget2D renderTarget;
         
@@ -62,7 +63,7 @@ namespace Adventum.Source
 
             ResourceManager.LoadContent(Content);
 
-            gameWorld = new World();
+            gameWorld = new GameWorld();
         }
 
 

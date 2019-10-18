@@ -16,6 +16,7 @@ namespace Adventum.Source.Entities
 
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
+        public CollisionData Collisions { get; set; }
         public Rectangle BoundingBox { get; set; }
         public Rectangle CollisionMask
         {
@@ -27,22 +28,24 @@ namespace Adventum.Source.Entities
             }
         }
 
+        public bool Solid { get; set; }
+
         public Texture2D Sprite { get; protected set; }
         public Point Origin { get; protected set; }
 
 
-        int tempTest;
         
 
         public Entity(Vector2 position)
         {
             random = new Random();
 
+            Solid = true;
+
             Position = position;
+            Collisions = new CollisionData();
 
             SetSprite("humanBase", new Point(16));
-
-            tempTest = random.Next(1000);
         }
 
 
@@ -57,8 +60,10 @@ namespace Adventum.Source.Entities
 
         public virtual void Update(DeltaTime delta)
         {
-            Position += Velocity * delta.Seconds;
+            Move(Velocity * delta.Seconds);
             Utils.Dampen(Velocity, 100 * delta.Seconds);
+
+            Collisions.Clear();
         }
 
 
@@ -70,9 +75,9 @@ namespace Adventum.Source.Entities
         }
 
 
-        public virtual void OnCollision(ICollidable other)
+        public virtual void OnCollision(CollisionData collisionData)
         {
-            Console.WriteLine(tempTest);
+            Collisions.Merge(collisionData);
         }
 
 
@@ -84,10 +89,14 @@ namespace Adventum.Source.Entities
         }
 
 
+        public virtual void Move(Vector2 vector)
+        {
+            Position += vector;
+        }
         public virtual void Move(Vector2 angle, float speed)
         {
             if (angle.LengthSquared() != 0)
-                Position += Angle.FromVector(angle).ToVector(speed);
+                Move(Angle.FromVector(angle).ToVector(speed));
         }
     }
 }

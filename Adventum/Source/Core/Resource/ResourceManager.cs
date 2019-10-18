@@ -49,7 +49,6 @@ namespace Adventum.Source.Core.Resource
         }
 
 
-
         public static Texture2D GetTexture(string name)
         {
             if (texturesLoaded.ContainsKey(name))

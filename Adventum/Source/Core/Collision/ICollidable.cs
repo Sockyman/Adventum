@@ -14,6 +14,9 @@ namespace Adventum.Source.Core.Collision
         Rectangle CollisionMask { get; }
 
 
-        void OnCollision(ICollidable other);
+        bool Solid { get; set; }
+
+
+        void OnCollision(CollisionData collisionData);
     }
 }

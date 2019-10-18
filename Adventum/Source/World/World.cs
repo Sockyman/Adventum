@@ -5,12 +5,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Adventum.Source.Entities;
 using Adventum.Source.Util;
+using Adventum.Source.Core;
 using Adventum.Source.Core.IO;
 using Adventum.Source.Core.Collision;
 
-namespace Adventum.Source.Core
+namespace Adventum.Source.World
 {
-    public class World
+    public class GameWorld
     {
         public static Random random;
 
@@ -20,7 +21,7 @@ namespace Adventum.Source.Core
         public Player player;
         public Input input;
 
-        public World()
+        public GameWorld()
         {
             random = new Random();
 
@@ -30,14 +31,11 @@ namespace Adventum.Source.Core
 
 
             {
-                Entity playerEntity = entityManager.CreateEntity(new Entity(new Vector2(200f)));
+                Entity playerEntity = entityManager.CreateEntity(new Mob(new Vector2(200f)));
                 player = new Player(this, input);
                 player.player = playerEntity;
 
-                for (int i = 0; i < 1; i++)
-                {
-                    entityManager.CreateEntity(new Entity(new Vector2(random.Next(640), random.Next(360))));
-                }
+                entityManager.CreateEntity(new Entity(new Vector2(random.Next(400), random.Next(300))));
             }
         }
 
