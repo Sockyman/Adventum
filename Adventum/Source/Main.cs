@@ -17,7 +17,6 @@ namespace Adventum.Source
         SpriteBatch spriteBatch;
         RenderTarget2D renderTarget;
         
-        
 
 
         public Main()
@@ -46,6 +45,7 @@ namespace Adventum.Source
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
         }
 
 

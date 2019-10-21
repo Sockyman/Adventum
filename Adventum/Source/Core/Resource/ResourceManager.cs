@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Adventum.Data;
 
 namespace Adventum.Source.Core.Resource
 {
@@ -10,15 +11,17 @@ namespace Adventum.Source.Core.Resource
     {
         public static ContentManager content;
 
-        private static string[] texturesToLoad = { };
+        //private static string[] texturesToLoad = { };
         private static Dictionary<string, Texture2D> texturesLoaded;
+        private static Dictionary<string, SpriteDefinition> spriteDefinitionsLoaded;
 
 
         public static void LoadContent(ContentManager content)
         {
             ResourceManager.content = content;
 
-            texturesLoaded = LoadContentType<Texture2D>("Texture", texturesToLoad);
+            texturesLoaded = new Dictionary<string, Texture2D>();
+            spriteDefinitionsLoaded = new Dictionary<string, SpriteDefinition>();
         }
 
 
@@ -35,35 +38,39 @@ namespace Adventum.Source.Core.Resource
         }
 
 
-        private static void LoadItem<T>(string rootFolder, string name, Dictionary<string, T> resourceMap)
+        private static T LoadItem<T>(string rootFolder, string name, Dictionary<string, T> resourceMap)
         {
-            try
+            if (!resourceMap.ContainsKey(name))
             {
-                T resource = content.Load<T>(rootFolder + "/" + name);
-                resourceMap[name] = resource;
+                try
+                {
+                    T resource = content.Load<T>(rootFolder + "/" + name);
+                    resourceMap[name] = resource;
+                    return resource;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Resource: " + rootFolder + "\\" + name + ", failed to load.");
+                    return default(T);
+                }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Resource: " + rootFolder + "\\" + name + ", failed to load.");
-            }
+            return resourceMap[name];
         }
 
 
         public static Texture2D GetTexture(string name)
         {
-            if (texturesLoaded.ContainsKey(name))
-            {
-                return texturesLoaded[name];
-            }
-            else
-            {
-                LoadItem<Texture2D>("Texture", name, texturesLoaded);
-                if (texturesLoaded.ContainsKey(name))
-                {
-                    return texturesLoaded[name];
-                }
-                return new Texture2D(Main.graphics.GraphicsDevice, 32, 32);
-            }
+            Texture2D texture = LoadItem<Texture2D>("Texture", name, texturesLoaded);
+            if (texture != null)
+                return texture;
+            return new Texture2D(Main.graphics.GraphicsDevice, 32, 32);
+        }
+
+
+        public static SpriteDefinition GetSpriteDefinition(string name)
+        {
+            SpriteDefinition spriteDefinition = LoadItem<SpriteDefinition>("SpriteDefinition", name, spriteDefinitionsLoaded);
+
         }
     }
 }

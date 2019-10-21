@@ -10,20 +10,14 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\Adventum.Data\bin\Debug\Adventum.Data.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Texture/humanBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/humanBase.png
+#begin SpriteDefinition/HumanoidBase.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteDefinition/HumanoidBase.xml
 
 #begin Texture/humanBase.png
 /importer:TextureImporter
@@ -48,18 +42,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/pixel.png
-
-#begin Texture/test.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/test.png
 
 #begin Texture/test.png
 /importer:TextureImporter
