@@ -35,7 +35,6 @@ namespace Adventum.Source.Entities
 
 
         
-
         public Entity(Vector2 position)
         {
             random = new Random();
@@ -47,17 +46,17 @@ namespace Adventum.Source.Entities
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
             Sprite.ChangeAnimation("walk");
+
+            SetBounds(new Point(16));
         }
 
 
 
-        /*protected void SetSprite(string name, Point bounds)
+        protected void SetBounds(Point bounds)
         {
-            Sprite = ResourceManager.GetTexture(name);
-
-            Origin = new Point(Sprite.Width / 2, Sprite.Height);
-            BoundingBox = new Rectangle(Origin.X - bounds.X / 2, Origin.Y - bounds.Y / 2, Origin.X + bounds.X / 2, Origin.Y + bounds.Y / 2);
-        }*/
+            Point origin = new Point(Sprite.Sprite.frameSize.X / 2, Sprite.Sprite.frameSize.Y);
+            BoundingBox = new Rectangle(origin.X - bounds.X / 2, origin.Y - bounds.Y / 2, origin.X + bounds.X / 2, origin.Y + bounds.Y / 2);
+        }
 
 
 

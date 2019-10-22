@@ -4,6 +4,15 @@ using Microsoft.Xna.Framework;
 
 namespace Adventum.Data
 {
+    public enum Direction
+    {
+        Down,
+        Left,
+        Up,
+        Right
+    }
+
+
     public class SpriteSheet
     {
         public string name = "";

@@ -79,7 +79,7 @@ namespace Adventum.Source.Sprite
 
         public Texture2D GetTexture()
         {
-            return Utils.GetTexturePart(SpriteTexture, new Rectangle(ActiveAnimation.cellOfOrigin.X + FrameIndex * Sprite.frameSize.X, ActiveAnimation.cellOfOrigin.Y, 
+            return Utils.GetTexturePart(SpriteTexture, new Rectangle(ActiveAnimation.cellOfOrigin.X + FrameIndex * Sprite.frameSize.X, ActiveAnimation.cellOfOrigin.Y * Sprite.frameSize.Y, 
                 Sprite.frameSize.X, Sprite.frameSize.Y));
         }
 
