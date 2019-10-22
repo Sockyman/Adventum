@@ -13,7 +13,7 @@ namespace Adventum.Source.Core.Resource
 
         //private static string[] texturesToLoad = { };
         private static Dictionary<string, Texture2D> texturesLoaded;
-        private static Dictionary<string, SpriteDefinition> spriteDefinitionsLoaded;
+        private static Dictionary<string, SpriteSheet> spriteSheetsLoaded;
 
 
         public static void LoadContent(ContentManager content)
@@ -21,7 +21,7 @@ namespace Adventum.Source.Core.Resource
             ResourceManager.content = content;
 
             texturesLoaded = new Dictionary<string, Texture2D>();
-            spriteDefinitionsLoaded = new Dictionary<string, SpriteDefinition>();
+            spriteSheetsLoaded = new Dictionary<string, SpriteSheet>();
         }
 
 
@@ -67,10 +67,15 @@ namespace Adventum.Source.Core.Resource
         }
 
 
-        public static SpriteDefinition GetSpriteDefinition(string name)
+        public static SpriteSheet GetSpriteSheet(string name)
         {
-            SpriteDefinition spriteDefinition = LoadItem<SpriteDefinition>("SpriteDefinition", name, spriteDefinitionsLoaded);
+            SpriteSheet spriteSheet = LoadItem<SpriteSheet>("SpriteSheet", name, spriteSheetsLoaded);
+            if (spriteSheet != default)
+            {
+                return spriteSheet;
+            }
 
+            return new SpriteSheet();
         }
     }
 }

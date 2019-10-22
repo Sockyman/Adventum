@@ -13,21 +13,20 @@ namespace Adventum.Data.Generator
         static void Main(string[] args)
         {
 
-            SpriteDefinition data = new SpriteDefinition();
+            SpriteSheet data = new SpriteSheet();
 
 
             data.name = "ooga";
             data.origin = new Point(16, 32);
             data.frameSize = new Point(32);
-            data.animations = new List<AnimationDefinition>();
+            data.animations = new Dictionary<string, Animation>();
 
-            AnimationDefinition ani = new AnimationDefinition();
+            Animation ani = new Animation();
             ani.cellOfOrigin = new Point(0);
             ani.frames = 1;
             ani.FPS = 15;
-            ani.name = "idle";
 
-            data.animations.Add(ani);
+            data.animations["NameOfAnimation"] = ani;
 
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;

@@ -5,6 +5,7 @@ using MonoGame.Extended;
 using Adventum.Source.Core.Resource;
 using Adventum.Source.Util;
 using Adventum.Source.Core.Collision;
+using Adventum.Source.Sprite;
 
 namespace Adventum.Source.Entities
 {
@@ -30,8 +31,7 @@ namespace Adventum.Source.Entities
 
         public bool Solid { get; set; }
 
-        public Texture2D Sprite { get; protected set; }
-        public Point Origin { get; protected set; }
+        public Animator Sprite { get; set; }
 
 
         
@@ -45,17 +45,20 @@ namespace Adventum.Source.Entities
             Position = position;
             Collisions = new CollisionData();
 
-            SetSprite("humanBase", new Point(16));
+            Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
+            Sprite.ChangeAnimation("walk");
         }
 
 
-        protected void SetSprite(string name, Point bounds)
+
+        /*protected void SetSprite(string name, Point bounds)
         {
             Sprite = ResourceManager.GetTexture(name);
 
             Origin = new Point(Sprite.Width / 2, Sprite.Height);
             BoundingBox = new Rectangle(Origin.X - bounds.X / 2, Origin.Y - bounds.Y / 2, Origin.X + bounds.X / 2, Origin.Y + bounds.Y / 2);
-        }
+        }*/
+
 
 
         public virtual void Update(DeltaTime delta)
@@ -64,14 +67,17 @@ namespace Adventum.Source.Entities
             Utils.Dampen(Velocity, 100 * delta.Seconds);
 
             Collisions.Clear();
+
+            Sprite.Update(delta);
         }
 
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, Position, color: Color.White, origin: Origin.ToVector2(), layerDepth: Position.Y / 360);
+            //spriteBatch.Draw(Sprite.GetTexture(), Position, color: Color.White, layerDepth: Position.Y / 360);
+            Sprite.Draw(spriteBatch, Position);
 
-            //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
+            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
         }
 
 

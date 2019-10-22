@@ -60,6 +60,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />
     <Compile Include="Source\Core\Collision\ICollidable.cs" />
@@ -146,9 +147,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Animation\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
@@ -162,6 +161,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\SpriteSheet\HumanoidBase.xml" />
     <Content Include="Content\Texture\humanBase.png" />
     <Content Include="Content\Texture\pixel.png" />
     <Content Include="Content\Texture\test.png" />

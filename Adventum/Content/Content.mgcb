@@ -14,10 +14,10 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin SpriteDefinition/HumanoidBase.xml
+#begin SpriteSheet/HumanoidBase.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
-/build:SpriteDefinition/HumanoidBase.xml
+/build:SpriteSheet/HumanoidBase.xml
 
 #begin Texture/humanBase.png
 /importer:TextureImporter

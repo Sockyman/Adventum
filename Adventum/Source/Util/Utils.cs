@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Adventum.Source.Util
 {
@@ -13,7 +14,6 @@ namespace Adventum.Source.Util
 
             return vector;
         }
-
         public static float Dampen(float toDampen, float dampening)
         {
             int sign = Math.Sign(toDampen);
@@ -39,6 +39,24 @@ namespace Adventum.Source.Util
 
             toAdd.Clear();
             toRemove.Clear();
+        }
+
+
+        public static Texture2D GetTexturePart(Texture2D texture, Rectangle rectangle)
+        {
+            Color[] imageData = new Color[texture.Width * texture.Height];
+            texture.GetData<Color>(imageData);
+
+            Color[] data = new Color[rectangle.Width * rectangle.Height];
+            int i = 0;
+
+            for (int y = 0; y < rectangle.Height; y++)
+                for (int x = 0; x < rectangle.Width; x++)
+                    data[x + y * rectangle.Height] = imageData[x + rectangle.X + (y + rectangle.Y) * texture.Width];
+
+            Texture2D final = new Texture2D(Main.graphics.GraphicsDevice, rectangle.Width, rectangle.Height);
+            final.SetData<Color>(data);
+            return final;
         }
     }
 }
