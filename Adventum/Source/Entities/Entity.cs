@@ -59,7 +59,6 @@ namespace Adventum.Source.Entities
         }
 
 
-
         public virtual void Update(DeltaTime delta)
         {
             Move(Velocity * delta.Seconds);
