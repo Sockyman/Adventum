@@ -12,10 +12,10 @@ namespace Adventum.Data.Generator
     {
         static void Main(string[] args)
         {
-            DirectionMap data = new DirectionMap();
+            //DirectionMap data = DirectionMap.standardMobMap;
 
-            Serialize(data);
-            
+
+            SerializeSpriteSheet();
         }
 
 

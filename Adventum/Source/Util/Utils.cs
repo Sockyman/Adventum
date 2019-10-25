@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using Adventum.Data;
 
 namespace Adventum.Source.Util
 {
@@ -57,6 +59,12 @@ namespace Adventum.Source.Util
             Texture2D final = new Texture2D(Main.graphics.GraphicsDevice, rectangle.Width, rectangle.Height);
             final.SetData<Color>(data);
             return final;
+        }
+
+
+        public static Direction AngleToDirection(Angle angle)
+        {
+            return (Direction)(angle.Revolutions * Enum.GetValues(typeof(Direction)).Length);
         }
     }
 }

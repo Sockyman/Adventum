@@ -6,6 +6,8 @@ using Adventum.Source.Core.Resource;
 using Adventum.Source.Util;
 using Adventum.Source.Core.Collision;
 using Adventum.Source.Sprite;
+using Adventum.Source.States;
+using Adventum.Data;
 
 namespace Adventum.Source.Entities
 {
@@ -28,6 +30,7 @@ namespace Adventum.Source.Entities
                 return mask;
             }
         }
+        public EntityState state;
 
         public bool Solid { get; set; }
 
@@ -43,9 +46,9 @@ namespace Adventum.Source.Entities
 
             Position = position;
             Collisions = new CollisionData();
+            state = new EntityState("idle");
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
-            Sprite.ChangeAnimation("walk");
 
             SetBounds(new Point(16));
         }
@@ -93,14 +96,18 @@ namespace Adventum.Source.Entities
         }
 
 
-        public virtual void Move(Vector2 vector)
+        public virtual void Move(Vector2 vector, bool changeDirection = false)
         {
             Position += vector;
+            if (changeDirection)
+            {
+                state.Facing = Utils.AngleToDirection(Angle.FromVector(vector));
+            }
         }
-        public virtual void Move(Vector2 angle, float speed)
+        public virtual void Move(Vector2 angle, float speed, bool changeDirection = false)
         {
             if (angle.LengthSquared() != 0)
-                Move(Angle.FromVector(angle).ToVector(speed));
+                Move(Angle.FromVector(angle).ToVector(speed), changeDirection);
         }
     }
 }

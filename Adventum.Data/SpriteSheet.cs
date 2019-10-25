@@ -27,31 +27,44 @@ namespace Adventum.Data
 
     public class Animation
     {
-        public Point cellOfOrigin;
-        public int frames;
-        public int FPS;
+        public Point cellOfOrigin = new Point();
+        public int frames = 1;
+        public int FPS = 0;
+        public DirectionMap directionMap = new DirectionMap();
     }
 
 
     public class DirectionMap
     {
-        public static DirectionMap standardDirectionMap = new DirectionMap();
+        public static DirectionMap standardMobMap = new DirectionMap(new Point(), new Point(0, 1), new Point(0, 2), new Point(0, 3));
 
         [ContentSerializer(FlattenContent = true)]
-        public Dictionary<Direction, Point> map = new Dictionary<Direction, Point>();
+        public Point[] map = new Point[Enum.GetValues(typeof(Direction)).Length];
 
 
         public DirectionMap()
         {
-            foreach (Direction d in Enum.GetValues(typeof(Direction)))
-                map[d] = Point.Zero;
+            for (int i = 0; i < map.Length; i++)
+            {
+                map[i] = new Point();
+            }
         }
         public DirectionMap(Point down, Point left, Point up, Point right)
         {
-            map[Direction.Down] = down;
-            map[Direction.Left] = left;
-            map[Direction.Up] = up;
-            map[Direction.Right] = right;
+            SetDirection(Direction.Down, down);
+            SetDirection(Direction.Left, left);
+            SetDirection(Direction.Up, up);
+            SetDirection(Direction.Right, right);
+        }
+
+
+        public Point GetDirection(Direction direction)
+        {
+            return map[(int)direction];
+        }
+        public void SetDirection(Direction direction, Point position)
+        {
+            map[(int)direction] = position;
         }
     }
 }
