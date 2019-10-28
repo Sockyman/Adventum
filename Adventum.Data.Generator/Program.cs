@@ -12,7 +12,26 @@ namespace Adventum.Data.Generator
     {
         static void Main(string[] args)
         {
+            //DirectionMap data = DirectionMap.standardMobMap;
 
+
+            SerializeSpriteSheet();
+        }
+
+
+        static void Serialize<T>(T data)
+        {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+
+            using (XmlWriter writer = XmlWriter.Create("test.xml", settings))
+            {
+                Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, data, null);
+            }
+        }
+
+        static void SerializeSpriteSheet()
+        {
             SpriteSheet data = new SpriteSheet();
 
 
@@ -28,13 +47,7 @@ namespace Adventum.Data.Generator
 
             data.animations["NameOfAnimation"] = ani;
 
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-
-            using (XmlWriter writer = XmlWriter.Create("test.xml", settings))
-            {
-                Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, data, null);
-            }
+            Serialize(data);
         }
     }
 }

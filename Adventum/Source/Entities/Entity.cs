@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Adventum.Data;
+using Adventum.Source.Core.Collision;
+using Adventum.Source.Core.Resource;
+using Adventum.Source.Sprite;
+using Adventum.Source.States;
+using Adventum.Source.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using Adventum.Source.Core.Resource;
-using Adventum.Source.Util;
-using Adventum.Source.Core.Collision;
-using Adventum.Source.Sprite;
+using System;
 
 namespace Adventum.Source.Entities
 {
@@ -28,13 +30,12 @@ namespace Adventum.Source.Entities
                 return mask;
             }
         }
-
+        public EntityState state;
         public bool Solid { get; set; }
-
         public Animator Sprite { get; set; }
 
 
-        
+
         public Entity(Vector2 position)
         {
             random = new Random();
@@ -43,9 +44,9 @@ namespace Adventum.Source.Entities
 
             Position = position;
             Collisions = new CollisionData();
+            state = new EntityState("walk", Direction.Down);
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
-            Sprite.ChangeAnimation("walk");
 
             SetBounds(new Point(16));
         }
@@ -59,7 +60,6 @@ namespace Adventum.Source.Entities
         }
 
 
-
         public virtual void Update(DeltaTime delta)
         {
             Move(Velocity * delta.Seconds);
@@ -67,7 +67,7 @@ namespace Adventum.Source.Entities
 
             Collisions.Clear();
 
-            Sprite.Update(delta);
+            Sprite.Update(delta, state);
         }
 
 
@@ -94,14 +94,18 @@ namespace Adventum.Source.Entities
         }
 
 
-        public virtual void Move(Vector2 vector)
+        public virtual void Move(Vector2 vector, bool changeDirection = false)
         {
             Position += vector;
+            if (changeDirection)
+            {
+                state.Facing = Utils.AngleToDirection(Angle.FromVector(vector));
+            }
         }
-        public virtual void Move(Vector2 angle, float speed)
+        public virtual void Move(Vector2 angle, float speed, bool changeDirection = false)
         {
             if (angle.LengthSquared() != 0)
-                Move(Angle.FromVector(angle).ToVector(speed));
+                Move(Angle.FromVector(angle).ToVector(speed), changeDirection);
         }
     }
 }

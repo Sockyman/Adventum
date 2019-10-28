@@ -68,7 +68,8 @@
     <Compile Include="Source\Core\IO\Input.cs" />
     <Compile Include="Source\Core\Player.cs" />
     <Compile Include="Source\Core\Resource\ResourceManager.cs" />
-    <Compile Include="Source\World\World.cs" />
+    <Compile Include="Source\States\EntityState.cs" />
+    <Compile Include="Source\World\GameWorld.cs" />
     <Compile Include="Source\Entities\Entity.cs" />
     <Compile Include="Source\Entities\Mob.cs" />
     <Compile Include="Source\Main.cs" />

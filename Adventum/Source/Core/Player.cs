@@ -12,7 +12,7 @@ namespace Adventum.Source.Core
 {
     public class Player
     {
-        public Entity player;
+        public Mob player;
         private GameWorld world;
         private Input input;
 
