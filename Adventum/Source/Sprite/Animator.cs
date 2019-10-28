@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Adventum.Data;
+﻿using Adventum.Data;
 using Adventum.Source.Core.Resource;
 using Adventum.Source.Util;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Adventum.Source.Sprite
 {
@@ -16,7 +15,7 @@ namespace Adventum.Source.Sprite
         {
             get
             {
-                return (int)Math.Floor(frameNumber);
+                return (int)Math.Floor(FrameNumber);
             }
             set
             {
@@ -35,7 +34,7 @@ namespace Adventum.Source.Sprite
             }
         }
         private float frameNumber;
-
+        public Direction Facing { get; private set; }
         public string AnimationName { get; private set; }
         public Animation ActiveAnimation
         {
@@ -46,6 +45,7 @@ namespace Adventum.Source.Sprite
                 return Sprite.animations[Sprite.defaultAnimation];
             }
         }
+
 
 
         public Animator(string spriteSheet, Texture2D texture)
@@ -59,10 +59,18 @@ namespace Adventum.Source.Sprite
         }
 
 
-        public virtual void Update(DeltaTime delta)
+
+        public void Update(DeltaTime delta, States.EntityState state)
+        {
+            TryChangeAnimation(state.State);
+            Facing = state.Facing;
+            Update(delta);
+        }
+        public void Update(DeltaTime delta)
         {
             FrameNumber += ActiveAnimation.FPS * delta.Seconds;
         }
+
 
 
         public void ChangeAnimation(string animation)
@@ -77,11 +85,13 @@ namespace Adventum.Source.Sprite
         }
 
 
-        public virtual Texture2D GetTexture()
+
+        public Texture2D GetTexture()
         {
-            return Utils.GetTexturePart(SpriteTexture, new Rectangle(ActiveAnimation.cellOfOrigin.X + FrameIndex * Sprite.frameSize.X, ActiveAnimation.cellOfOrigin.Y * Sprite.frameSize.Y, 
-                Sprite.frameSize.X, Sprite.frameSize.Y));
+            return Utils.GetTexturePart(SpriteTexture, new Rectangle(ActiveAnimation.cellOfOrigin.X + (FrameIndex + ActiveAnimation.directionMap.GetDirection(Facing).X) * Sprite.frameSize.X,
+                (ActiveAnimation.cellOfOrigin.Y + ActiveAnimation.directionMap.GetDirection(Facing).Y) * Sprite.frameSize.Y, Sprite.frameSize.X, Sprite.frameSize.Y));
         }
+
 
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)

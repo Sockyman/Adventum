@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Adventum.Data;
+using Adventum.Source.Core.Collision;
+using Adventum.Source.Core.Resource;
+using Adventum.Source.Sprite;
+using Adventum.Source.States;
+using Adventum.Source.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using Adventum.Source.Core.Resource;
-using Adventum.Source.Util;
-using Adventum.Source.Core.Collision;
-using Adventum.Source.Sprite;
-using Adventum.Source.States;
-using Adventum.Data;
+using System;
 
 namespace Adventum.Source.Entities
 {
@@ -31,13 +31,11 @@ namespace Adventum.Source.Entities
             }
         }
         public EntityState state;
-
         public bool Solid { get; set; }
-
         public Animator Sprite { get; set; }
 
 
-        
+
         public Entity(Vector2 position)
         {
             random = new Random();
@@ -46,7 +44,7 @@ namespace Adventum.Source.Entities
 
             Position = position;
             Collisions = new CollisionData();
-            state = new EntityState("idle");
+            state = new EntityState("walk", Direction.Down);
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
 
@@ -69,7 +67,7 @@ namespace Adventum.Source.Entities
 
             Collisions.Clear();
 
-            Sprite.Update(delta);
+            Sprite.Update(delta, state);
         }
 
 
