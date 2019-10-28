@@ -21,6 +21,7 @@ namespace Adventum.Source.World
         public Player player;
         public Input input;
 
+
         public GameWorld()
         {
             random = new Random();
@@ -31,7 +32,8 @@ namespace Adventum.Source.World
 
 
             {
-                Mob playerEntity = (Mob)entityManager.CreateEntity(new Mob(new Vector2(200f)));
+                PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(200f)));
+                playerEntity.input = input;
                 player = new Player(this, input);
                 player.player = playerEntity;
 

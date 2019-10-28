@@ -60,6 +60,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Source\Entities\PlayerEntity.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />

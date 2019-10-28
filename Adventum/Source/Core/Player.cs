@@ -12,7 +12,7 @@ namespace Adventum.Source.Core
 {
     public class Player
     {
-        public Mob player;
+        public PlayerEntity player;
         private GameWorld world;
         private Input input;
 
@@ -26,11 +26,7 @@ namespace Adventum.Source.Core
 
         public void Update(DeltaTime delta)
         {
-            Vector2 movement = new Vector2();
-            movement.X += input.CheckAxis(Keys.A, Keys.D);
-            movement.Y += input.CheckAxis(Keys.W, Keys.S);
-
-            player.Move(movement, Entity.MaxMovementSpeed * delta.Seconds);
+            
         }
     }
 }
