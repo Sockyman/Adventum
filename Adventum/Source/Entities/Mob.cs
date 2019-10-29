@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Adventum.Data;
 using MonoGame.Extended;
 
@@ -17,9 +18,12 @@ namespace Adventum.Source.Entities
         {
             base.Move(angle, speed, changeDirection);
 
-            if (changeDirection)
+            
+
+            if (false)
             {
-                state.Facing = (Direction)((Angle.FromVector(angle).Degrees * -1 + 180) / 90);
+                float direction = ((Angle.FromVector(angle).Degrees * -1) / 90) + 1;
+                state.Facing = (Direction)direction;
             }
         }
     }

@@ -97,7 +97,7 @@ namespace Adventum.Source.Entities
         public virtual void Move(Vector2 vector, bool changeDirection = false)
         {
             Position += vector;
-            if (changeDirection)
+            if (changeDirection && vector.LengthSquared() != 0)
             {
                 state.Facing = Utils.AngleToDirection(Angle.FromVector(vector));
             }

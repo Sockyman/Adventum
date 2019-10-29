@@ -8,9 +8,9 @@ namespace Adventum.Data
     public enum Direction
     {
         Down,
-        Left,
+        Right,
         Up,
-        Right
+        Left
     }
 
 
