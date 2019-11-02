@@ -44,7 +44,7 @@ namespace Adventum.Source.Entities
 
             Position = position;
             Collisions = new CollisionData();
-            state = new EntityState("walk", Direction.Down);
+            state = new EntityState("idle", Direction.Down);
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
 
@@ -104,7 +104,7 @@ namespace Adventum.Source.Entities
         }
         public virtual void Move(Vector2 angle, float speed, bool changeDirection = false)
         {
-            if (angle.LengthSquared() != 0)
+            if (angle.LengthSquared()  != 0)
                 Move(Angle.FromVector(angle).ToVector(speed), changeDirection);
         }
     }

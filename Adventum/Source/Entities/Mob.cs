@@ -17,14 +17,10 @@ namespace Adventum.Source.Entities
         public override void Move(Vector2 angle, float speed, bool changeDirection = false)
         {
             base.Move(angle, speed, changeDirection);
-
-            
-
-            if (false)
-            {
-                float direction = ((Angle.FromVector(angle).Degrees * -1) / 90) + 1;
-                state.Facing = (Direction)direction;
-            }
+            if (changeDirection && speed != 0)
+                state.State = "walk";
+            else
+                state.State = "idle";
         }
     }
 }

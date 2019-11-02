@@ -64,8 +64,17 @@ namespace Adventum.Source.Util
 
         public static Direction AngleToDirection(Angle angle)
         {
-            angle.Degrees += 90;
-            return (Direction)(int)((angle.Revolutions * Enum.GetValues(typeof(Direction)).Length) - 1);
+            Vector2 vector = angle.ToVector(1);
+            vector.X = (float)Math.Round(vector.X);
+            vector.Y = (float)Math.Round(vector.Y);
+
+            if (vector.Y > 0)
+                return Direction.Down;
+            if (vector.Y < 0)
+                return Direction.Up;
+            if (vector.X > 0)
+                return Direction.Right;
+            return Direction.Left;
         }
     }
 }
