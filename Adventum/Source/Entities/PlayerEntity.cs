@@ -26,6 +26,8 @@ namespace Adventum.Source.Entities
             movement.X += input.CheckAxis(Keys.A, Keys.D);
             movement.Y += input.CheckAxis(Keys.W, Keys.S);
 
+            if (movement == Vector2.Zero)
+                state.State = "idle";
             Move(movement, MaxMovementSpeed * delta.Seconds, true);
         }
     }

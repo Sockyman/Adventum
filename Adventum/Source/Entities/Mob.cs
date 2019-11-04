@@ -14,13 +14,11 @@ namespace Adventum.Source.Entities
 
 
 
-        public override void Move(Vector2 angle, float speed, bool changeDirection = false)
+        public override void Move(Vector2 angle, bool changeDirection = false)
         {
-            base.Move(angle, speed, changeDirection);
-            if (changeDirection && speed != 0)
+            base.Move(angle, changeDirection);
+            if (changeDirection && angle != Vector2.Zero)
                 state.State = "walk";
-            else
-                state.State = "idle";
         }
     }
 }
