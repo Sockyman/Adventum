@@ -50,7 +50,6 @@ namespace Adventum.Source.Util
             texture.GetData<Color>(imageData);
 
             Color[] data = new Color[rectangle.Width * rectangle.Height];
-            int i = 0;
 
             for (int y = 0; y < rectangle.Height; y++)
                 for (int x = 0; x < rectangle.Width; x++)

@@ -31,6 +31,7 @@ namespace Adventum.Source.Entities
             }
         }
         public EntityState state;
+
         public bool Solid { get; set; }
         public Animator Sprite { get; set; }
 

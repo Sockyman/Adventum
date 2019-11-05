@@ -4,16 +4,16 @@ using Adventum.Data;
 
 namespace Adventum.Source.States
 {
-    public class EntityState
+    public class EntityState : Fsm<EState>
     {
-        public string State { get; set; }
         public Direction Facing { get; set; }
 
 
-        public EntityState(string state = "", Direction facing = Direction.Down)
+        public EntityState(EState state, Direction facing = Direction.Down) : base()
         {
-            State = state;
             Facing = facing;
+
+            
         }
     }
 }
