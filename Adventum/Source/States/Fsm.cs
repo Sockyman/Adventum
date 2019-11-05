@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Adventum.Source.Util;
 
@@ -37,6 +38,8 @@ namespace Adventum.Source.States
             T stateName = activeState.Update(delta);
 
             SetActiveState(stateName);
+
+            Console.WriteLine(ToString());
         }
 
 
@@ -60,6 +63,16 @@ namespace Adventum.Source.States
             }
 
             return null;
+        }
+
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder("State: ");
+            sb.Append(typeof(T).ToString());
+            sb.Append(".");
+            sb.Append(ActiveState.ToString());
+            return sb.ToString();
         }
     }
 }

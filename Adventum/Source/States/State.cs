@@ -13,6 +13,7 @@ namespace Adventum.Source.States
         public State(T name)
         {
             Name = name;
+            triggers = new List<Trigger<T>>();
         }
 
 

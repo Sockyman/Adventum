@@ -13,7 +13,13 @@ namespace Adventum.Source.States
         {
             Facing = facing;
 
-            
+            CreateState(new State<EState>(EState.Idle).AddTrigger(EState.Walk, () =>
+                facing == Direction.Up
+            ));
+
+            CreateState(new State<EState>(EState.Walk));
+
+            SetActiveState(EState.Idle);
         }
     }
 }

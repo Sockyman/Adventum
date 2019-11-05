@@ -27,8 +27,15 @@ namespace Adventum.Source.Entities
             movement.Y += input.CheckAxis(Keys.W, Keys.S);
 
             if (movement == Vector2.Zero)
-                state.State = "idle";
+            {
+
+            }
             Move(movement, MaxMovementSpeed * delta.Seconds, true);
+
+            if (state.ActiveState == EState.Walk)
+            {
+                Position += new Vector2(1, 0);
+            }
         }
     }
 }

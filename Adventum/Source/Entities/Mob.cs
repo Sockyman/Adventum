@@ -18,7 +18,10 @@ namespace Adventum.Source.Entities
         {
             base.Move(angle, changeDirection);
             if (changeDirection && angle != Vector2.Zero)
-                state.State = "walk";
+            {
+
+            }
+                
         }
     }
 }

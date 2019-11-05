@@ -45,7 +45,7 @@ namespace Adventum.Source.Entities
 
             Position = position;
             Collisions = new CollisionData();
-            state = new EntityState("idle", Direction.Down);
+            state = new EntityState(EState.Idle, Direction.Down);
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
 
@@ -69,6 +69,8 @@ namespace Adventum.Source.Entities
             Collisions.Clear();
 
             Sprite.Update(delta, state);
+
+            state.Update(delta);
         }
 
 
