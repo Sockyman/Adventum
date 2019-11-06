@@ -36,6 +36,8 @@ namespace Adventum.Source.Entities
             {
                 Position += new Vector2(1, 0);
             }
+
+            Console.WriteLine(state.Facing);
         }
     }
 }

@@ -25,17 +25,18 @@ namespace Adventum.Source.Core.Collision
 
         public void Update(DeltaTime delta)
         {
-            for (int i = 0; i < colliders.Count; i++)
-            {
-                for (int j = i + 1; i < colliders.Count; i++)
+            if (colliders.Count > 1)
+                for (int i = 0; i < colliders.Count; i++)
                 {
-                    if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask) && colliders[i] != colliders[j])
+                    for (int j = i + 1; i < colliders.Count; i++)
                     {
-                        colliders[i].OnCollision(new CollisionData(colliders[j]));
-                        colliders[j].OnCollision(new CollisionData(colliders[i]));
+                        if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask) && colliders[i] != colliders[j])
+                        {
+                            colliders[i].OnCollision(new CollisionData(colliders[j]));
+                            colliders[j].OnCollision(new CollisionData(colliders[i]));
+                        }
                     }
                 }
-            }
 
 
             Utils.SyncLists<ICollidable>(colliders, collidersToAdd, collidersToRemove);

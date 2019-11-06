@@ -33,7 +33,7 @@ namespace Adventum.Source.States
         }
 
 
-        public void Update(DeltaTime delta)
+        public virtual void Update(DeltaTime delta)
         {
             T stateName = activeState.Update(delta);
 
