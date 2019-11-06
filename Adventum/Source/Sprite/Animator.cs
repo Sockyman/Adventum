@@ -62,7 +62,6 @@ namespace Adventum.Source.Sprite
 
         public void Update(DeltaTime delta, States.EntityState state)
         {
-            TryChangeAnimation("idle");
             Facing = state.Facing;
             Update(delta);
         }

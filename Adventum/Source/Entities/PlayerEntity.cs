@@ -34,7 +34,12 @@ namespace Adventum.Source.Entities
 
             if (state.ActiveState == EState.Walk)
             {
-                Position += new Vector2(1, 0);
+                Sprite.TryChangeAnimation("walk");
+                Move(new Vector2(1, 0), delta.Seconds * 20, false);
+            }
+            else
+            {
+                Sprite.TryChangeAnimation("idle");
             }
 
             Console.WriteLine(state.Facing);

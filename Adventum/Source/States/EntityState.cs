@@ -8,23 +8,20 @@ namespace Adventum.Source.States
     public class EntityState : Fsm<EState>
     {
         public Direction Facing { get; set; }
-        Random random = new Random();
-        int randval;
 
 
         public EntityState(EState state, Direction facing = Direction.Down) : base()
         {
-            randval = 27;
 
             Facing = facing;
 
-            CreateState(new State<EState>(EState.Idle).AddTrigger(EState.Walk, () =>
-                randval == 27
-            ));
+            AddState(EState.Idle).AddTrigger(EState.Walk, () =>
+                Facing == Direction.Down
+            );
 
-            CreateState(new State<EState>(EState.Walk).AddTrigger(EState.Idle, () => 
-                randval == 301
-            ));
+            AddState(EState.Walk).AddTrigger(EState.Idle, () => 
+                Facing == Direction.Up
+            );
 
             SetActiveState(EState.Idle);
         }
@@ -33,8 +30,6 @@ namespace Adventum.Source.States
         public override void Update(DeltaTime delta)
         {
             base.Update(delta);
-
-            randval = 301;
         }
     }
 }

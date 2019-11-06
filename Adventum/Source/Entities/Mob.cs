@@ -9,7 +9,7 @@ namespace Adventum.Source.Entities
     {
         public Mob(Vector2 position) : base(position)
         {
-
+            
         }
 
 

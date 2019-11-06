@@ -26,10 +26,16 @@ namespace Adventum.Source.States
         }
 
 
-        public Fsm<T> CreateState(State<T> state)
+        public State<T> AddState(T stateName)
         {
-            states.Add(state);
-            return this;
+            State<T> state = GetLegalState(stateName);
+            if (state == null)
+            {
+                state = new State<T>(stateName);
+                states.Add(state);
+            }
+            
+            return state;
         }
 
 
