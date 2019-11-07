@@ -25,8 +25,9 @@ namespace Adventum.Source.Core.Collision
 
         public void Update(DeltaTime delta)
         {
-            if (colliders.Count > 1)
-                for (int i = 0; i < colliders.Count; i++)
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                if (colliders.Count < i)
                 {
                     for (int j = i + 1; i < colliders.Count; i++)
                     {
@@ -37,6 +38,11 @@ namespace Adventum.Source.Core.Collision
                         }
                     }
                 }
+
+                colliders[i].Position += colliders[i].PreviousVelocity;
+                colliders[i].PreviousVelocity = colliders[i].Velocity;
+                colliders[i].Velocity = Vector2.Zero;
+            }
 
 
             Utils.SyncLists<ICollidable>(colliders, collidersToAdd, collidersToRemove);

@@ -1,6 +1,10 @@
-﻿public enum EState
+﻿
+namespace Adventum.Source.States
 {
-    None,
-    Idle,
-    Walk
+    public enum EState
+    {
+        None,
+        Idle,
+        Walk
+    }
 }

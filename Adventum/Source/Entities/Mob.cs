@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Adventum.Data;
+using Adventum.Source.States;
 using MonoGame.Extended;
 
 namespace Adventum.Source.Entities
@@ -12,6 +13,19 @@ namespace Adventum.Source.Entities
             
         }
 
+
+        protected override void InitalizeBehavior()
+        {
+            base.InitalizeBehavior();
+
+            state.AddState(EState.Idle).AddTrigger(EState.Walk, () =>
+                PreviousVelocity != Vector2.Zero
+            );
+
+            state.AddState(EState.Walk).AddTrigger(EState.Idle, () =>
+                PreviousVelocity == Vector2.Zero
+            );
+        }
 
 
         public override void Move(Vector2 angle, bool changeDirection = false)

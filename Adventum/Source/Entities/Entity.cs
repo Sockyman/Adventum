@@ -19,6 +19,9 @@ namespace Adventum.Source.Entities
 
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
+        public Vector2 PreviousVelocity { get; set; }
+
+        public Vector2 Motion { get; set; }
         public CollisionData Collisions { get; set; }
         public Rectangle BoundingBox { get; set; }
         public Rectangle CollisionMask
@@ -45,13 +48,19 @@ namespace Adventum.Source.Entities
 
             Position = position;
             Collisions = new CollisionData();
-            state = new EntityState(EState.Idle, Direction.Down);
+
+            InitalizeBehavior();
 
             Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
 
             SetBounds(new Point(16));
         }
 
+
+        protected virtual void InitalizeBehavior()
+        {
+            state = new EntityState(EState.Idle, Direction.Down);
+        }
 
 
         protected void SetBounds(Point bounds)
@@ -63,8 +72,8 @@ namespace Adventum.Source.Entities
 
         public virtual void Update(DeltaTime delta)
         {
-            Move(Velocity * delta.Seconds);
-            Utils.Dampen(Velocity, 100 * delta.Seconds);
+            Move(Motion * delta.Seconds);
+            Utils.Dampen(Motion, 100 * delta.Seconds);
 
             Collisions.Clear();
 
@@ -93,13 +102,13 @@ namespace Adventum.Source.Entities
         {
             Vector2 direction = angle.ToVector(velocity);
 
-            Velocity += direction;
+            Motion += direction;
         }
 
 
         public virtual void Move(Vector2 vector, bool changeDirection = false)
         {
-            Position += vector;
+            Velocity += vector;
             if (changeDirection && vector.LengthSquared() != 0)
             {
                 state.Facing = Utils.AngleToDirection(Angle.FromVector(vector));

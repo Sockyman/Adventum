@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Adventum.Data;
 using Adventum.Source.Util;
+using Adventum.Source.Entities;
+using Microsoft.Xna.Framework;
 
 namespace Adventum.Source.States
 {
@@ -12,16 +14,9 @@ namespace Adventum.Source.States
 
         public EntityState(EState state, Direction facing = Direction.Down) : base()
         {
-
             Facing = facing;
 
-            AddState(EState.Idle).AddTrigger(EState.Walk, () =>
-                Facing == Direction.Down
-            );
-
-            AddState(EState.Walk).AddTrigger(EState.Idle, () => 
-                Facing == Direction.Up
-            );
+            AddState(EState.Idle);
 
             SetActiveState(EState.Idle);
         }

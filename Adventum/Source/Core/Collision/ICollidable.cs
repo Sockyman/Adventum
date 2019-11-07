@@ -8,6 +8,10 @@ namespace Adventum.Source.Core.Collision
         Vector2 Position { get; set; }
 
 
+        Vector2 Velocity { get; set; }
+        Vector2 PreviousVelocity { get; set; }
+
+
         Rectangle BoundingBox { get; set; }
         
 

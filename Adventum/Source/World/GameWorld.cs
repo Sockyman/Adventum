@@ -46,11 +46,13 @@ namespace Adventum.Source.World
         {
             DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
 
-            entityManager.Update(delta);
-            collisionManager.Update(delta);
 
             input.Update();
             player.Update(delta);
+
+            entityManager.Update(delta);
+            collisionManager.Update(delta);
+
 
             if (input.KeyCheckPressed(Keys.F11))
             {
