@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Adventum.Source.Util;
+using Adventum.Source.States.Triggers;
 
 namespace Adventum.Source.States
 {
@@ -10,17 +11,30 @@ namespace Adventum.Source.States
         public T Name { get; private set; }
         private List<Trigger<T>> triggers;
 
-        public State(T name)
+        private Fsm<T> parent;
+
+
+        public State(T name, Fsm<T> parent)
         {
             Name = name;
             triggers = new List<Trigger<T>>();
+
+            this.parent = parent;
         }
 
 
-        public State<T> AddTrigger(T target, TargetExpresion expresion)
+        public State<T> AddTrigger(TargetExpresion target, TriggerExpresion expresion)
         {
-            triggers.Add(new Trigger<T>(target, expresion));
+            triggers.Add(new Trigger<T>(this, target, expresion));
             return this;
+        }
+        public State<T> AddStateTrigger(T target, TriggerExpresion expression)
+        {
+            return AddTrigger(() => parent.SetActiveState(target), expression);
+        }
+        public State<T> AddUpdateTrigger(TargetExpresion target)
+        {
+            return AddTrigger(target, () => true);
         }
 
 
@@ -30,7 +44,7 @@ namespace Adventum.Source.States
             {
                 if (trigger.Evaluate())
                 {
-                    return trigger.Target;
+                    
                 }
             }
 

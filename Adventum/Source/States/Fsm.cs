@@ -31,7 +31,7 @@ namespace Adventum.Source.States
             State<T> state = GetLegalState(stateName);
             if (state == null)
             {
-                state = new State<T>(stateName);
+                state = new State<T>(stateName, this);
                 states.Add(state);
             }
             

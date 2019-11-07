@@ -17,6 +17,7 @@ namespace Adventum.Source.World
 
         public static EntityManager entityManager;
         public static CollisionManager collisionManager;
+        public static DeltaTime deltaTime;
 
         public Player player;
         public Input input;
@@ -37,7 +38,7 @@ namespace Adventum.Source.World
                 player = new Player(this, input);
                 player.player = playerEntity;
 
-                //entityManager.CreateEntity(new Entity(new Vector2(random.Next(400), random.Next(300))));
+                entityManager.CreateEntity(new Mob(new Vector2(random.Next(400), random.Next(300))));
             }
         }
 
@@ -45,7 +46,7 @@ namespace Adventum.Source.World
         public void Update(GameTime gameTime)
         {
             DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
-
+            deltaTime = delta;
 
             input.Update();
             player.Update(delta);

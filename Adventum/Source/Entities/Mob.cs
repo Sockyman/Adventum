@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Adventum.Data;
 using Adventum.Source.States;
+using Adventum.Source.States.Triggers;
 using MonoGame.Extended;
 
 namespace Adventum.Source.Entities
@@ -18,11 +19,11 @@ namespace Adventum.Source.Entities
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddTrigger(EState.Walk, () =>
+            state.AddState(EState.Idle).AddStateTrigger(EState.Walk, () =>
                 PreviousVelocity != Vector2.Zero
             );
 
-            state.AddState(EState.Walk).AddTrigger(EState.Idle, () =>
+            state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () =>
                 PreviousVelocity == Vector2.Zero
             );
         }
