@@ -75,5 +75,21 @@ namespace Adventum.Source.Util
                 return Direction.Right;
             return Direction.Left;
         }
+
+
+        public static Vector2 DirectionToVector(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Down:
+                    return new Vector2(0, 1);
+                case Direction.Up:
+                    return new Vector2(0, -1);
+                case Direction.Right:
+                    return new Vector2(1, 0);
+                default:
+                    return new Vector2(-1, 0);
+            }
+        }
     }
 }

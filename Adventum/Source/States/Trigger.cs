@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Adventum.Source.States.Triggers
+namespace Adventum.Source.States
 {
     public delegate bool TriggerExpresion();
     public delegate void TargetExpresion();
 
     public class Trigger<T>
     {
-        private TargetExpresion target;
+        public TargetExpresion target;
         private TriggerExpresion expresion;
         private State<T> parentState;
 
@@ -28,10 +28,16 @@ namespace Adventum.Source.States.Triggers
         {
             if (expresion.Invoke())
             {
-                target.Invoke();
+                ExcecuteTarget();
                 return true;
             }
             return false;
+        }
+
+
+        public void ExcecuteTarget()
+        {
+            target.Invoke();
         }
     }
 }

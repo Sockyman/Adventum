@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Adventum.Source.Util;
-using Adventum.Source.States.Triggers;
+using MonoGame.Extended.Timers;
 
 namespace Adventum.Source.States
 {
@@ -10,45 +10,78 @@ namespace Adventum.Source.States
     {
         public T Name { get; private set; }
         private List<Trigger<T>> triggers;
+        public Trigger<T> OnEnter { get; private set; }
+        public ContinuousClock clock;
 
-        private Fsm<T> parent;
+        protected Fsm<T> parent;
 
 
         public State(T name, Fsm<T> parent)
         {
+            clock = new ContinuousClock(1);
+
             Name = name;
             triggers = new List<Trigger<T>>();
+
+            OnEnter = new Trigger<T>(this, () => { }, () => false);
 
             this.parent = parent;
         }
 
 
+        public Trigger<T> AttachTrigger(Trigger<T> trigger)
+        {
+            triggers.Add(trigger);
+            return trigger;
+        }
+
+        public State<T> AddEntranceTrigger(TargetExpresion target)
+        {
+            OnEnter.target += target;
+            return this;
+        }
         public State<T> AddTrigger(TargetExpresion target, TriggerExpresion expresion)
         {
-            triggers.Add(new Trigger<T>(this, target, expresion));
+            AttachTrigger(new Trigger<T>(this, target, expresion));
             return this;
         }
         public State<T> AddStateTrigger(T target, TriggerExpresion expression)
         {
-            return AddTrigger(() => parent.SetActiveState(target), expression);
+            return AddTrigger(() => ChangeState(target), expression);
         }
         public State<T> AddUpdateTrigger(TargetExpresion target)
         {
             return AddTrigger(target, () => true);
         }
+        public State<T> AddCountdownTrigger(TargetExpresion target, float seconds)
+        {
+            return AddTrigger(target, () => clock.CurrentTime.TotalSeconds > seconds);
+        }
+        public State<T> AddCountdownStateTrigger(T target, float seconds)
+        {
+            return AddCountdownTrigger(() => ChangeState(target), seconds);
+        }
+
+        public Trigger<T> RecentTrigger()
+        {
+            return triggers[triggers.Count - 1];
+        }
 
 
-        public T Update(DeltaTime delta)
+        protected void ChangeState(T state)
+        {
+            parent.SetActiveState(state);
+        }
+
+
+        public void Update(DeltaTime delta)
         {
             foreach(Trigger<T> trigger in triggers)
             {
-                if (trigger.Evaluate())
-                {
-                    
-                }
+                trigger.Evaluate();
             }
 
-            return default;
+            clock.Update(delta);
         }
     }
 }

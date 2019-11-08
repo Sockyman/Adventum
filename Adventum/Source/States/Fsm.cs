@@ -15,7 +15,9 @@ namespace Adventum.Source.States
         {
             get
             {
-                return activeState.Name;
+                if (activeState != null)
+                    return activeState.Name;
+                return default;
             }
         }
 
@@ -41,11 +43,9 @@ namespace Adventum.Source.States
 
         public virtual void Update(DeltaTime delta)
         {
-            T stateName = activeState.Update(delta);
+            activeState.Update(delta);
 
-            SetActiveState(stateName);
-
-            Console.WriteLine(ToString());
+            //Console.WriteLine(ToString());
         }
 
 
@@ -55,7 +55,9 @@ namespace Adventum.Source.States
 
             if (state != null)
             {
+                state.clock.Restart();
                 activeState = state;
+                state.OnEnter.ExcecuteTarget();
             }
         }
 

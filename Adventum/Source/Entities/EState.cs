@@ -5,6 +5,7 @@ namespace Adventum.Source.States
     {
         None,
         Idle,
-        Walk
+        Walk,
+        Attack
     }
 }

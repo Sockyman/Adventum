@@ -38,7 +38,7 @@ namespace Adventum.Source.World
                 player = new Player(this, input);
                 player.player = playerEntity;
 
-                entityManager.CreateEntity(new Mob(new Vector2(random.Next(400), random.Next(300))));
+                entityManager.CreateEntity(new Enemy(new Vector2(350, 250)));
             }
         }
 

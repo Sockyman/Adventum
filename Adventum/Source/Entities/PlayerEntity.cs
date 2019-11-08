@@ -19,6 +19,17 @@ namespace Adventum.Source.Entities
         }
 
 
+        protected override void InitalizeBehavior()
+        {
+            base.InitalizeBehavior();
+
+            state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheckPressed(Keys.Space));
+            Trigger<EState> t = state.AddState(EState.Idle).RecentTrigger();
+            state.AddState(EState.Walk).AttachTrigger(t);
+            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+        }
+
+
         public override void Update(DeltaTime delta)
         {
             base.Update(delta);
@@ -27,8 +38,9 @@ namespace Adventum.Source.Entities
             movement.X += input.CheckAxis(Keys.A, Keys.D);
             movement.Y += input.CheckAxis(Keys.W, Keys.S);
 
-            Move(movement, MaxMovementSpeed * delta.Seconds, true);
+            Move(movement, MaxMovementSpeed, true);
 
+            /*
             if (state.ActiveState == EState.Walk)
             {
                 Sprite.TryChangeAnimation("walk");
@@ -36,7 +48,7 @@ namespace Adventum.Source.Entities
             else
             {
                 Sprite.TryChangeAnimation("idle");
-            }
+            }*/
 
             Console.WriteLine(state.Facing);
         }

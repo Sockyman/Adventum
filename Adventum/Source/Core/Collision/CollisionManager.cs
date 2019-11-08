@@ -39,7 +39,7 @@ namespace Adventum.Source.Core.Collision
                     }
                 }
 
-                colliders[i].Position += colliders[i].PreviousVelocity;
+                colliders[i].Position += colliders[i].PreviousVelocity * delta.Seconds;
                 colliders[i].PreviousVelocity = colliders[i].Velocity;
                 colliders[i].Velocity = Vector2.Zero;
             }
