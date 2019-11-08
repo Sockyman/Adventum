@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Adventum.Source.Util;
+using MonoGame.Extended.Timers;
 
 namespace Adventum.Source.States
 {
@@ -10,6 +11,8 @@ namespace Adventum.Source.States
     {
         protected List<State<T>> states;
         protected State<T> activeState;
+        public ContinuousClock clock;
+        
 
         public T ActiveState
         {
@@ -30,6 +33,8 @@ namespace Adventum.Source.States
 
         public State<T> AddState(T stateName)
         {
+            clock = new ContinuousClock(1);
+
             State<T> state = GetLegalState(stateName);
             if (state == null)
             {
@@ -45,7 +50,7 @@ namespace Adventum.Source.States
         {
             activeState.Update(delta);
 
-            //Console.WriteLine(ToString());
+            clock.Update(delta);
         }
 
 
@@ -55,7 +60,7 @@ namespace Adventum.Source.States
 
             if (state != null)
             {
-                state.clock.Restart();
+                clock.Restart();
                 activeState = state;
                 state.OnEnter.ExcecuteTarget();
             }

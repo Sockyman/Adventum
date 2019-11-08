@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Adventum.Source.Util;
-using MonoGame.Extended.Timers;
 
 namespace Adventum.Source.States
 {
@@ -11,14 +10,14 @@ namespace Adventum.Source.States
         public T Name { get; private set; }
         private List<Trigger<T>> triggers;
         public Trigger<T> OnEnter { get; private set; }
-        public ContinuousClock clock;
+        
 
         protected Fsm<T> parent;
 
 
         public State(T name, Fsm<T> parent)
         {
-            clock = new ContinuousClock(1);
+            
 
             Name = name;
             triggers = new List<Trigger<T>>();
@@ -55,7 +54,7 @@ namespace Adventum.Source.States
         }
         public State<T> AddCountdownTrigger(TargetExpresion target, float seconds)
         {
-            return AddTrigger(target, () => clock.CurrentTime.TotalSeconds > seconds);
+            return AddTrigger(target, () => parent.clock.CurrentTime.TotalSeconds > seconds);
         }
         public State<T> AddCountdownStateTrigger(T target, float seconds)
         {
@@ -80,8 +79,6 @@ namespace Adventum.Source.States
             {
                 trigger.Evaluate();
             }
-
-            clock.Update(delta);
         }
     }
 }
