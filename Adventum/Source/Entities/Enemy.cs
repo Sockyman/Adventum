@@ -12,18 +12,19 @@ namespace Adventum.Source.Entities
     {
         public Enemy(Vector2 position) : base(position)
         {
+            Sprite.SpriteTexture = Core.Resource.ResourceManager.GetTexture("zombieBase");
         }
 
         protected override void InitalizeBehavior()
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 1);
+            state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 0f);
 
-            state.AddState(EState.Walk).AddCountdownStateTrigger(EState.Idle, 2).AddEntranceTrigger(() => state.Facing = (Direction)random.Next(4))
+            state.AddState(EState.Walk).AddCountdownStateTrigger(EState.Idle, 0.5f).AddEntranceTrigger(() => state.Facing = (Direction)random.Next(4))
                 .AddUpdateTrigger( () =>
                 {
-                    Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed, true);
+                    Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed / 2, true);
                 });
         }
 

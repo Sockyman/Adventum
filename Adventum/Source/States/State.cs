@@ -28,10 +28,10 @@ namespace Adventum.Source.States
         }
 
 
-        public Trigger<T> AttachTrigger(Trigger<T> trigger)
+        public State<T> AttachTrigger(Trigger<T> trigger)
         {
             triggers.Add(trigger);
-            return trigger;
+            return this;
         }
 
         public State<T> AddEntranceTrigger(TargetExpresion target)

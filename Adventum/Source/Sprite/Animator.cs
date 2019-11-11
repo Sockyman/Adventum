@@ -10,7 +10,7 @@ namespace Adventum.Source.Sprite
     public class Animator
     {
         public SpriteSheet Sprite { get; private set; }
-        public Texture2D SpriteTexture { get; private set; }
+        public Texture2D SpriteTexture { get; set; }
         public int FrameIndex
         {
             get

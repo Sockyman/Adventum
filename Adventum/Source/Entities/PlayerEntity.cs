@@ -23,9 +23,13 @@ namespace Adventum.Source.Entities
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheckPressed(Keys.Space));
+            state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheckPressed(Keys.Space)).AddStateTrigger(EState.Walk, () =>
+                PreviousVelocity != Vector2.Zero
+            );
             Trigger<EState> t = state.AddState(EState.Idle).RecentTrigger();
-            state.AddState(EState.Walk).AttachTrigger(t);
+            state.AddState(EState.Walk).AttachTrigger(t).AddStateTrigger(EState.Idle, () =>
+                PreviousVelocity == Vector2.Zero
+            );
             state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
         }
 

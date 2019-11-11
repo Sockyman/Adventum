@@ -18,13 +18,9 @@ namespace Adventum.Source.Entities
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddStateTrigger(EState.Walk, () =>
-                PreviousVelocity != Vector2.Zero
-            ).AddEntranceTrigger(() => Sprite.TryChangeAnimation("idle"));
+            state.AddState(EState.Idle).AddEntranceTrigger(() => Sprite.TryChangeAnimation("idle"));
 
-            state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () =>
-                PreviousVelocity == Vector2.Zero
-            ).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            state.AddState(EState.Walk).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
 
             state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 2f);
         }
