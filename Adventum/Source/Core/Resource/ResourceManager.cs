@@ -22,6 +22,9 @@ namespace Adventum.Source.Core.Resource
 
             texturesLoaded = new Dictionary<string, Texture2D>();
             spriteSheetsLoaded = new Dictionary<string, SpriteSheet>();
+
+            texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
+            texturesLoaded["pixel"].SetData( new Color[] { Color.White } );
         }
 
 
