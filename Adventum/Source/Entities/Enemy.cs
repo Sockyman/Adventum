@@ -15,6 +15,7 @@ namespace Adventum.Source.Entities
             Sprite.SpriteTexture = Core.Resource.ResourceManager.GetTexture("zombieBase");
         }
 
+
         protected override void InitalizeBehavior()
         {
             base.InitalizeBehavior();
