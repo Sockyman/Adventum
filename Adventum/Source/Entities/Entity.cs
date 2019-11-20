@@ -42,7 +42,7 @@ namespace Adventum.Source.Entities
 
         public Entity(Vector2 position)
         {
-            random = new Random();
+            random = new Random(World.GameWorld.random.Next(int.MinValue, int.MaxValue));
 
             Solid = true;
 

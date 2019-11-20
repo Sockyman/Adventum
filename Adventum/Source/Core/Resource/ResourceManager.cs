@@ -53,7 +53,7 @@ namespace Adventum.Source.Core.Resource
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Resource: " + rootFolder + "\\" + name + ", failed to load.");
+                    Console.WriteLine("Resource: " + rootFolder + @"\" + name + ", failed to load.");
                     return default(T);
                 }
             }

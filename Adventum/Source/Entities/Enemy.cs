@@ -12,7 +12,7 @@ namespace Adventum.Source.Entities
     {
         public Enemy(Vector2 position) : base(position)
         {
-            Sprite.SpriteTexture = Core.Resource.ResourceManager.GetTexture("zombieBase");
+            Sprite.SpriteTexture = Core.Resource.ResourceManager.GetTexture("humanBase");
         }
 
 
@@ -22,7 +22,8 @@ namespace Adventum.Source.Entities
 
             state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 0f);
 
-            state.AddState(EState.Walk).AddCountdownStateTrigger(EState.Idle, 0.5f).AddEntranceTrigger(() => state.Facing = (Direction)random.Next(4))
+            state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () => random.Next(100) > 93 && state.clock.CurrentTime.TotalSeconds > 0.5)
+                .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(4))
                 .AddUpdateTrigger( () =>
                 {
                     Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed / 2, true);
@@ -34,6 +35,7 @@ namespace Adventum.Source.Entities
         {
             base.Update(delta);
 
+            
             Console.WriteLine(state);
         }
     }
