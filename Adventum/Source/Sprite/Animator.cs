@@ -10,7 +10,21 @@ namespace Adventum.Source.Sprite
     public class Animator
     {
         public SpriteSheet Sprite { get; private set; }
-        public Texture2D SpriteTexture { get; set; }
+        public Texture2D SpriteTexture
+        {
+            get
+            {
+                return spriteTexture;
+            }
+            set
+            {
+                spriteTexture = value;
+                textureData = new Color[value.Width * value.Height];
+                value.GetData<Color>(textureData);
+            }
+        }
+        private Texture2D spriteTexture;
+        public Color[] textureData;
         public int FrameIndex
         {
             get
@@ -87,7 +101,7 @@ namespace Adventum.Source.Sprite
 
         public Texture2D GetTexture()
         {
-            return Utils.GetTexturePart(SpriteTexture, new Rectangle(ActiveAnimation.cellOfOrigin.X + (FrameIndex + ActiveAnimation.directionMap.GetDirection(Facing).X) * Sprite.frameSize.X,
+            return Utils.GetTexturePart(textureData, SpriteTexture.Width, new Rectangle(ActiveAnimation.cellOfOrigin.X + (FrameIndex + ActiveAnimation.directionMap.GetDirection(Facing).X) * Sprite.frameSize.X,
                 (ActiveAnimation.cellOfOrigin.Y + ActiveAnimation.directionMap.GetDirection(Facing).Y) * Sprite.frameSize.Y, Sprite.frameSize.X, Sprite.frameSize.Y));
         }
 

@@ -48,12 +48,15 @@ namespace Adventum.Source.Util
         {
             Color[] imageData = new Color[texture.Width * texture.Height];
             texture.GetData<Color>(imageData);
-
+            return GetTexturePart(imageData, texture.Width, rectangle);
+        }
+        public static Texture2D GetTexturePart(Color[] texture, int textureWidth, Rectangle rectangle)
+        {
             Color[] data = new Color[rectangle.Width * rectangle.Height];
 
             for (int y = 0; y < rectangle.Height; y++)
                 for (int x = 0; x < rectangle.Width; x++)
-                    data[x + y * rectangle.Height] = imageData[x + rectangle.X + (y + rectangle.Y) * texture.Width];
+                    data[x + y * rectangle.Height] = texture[x + rectangle.X + (y + rectangle.Y) * textureWidth];
 
             Texture2D final = new Texture2D(Main.graphics.GraphicsDevice, rectangle.Width, rectangle.Height);
             final.SetData<Color>(data);
