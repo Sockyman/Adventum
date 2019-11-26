@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Adventum.Data;
+using Adventum.Source.Util;
 
 namespace Adventum.Source.Core.Resource
 {
@@ -14,6 +15,8 @@ namespace Adventum.Source.Core.Resource
         //private static string[] texturesToLoad = { };
         private static Dictionary<string, Texture2D> texturesLoaded;
         private static Dictionary<string, SpriteSheet> spriteSheetsLoaded;
+        private static Dictionary<string, Texture2D[,]> textureGrids;
+        private static Dictionary<string, SpriteFont> fontsLoaded;
 
 
         public static void LoadContent(ContentManager content)
@@ -22,6 +25,8 @@ namespace Adventum.Source.Core.Resource
 
             texturesLoaded = new Dictionary<string, Texture2D>();
             spriteSheetsLoaded = new Dictionary<string, SpriteSheet>();
+            textureGrids = new Dictionary<string, Texture2D[,]>();
+            fontsLoaded = new Dictionary<string, SpriteFont>();
 
             texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
             texturesLoaded["pixel"].SetData( new Color[] { Color.White } );
@@ -69,7 +74,6 @@ namespace Adventum.Source.Core.Resource
             return new Texture2D(Main.graphics.GraphicsDevice, 32, 32);
         }
 
-
         public static SpriteSheet GetSpriteSheet(string name)
         {
             SpriteSheet spriteSheet = LoadItem<SpriteSheet>("SpriteSheet", name, spriteSheetsLoaded);
@@ -79,6 +83,34 @@ namespace Adventum.Source.Core.Resource
             }
 
             return new SpriteSheet();
+        }
+
+        public static Texture2D[,] GetTextureSheet(string name, Point size)
+        {
+            if (!textureGrids.ContainsKey(name))
+            {
+                Texture2D texture = GetTexture(name);
+                Color[] textureData = new Color[texture.Width * texture.Height];
+                texture.GetData(textureData);
+
+                textureGrids[name] = new Texture2D[texture.Width / size.X, texture.Height / size.Y];
+
+                for (int x = 0; x < texture.Width / size.X; x++)
+                    for (int y = 0; y < texture.Height / size.Y; y++)
+                    {
+                        textureGrids[name][x, y] = Utils.GetTexturePart(textureData, texture.Width, new Rectangle(new Point(x * size.X, y * size.Y), size));
+                    }
+            }
+
+            return textureGrids[name];
+        }
+
+        public static SpriteFont GetFont(string name)
+        {
+            SpriteFont font = LoadItem<SpriteFont>("Font", name, fontsLoaded);
+            if (font != null)
+                return font;
+            throw new Exception("Font {name} not found");
         }
     }
 }

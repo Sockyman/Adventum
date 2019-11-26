@@ -114,7 +114,12 @@ namespace Adventum.Source
 
             GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+            
+
             spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+
+            spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), GameWorld.deltaTime.FPS.ToString(), new Vector2(40, 40), Color.White);
             spriteBatch.End();
 
 

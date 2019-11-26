@@ -51,7 +51,7 @@ namespace Adventum.Source.Entities
 
             InitalizeBehavior();
 
-            Sprite = new Animator("HumanoidBase", ResourceManager.GetTexture("humanBase"));
+            Sprite = new Animator("HumanoidBase", "humanBase");
 
             SetBounds(new Point(16));
         }

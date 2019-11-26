@@ -24,6 +24,14 @@ namespace Adventum.Source.Util
             }
         }
 
+        public float FPS
+        {
+            get
+            {
+                return 1 / Seconds;
+            }
+        }
+
 
 
         public DeltaTime(TimeSpan totalGameTime, TimeSpan elapsedGameTime) : base(totalGameTime, elapsedGameTime)
