@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Data="Adventum.Data">
+  <Asset Type="Data:SpriteSheet">
+    <name>AttackSwish</name>
+    <defaultAnimation>base</defaultAnimation>
+    <frameSize>32 32</frameSize>
+    <origin>16 32</origin>
+    <animations>
+      <Item>
+        <Key>base</Key>
+        <Value>
+          <cellOfOrigin>0 0</cellOfOrigin>
+          <frames>1</frames>
+          <FPS>0</FPS>
+          <directionMap>0 0 0 1 0 2 0 3</directionMap>
+        </Value>
+      </Item>
+    </animations>
+  </Asset>
+</XnaContent>

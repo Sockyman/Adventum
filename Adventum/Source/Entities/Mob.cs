@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using Adventum.Data;
 using Adventum.Source.States;
+using Adventum.Source.Sprite;
 using MonoGame.Extended;
+using Adventum.Source.Core.Collision;
 
 namespace Adventum.Source.Entities
 {
@@ -10,7 +12,7 @@ namespace Adventum.Source.Entities
     {
         public Mob(Vector2 position) : base(position)
         {
-            
+            Sprite = new Animator("HumanoidBase", "humanBase");
         }
 
 
@@ -22,7 +24,7 @@ namespace Adventum.Source.Entities
 
             state.AddState(EState.Walk).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
 
-            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 2f);
+            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.5f);
         }
 
 
@@ -34,6 +36,17 @@ namespace Adventum.Source.Entities
 
             }
                 
+        }
+
+        public override void OnCollision(CollisionData collisionData)
+        {
+            base.OnCollision(collisionData);
+        }
+
+
+        public void Hurt()
+        {
+            Console.WriteLine(ToString());
         }
     }
 }

@@ -5,6 +5,7 @@ using Adventum.Source.Core.IO;
 using Adventum.Source.Util;
 using Adventum.Source.States;
 using Adventum.Data;
+using Adventum.Source.Core.Collision;
 
 namespace Adventum.Source.Entities
 {
@@ -30,7 +31,10 @@ namespace Adventum.Source.Entities
             state.AddState(EState.Walk).AttachTrigger(t).AddStateTrigger(EState.Idle, () =>
                 PreviousVelocity == Vector2.Zero
             );
-            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk")).AddEntranceTrigger(() =>
+            {
+                World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
+            });
         }
 
 
@@ -43,18 +47,13 @@ namespace Adventum.Source.Entities
             movement.Y += input.CheckAxis(Keys.W, Keys.S);
 
             Move(movement, MaxMovementSpeed, true);
+        }
 
-            /*
-            if (state.ActiveState == EState.Walk)
-            {
-                Sprite.TryChangeAnimation("walk");
-            }
-            else
-            {
-                Sprite.TryChangeAnimation("idle");
-            }*/
+        public override void OnCollision(CollisionData collisionData)
+        {
+            base.OnCollision(collisionData);
 
-            Console.WriteLine(state.Facing);
+            Console.WriteLine(collisionData.colliders[0]);
         }
     }
 }

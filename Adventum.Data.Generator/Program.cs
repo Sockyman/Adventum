@@ -35,17 +35,19 @@ namespace Adventum.Data.Generator
             SpriteSheet data = new SpriteSheet();
 
 
-            data.name = "ooga";
+            data.name = "AttackSwish";
             data.origin = new Point(16, 32);
             data.frameSize = new Point(32);
             data.animations = new Dictionary<string, Animation>();
+            data.defaultAnimation = "base";
 
             Animation ani = new Animation();
             ani.cellOfOrigin = new Point(0);
             ani.frames = 1;
             ani.FPS = 15;
+            ani.directionMap = DirectionMap.standardMobMap;
 
-            data.animations["NameOfAnimation"] = ani;
+            data.animations["base"] = ani;
 
             Serialize(data);
         }

@@ -60,6 +60,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Source\Entities\Attack.cs" />
     <Compile Include="Source\Entities\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\PlayerEntity.cs" />

@@ -34,9 +34,6 @@ namespace Adventum.Source.Entities
         public override void Update(DeltaTime delta)
         {
             base.Update(delta);
-
-            
-            Console.WriteLine(state);
         }
     }
 }

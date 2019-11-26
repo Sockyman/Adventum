@@ -11,7 +11,7 @@ using System;
 
 namespace Adventum.Source.Entities
 {
-    public class Entity : ICollidable
+    public abstract class Entity : ICollidable
     {
         public const float MaxMovementSpeed = 200;
 
@@ -51,9 +51,7 @@ namespace Adventum.Source.Entities
 
             InitalizeBehavior();
 
-            Sprite = new Animator("HumanoidBase", "humanBase");
-
-            SetBounds(new Point(16));
+            //Sprite = new Animator();
         }
 
 
@@ -70,10 +68,11 @@ namespace Adventum.Source.Entities
         }
 
 
+
         public virtual void Update(DeltaTime delta)
         {
-            Move(Motion * delta.Seconds);
-            Utils.Dampen(Motion, 100 * delta.Seconds);
+            Move(Motion);
+            Motion = Utils.Dampen(Motion, 3000 * delta.Seconds);
 
             Collisions.Clear();
 
@@ -118,6 +117,12 @@ namespace Adventum.Source.Entities
         {
             if (angle.LengthSquared()  != 0)
                 Move(Angle.FromVector(angle).ToVector(speed), changeDirection);
+        }
+
+
+        public virtual void Destroy()
+        {
+            World.GameWorld.entityManager.RemoveEntity(this);
         }
     }
 }
