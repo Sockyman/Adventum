@@ -53,7 +53,7 @@ namespace Adventum.Source.Entities
         {
             base.OnCollision(collisionData);
 
-            Console.WriteLine(collisionData.colliders[0]);
+            Console.WriteLine("Here");
         }
     }
 }

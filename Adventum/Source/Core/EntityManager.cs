@@ -34,9 +34,10 @@ namespace Adventum.Source.Core
         {
             if (EntityExists(entity))
             {
-                entitiesToRemove.Add(entity);
-                GameWorld.collisionManager.RemoveCollider(entity);
+                
             }
+            entitiesToRemove.Add(entity);
+            GameWorld.collisionManager.RemoveCollider(entity);
         }
 
 

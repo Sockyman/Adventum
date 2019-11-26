@@ -13,6 +13,7 @@ namespace Adventum.Source.Entities
         public Mob(Vector2 position) : base(position)
         {
             Sprite = new Animator("HumanoidBase", "humanBase");
+            SetBounds(new Point(16));
         }
 
 

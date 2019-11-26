@@ -27,15 +27,12 @@ namespace Adventum.Source.Core.Collision
         {
             for (int i = 0; i < colliders.Count; i++)
             {
-                if (colliders.Count < i)
+                for (int j = i + 1; j < colliders.Count; j++)
                 {
-                    for (int j = i + 1; i < colliders.Count; i++)
+                    if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask) && colliders[j] != colliders[i])
                     {
-                        if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask) && colliders[i] != colliders[j])
-                        {
-                            colliders[i].OnCollision(new CollisionData(colliders[j]));
-                            colliders[j].OnCollision(new CollisionData(colliders[i]));
-                        }
+                        colliders[i].OnCollision(new CollisionData(colliders[j]));
+                        colliders[j].OnCollision(new CollisionData(colliders[i]));
                     }
                 }
 

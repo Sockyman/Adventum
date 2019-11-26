@@ -50,6 +50,7 @@ namespace Adventum.Source.Entities
             Collisions = new CollisionData();
 
             InitalizeBehavior();
+            
 
             //Sprite = new Animator();
         }
