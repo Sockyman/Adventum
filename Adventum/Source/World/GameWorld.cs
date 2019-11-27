@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Adventum.Source.Entities;
+using Adventum.Source.Entities.Mobs;
 using Adventum.Source.Util;
 using Adventum.Source.Core;
 using Adventum.Source.Core.IO;

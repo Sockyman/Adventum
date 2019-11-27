@@ -29,7 +29,7 @@ namespace Adventum.Source.Core.Collision
             {
                 for (int j = i + 1; j < colliders.Count; j++)
                 {
-                    if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask) && colliders[j] != colliders[i])
+                    if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask)) // && colliders[j] != colliders[i])
                     {
                         colliders[i].OnCollision(new CollisionData(colliders[j]));
                         colliders[j].OnCollision(new CollisionData(colliders[i]));
@@ -54,7 +54,7 @@ namespace Adventum.Source.Core.Collision
 
         public void RemoveCollider(ICollidable collider)
         {
-            collidersToRemove.Remove(collider);
+            collidersToRemove.Add(collider);
         }
     }
 }

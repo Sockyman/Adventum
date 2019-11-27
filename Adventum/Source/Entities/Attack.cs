@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Adventum.Source.Util;
 using Adventum.Source.Sprite;
+using Adventum.Source.Entities.Mobs;
 using Adventum.Data;
 using MonoGame.Extended;
 using Adventum.Source.Core.Collision;
@@ -48,7 +49,6 @@ namespace Adventum.Source.Entities
 
             foreach (ICollidable collider in collisionData.colliders)
             {
-                Console.WriteLine(collider.ToString());
                 if (collider is Mob)
                 {
                     ((Mob)collider).Hurt();

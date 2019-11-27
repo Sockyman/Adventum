@@ -28,6 +28,7 @@ namespace Adventum.Source
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
             graphics.IsFullScreen = false;
+            graphics.SynchronizeWithVerticalRetrace = false;
 
             IsFixedTimeStep = false;
         }

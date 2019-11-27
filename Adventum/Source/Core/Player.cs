@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using Adventum.Source.Core.IO;
 using Adventum.Source.Entities;
+using Adventum.Source.Entities.Mobs;
 using Adventum.Source.Util;
 using Adventum.Source.World;
 

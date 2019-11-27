@@ -6,7 +6,7 @@ using Adventum.Source.Sprite;
 using MonoGame.Extended;
 using Adventum.Source.Core.Collision;
 
-namespace Adventum.Source.Entities
+namespace Adventum.Source.Entities.Mobs
 {
     public class Mob : Entity
     {

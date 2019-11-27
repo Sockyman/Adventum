@@ -61,9 +61,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Source\Entities\Attack.cs" />
-    <Compile Include="Source\Entities\Enemy.cs" />
+    <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
-    <Compile Include="Source\Entities\PlayerEntity.cs" />
+    <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Source\States\Trigger.cs" />
     <Compile Include="Source\World\GameWorld.cs" />
     <Compile Include="Source\Entities\Entity.cs" />
-    <Compile Include="Source\Entities\Mob.cs" />
+    <Compile Include="Source\Entities\Mobs\Mob.cs" />
     <Compile Include="Source\Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ using Adventum.Source.States;
 using Adventum.Data;
 using Adventum.Source.Core.Collision;
 
-namespace Adventum.Source.Entities
+namespace Adventum.Source.Entities.Mobs
 {
     public class PlayerEntity : Mob
     {
@@ -30,7 +30,7 @@ namespace Adventum.Source.Entities
             Trigger<EState> t = state.AddState(EState.Idle).RecentTrigger();
             state.AddState(EState.Walk).AttachTrigger(t).AddStateTrigger(EState.Idle, () =>
                 PreviousVelocity == Vector2.Zero
-            );
+            ).AddStateTrigger(EState.Attack, () => input.KeyCheckPressed(Keys.Space));
             state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk")).AddEntranceTrigger(() =>
             {
                 World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
@@ -52,8 +52,6 @@ namespace Adventum.Source.Entities
         public override void OnCollision(CollisionData collisionData)
         {
             base.OnCollision(collisionData);
-
-            Console.WriteLine("Here");
         }
     }
 }

@@ -6,7 +6,7 @@ using Adventum.Source.Util;
 using Adventum.Data;
 using MonoGame.Extended;
 
-namespace Adventum.Source.Entities
+namespace Adventum.Source.Entities.Mobs
 {
     class Enemy : Mob
     {
