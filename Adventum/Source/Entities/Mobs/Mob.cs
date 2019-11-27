@@ -5,11 +5,18 @@ using Adventum.Source.States;
 using Adventum.Source.Sprite;
 using MonoGame.Extended;
 using Adventum.Source.Core.Collision;
+using Adventum.Source.Util;
+using Adventum.Source.World;
 
 namespace Adventum.Source.Entities.Mobs
 {
     public class Mob : Entity
     {
+        public int MaxHealth { get; private set; }
+        public int Health { get; set; }
+
+
+
         public Mob(Vector2 position) : base(position)
         {
             Sprite = new Animator("HumanoidBase", "humanBase");
@@ -25,7 +32,17 @@ namespace Adventum.Source.Entities.Mobs
 
             state.AddState(EState.Walk).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
 
-            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.5f);
+            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.25f);
+        }
+
+
+        public override void Update(DeltaTime delta)
+        {
+            base.Update(delta);
+            if (Health < 0)
+            {
+                GameWorld.entityManager.RemoveEntity(this);
+            }
         }
 
 
@@ -45,9 +62,9 @@ namespace Adventum.Source.Entities.Mobs
         }
 
 
-        public void Hurt()
+        public void Hurt(int damage, Angle direction)
         {
-            Console.WriteLine(ToString());
+            Health -= damage;
         }
     }
 }
