@@ -64,7 +64,6 @@ namespace Adventum.Entities
 
         protected virtual void SetBounds(Point bounds)
         {
-            Point origin = Sprite.Sprite.origin;
             BoundingBox = new Rectangle(-bounds.X / 2, -bounds.Y / 2, bounds.X, bounds.Y);
         }
 

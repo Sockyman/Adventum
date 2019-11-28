@@ -62,9 +62,9 @@ namespace Adventum.Core.Resource
                     return resource;
                 }
                 catch (Exception)
-                {
+                { 
                     Console.WriteLine("Resource: " + rootFolder + @"\" + name + ", failed to load.");
-                    return default(T);
+                    return default;
                 }
             }
             return resourceMap[name];

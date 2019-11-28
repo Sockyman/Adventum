@@ -21,8 +21,10 @@ namespace Adventum.Data.Generator
 
         static void Serialize<T>(T data)
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true
+            };
 
             using (XmlWriter writer = XmlWriter.Create("test.xml", settings))
             {
@@ -32,20 +34,22 @@ namespace Adventum.Data.Generator
 
         static void SerializeSpriteSheet()
         {
-            SpriteSheet data = new SpriteSheet();
+            SpriteSheet data = new SpriteSheet
+            {
+                name = "AttackSwish",
+                origin = new Point(16, 32),
+                frameSize = new Point(32),
+                animations = new Dictionary<string, Animation>(),
+                defaultAnimation = "base"
+            };
 
-
-            data.name = "AttackSwish";
-            data.origin = new Point(16, 32);
-            data.frameSize = new Point(32);
-            data.animations = new Dictionary<string, Animation>();
-            data.defaultAnimation = "base";
-
-            Animation ani = new Animation();
-            ani.cellOfOrigin = new Point(0);
-            ani.frames = 1;
-            ani.FPS = 15;
-            ani.directionMap = DirectionMap.standardMobMap;
+            Animation ani = new Animation
+            {
+                cellOfOrigin = new Point(0),
+                frames = 1,
+                FPS = 15,
+                directionMap = DirectionMap.standardMobMap
+            };
 
             data.animations["base"] = ani;
 

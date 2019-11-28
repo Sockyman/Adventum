@@ -14,9 +14,9 @@ namespace Adventum
     {
         public static GraphicsDeviceManager graphics;
         public static GameWorld gameWorld;
+        public static RenderTarget2D renderTarget;
         SpriteBatch spriteBatch;
-        RenderTarget2D renderTarget;
-        
+
 
 
         public Main()

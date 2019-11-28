@@ -1,11 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using Adventum.Core.IO;
 using Adventum.Util;
 using Adventum.States;
 using Adventum.Data;
 using Adventum.Core.Collision;
+using Adventum.Data;
 
 namespace Adventum.Entities.Mobs
 {
@@ -46,7 +48,9 @@ namespace Adventum.Entities.Mobs
             movement.X += input.CheckAxis(Keys.A, Keys.D);
             movement.Y += input.CheckAxis(Keys.W, Keys.S);
 
-            Move(movement, MaxMovementSpeed, true);
+            Move(movement, MaxMovementSpeed, false);
+
+            state.Facing = Utils.AngleToDirection(Angle.FromVector(Position - Mouse.GetState().Position.ToVector2()));
         }
 
         public override void OnCollision(CollisionData collisionData)

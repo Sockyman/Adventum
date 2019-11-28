@@ -10,11 +10,29 @@ namespace Adventum.Core.IO
         private KeyboardState keyboardState;
         private KeyboardState oldKeyboardState;
 
+        private MouseState mouseState;
+        private MouseState oldMouseState;
+
+
+        public Vector2 MousePosition
+        {
+            get
+            {
+                Vector2 mousePosition = mouseState.Position.ToVector2();
+                mousePosition.X = mousePosition.X / Main.graphics.PreferredBackBufferWidth * Main.renderTarget.Width;
+                mousePosition.Y = mousePosition.Y / Main.graphics.PreferredBackBufferHeight * Main.renderTarget.Height;
+                return mousePosition;
+            }
+        }
+
 
         public Input()
         {
             keyboardState = new KeyboardState();
             oldKeyboardState = new KeyboardState();
+
+            mouseState = new MouseState();
+            oldMouseState = new MouseState();
         }
 
 
@@ -22,6 +40,9 @@ namespace Adventum.Core.IO
         {
             oldKeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
+
+            oldMouseState = mouseState;
+            mouseState = Mouse.GetState();
         }
 
 
