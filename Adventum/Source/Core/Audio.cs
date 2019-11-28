@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Adventum.Source.Core.Resource;
+using Adventum.Core.Resource;
 
-namespace Adventum.Source.Core
+namespace Adventum.Core
 {
     public static class Audio
     {

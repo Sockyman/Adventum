@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Adventum.Source.Core.IO
+namespace Adventum.Core.IO
 {
     public class Input
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Adventum.Source.Util;
+using Adventum.Util;
 using MonoGame.Extended.Timers;
 
-namespace Adventum.Source.States
+namespace Adventum.States
 {
     public class Fsm<T>
     {

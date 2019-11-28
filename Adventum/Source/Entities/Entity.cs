@@ -1,15 +1,15 @@
 ﻿using Adventum.Data;
-using Adventum.Source.Core.Collision;
-using Adventum.Source.Core.Resource;
-using Adventum.Source.Sprite;
-using Adventum.Source.States;
-using Adventum.Source.Util;
+using Adventum.Core.Collision;
+using Adventum.Core.Resource;
+using Adventum.Sprite;
+using Adventum.States;
+using Adventum.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using System;
 
-namespace Adventum.Source.Entities
+namespace Adventum.Entities
 {
     public abstract class Entity : ICollidable
     {

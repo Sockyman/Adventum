@@ -17,7 +17,7 @@ namespace Adventum
         [STAThread]
         static void Main()
         {
-            using (var game = new Source.Main())
+            using (var game = new Main())
                 game.Run();
         }
     }

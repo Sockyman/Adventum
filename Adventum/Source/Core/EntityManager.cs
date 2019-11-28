@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Adventum.Source.Entities;
-using Adventum.Source.Util;
-using Adventum.Source.World;
+using Adventum.Entities;
+using Adventum.Util;
+using Adventum.World;
 
-namespace Adventum.Source.Core
+namespace Adventum.Core
 {
     public class EntityManager
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Adventum.Source.Core.IO;
-using Adventum.Source.Util;
-using Adventum.Source.States;
+using Adventum.Core.IO;
+using Adventum.Util;
+using Adventum.States;
 using Adventum.Data;
-using Adventum.Source.Core.Collision;
+using Adventum.Core.Collision;
 
-namespace Adventum.Source.Entities.Mobs
+namespace Adventum.Entities.Mobs
 {
     public class PlayerEntity : Mob
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Adventum.Source.Core.Collision
+namespace Adventum.Core.Collision
 {
     public interface ICollidable
     {

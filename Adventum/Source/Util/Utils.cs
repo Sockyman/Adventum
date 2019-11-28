@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Adventum.Data;
 
-namespace Adventum.Source.Util
+namespace Adventum.Util
 {
     public static class Utils
     {

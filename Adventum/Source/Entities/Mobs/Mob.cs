@@ -2,16 +2,16 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Adventum.Data;
-using Adventum.Source.States;
-using Adventum.Source.Sprite;
+using Adventum.States;
+using Adventum.Sprite;
 using MonoGame.Extended;
-using Adventum.Source.Core;
-using Adventum.Source.Core.Collision;
-using Adventum.Source.Util;
-using Adventum.Source.World;
-using Adventum.Source.Core.Resource;
+using Adventum.Core;
+using Adventum.Core.Collision;
+using Adventum.Util;
+using Adventum.World;
+using Adventum.Core.Resource;
 
-namespace Adventum.Source.Entities.Mobs
+namespace Adventum.Entities.Mobs
 {
     public class Mob : Entity
     {

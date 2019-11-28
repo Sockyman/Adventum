@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Adventum.Source.States;
-using Adventum.Source.Util;
-using Adventum.Source.Sprite;
+using Adventum.States;
+using Adventum.Util;
+using Adventum.Sprite;
 using Adventum.Data;
 using MonoGame.Extended;
 
-namespace Adventum.Source.Entities.Mobs
+namespace Adventum.Entities.Mobs
 {
     class Enemy : Mob
     {

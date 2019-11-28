@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Adventum.Source.Util
+namespace Adventum.Util
 {
     public class DeltaTime : GameTime
     {

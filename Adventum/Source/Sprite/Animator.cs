@@ -1,11 +1,11 @@
 ﻿using Adventum.Data;
-using Adventum.Source.Core.Resource;
-using Adventum.Source.Util;
+using Adventum.Core.Resource;
+using Adventum.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace Adventum.Source.Sprite
+namespace Adventum.Sprite
 {
     public class Animator
     {

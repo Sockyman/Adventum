@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Adventum.Data;
-using Adventum.Source.Util;
-using Adventum.Source.Entities;
+using Adventum.Util;
+using Adventum.Entities;
 using Microsoft.Xna.Framework;
 
-namespace Adventum.Source.States
+namespace Adventum.States
 {
     public class EntityState : Fsm<EState>
     {

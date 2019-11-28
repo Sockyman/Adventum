@@ -1,5 +1,5 @@
 ﻿
-namespace Adventum.Source.States
+namespace Adventum.States
 {
     public enum EState
     {

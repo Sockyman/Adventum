@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace Adventum.Source.Core.Collision
+namespace Adventum.Core.Collision
 {
     public class CollisionData
     {

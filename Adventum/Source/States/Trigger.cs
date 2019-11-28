@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Adventum.Source.States
+namespace Adventum.States
 {
     public delegate bool TriggerExpresion();
     public delegate void TargetExpresion();

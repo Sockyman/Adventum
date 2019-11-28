@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Adventum.Data;
-using Adventum.Source.Util;
+using Adventum.Util;
 
-namespace Adventum.Source.Core.Resource
+namespace Adventum.Core.Resource
 {
     public static class ResourceManager
     {

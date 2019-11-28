@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Adventum.Source.Util;
-using Adventum.Source.Sprite;
-using Adventum.Source.Entities.Mobs;
+using Adventum.Util;
+using Adventum.Sprite;
+using Adventum.Entities.Mobs;
 using Adventum.Data;
 using MonoGame.Extended;
-using Adventum.Source.Core.Collision;
+using Adventum.Core.Collision;
 
-namespace Adventum.Source.Entities
+namespace Adventum.Entities
 {
     class Attack : Entity
     {

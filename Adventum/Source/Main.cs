@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Adventum.Source.Core;
-using Adventum.Source.Core.Resource;
-using Adventum.Source.World;
+using Adventum.Core;
+using Adventum.Core.Resource;
+using Adventum.World;
 
-namespace Adventum.Source
+namespace Adventum
 {
     /// <summary>
     /// This is the main type for your game.

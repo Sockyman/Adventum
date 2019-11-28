@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Adventum.Source.Entities;
-using Adventum.Source.Entities.Mobs;
-using Adventum.Source.Util;
-using Adventum.Source.Core;
-using Adventum.Source.Core.IO;
-using Adventum.Source.Core.Collision;
+using Adventum.Entities;
+using Adventum.Entities.Mobs;
+using Adventum.Util;
+using Adventum.Core;
+using Adventum.Core.IO;
+using Adventum.Core.Collision;
 
-namespace Adventum.Source.World
+namespace Adventum.World
 {
     public class GameWorld
     {
