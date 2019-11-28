@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Adventum.Source.States;
 using Adventum.Source.Util;
+using Adventum.Source.Sprite;
 using Adventum.Data;
 using MonoGame.Extended;
 
@@ -12,7 +13,7 @@ namespace Adventum.Source.Entities.Mobs
     {
         public Enemy(Vector2 position) : base(position)
         {
-            Sprite.SpriteTexture = Core.Resource.ResourceManager.GetTexture("humanBase");
+            Sprite = new Animator("HumanoidBase", "zombieBase");
         }
 
 

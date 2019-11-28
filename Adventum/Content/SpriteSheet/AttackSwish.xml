@@ -4,7 +4,7 @@
     <name>AttackSwish</name>
     <defaultAnimation>base</defaultAnimation>
     <frameSize>32 32</frameSize>
-    <origin>16 16</origin>
+    <origin>16 32</origin>
     <animations>
       <Item>
         <Key>base</Key>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Adventum.Data;
 using Adventum.Source.Util;
 
@@ -17,6 +18,8 @@ namespace Adventum.Source.Core.Resource
         private static Dictionary<string, SpriteSheet> spriteSheetsLoaded;
         private static Dictionary<string, Texture2D[,]> textureGrids;
         private static Dictionary<string, SpriteFont> fontsLoaded;
+        private static Dictionary<string, Effect> shadersLoaded;
+        private static Dictionary<string, SoundEffect> soundsLoaded;
 
 
         public static void LoadContent(ContentManager content)
@@ -27,6 +30,8 @@ namespace Adventum.Source.Core.Resource
             spriteSheetsLoaded = new Dictionary<string, SpriteSheet>();
             textureGrids = new Dictionary<string, Texture2D[,]>();
             fontsLoaded = new Dictionary<string, SpriteFont>();
+            shadersLoaded = new Dictionary<string, Effect>();
+            soundsLoaded = new Dictionary<string, SoundEffect>();
 
             texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
             texturesLoaded["pixel"].SetData( new Color[] { Color.White } );
@@ -74,6 +79,13 @@ namespace Adventum.Source.Core.Resource
             return new Texture2D(Main.graphics.GraphicsDevice, 32, 32);
         }
 
+
+        public static SoundEffect GetSound(string name)
+        {
+            SoundEffect sound = LoadItem<SoundEffect>("Sound", name, soundsLoaded);
+            return sound;
+        }
+
         public static SpriteSheet GetSpriteSheet(string name)
         {
             SpriteSheet spriteSheet = LoadItem<SpriteSheet>("SpriteSheet", name, spriteSheetsLoaded);
@@ -111,6 +123,15 @@ namespace Adventum.Source.Core.Resource
             if (font != null)
                 return font;
             throw new Exception("Font {name} not found");
+        }
+
+
+        public static Effect GetShader(string name)
+        {
+            Effect shader = LoadItem("Shader", name, shadersLoaded);
+            if (shader != null)
+                return shader;
+            throw new Exception("Shader {name} not found");
         }
     }
 }

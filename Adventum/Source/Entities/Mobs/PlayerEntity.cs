@@ -33,7 +33,7 @@ namespace Adventum.Source.Entities.Mobs
             ).AddStateTrigger(EState.Attack, () => input.KeyCheck(Keys.Space));
             state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk")).AddEntranceTrigger(() =>
             {
-                World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(8), Utils.DirectionToVector(state.Facing), 0.1f, 500));
+                World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
             });
         }
 

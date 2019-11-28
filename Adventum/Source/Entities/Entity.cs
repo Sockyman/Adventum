@@ -62,10 +62,10 @@ namespace Adventum.Source.Entities
         }
 
 
-        protected void SetBounds(Point bounds)
+        protected virtual void SetBounds(Point bounds)
         {
-            Point origin = new Point(Sprite.Sprite.frameSize.X / 2, Sprite.Sprite.frameSize.Y);
-            BoundingBox = new Rectangle(origin.X - bounds.X / 2, origin.Y - bounds.Y / 2, origin.X + bounds.X / 2, origin.Y + bounds.Y / 2);
+            Point origin = Sprite.Sprite.origin;
+            BoundingBox = new Rectangle(-bounds.X / 2, -bounds.Y / 2, bounds.X, bounds.Y);
         }
 
 
@@ -88,13 +88,29 @@ namespace Adventum.Source.Entities
             //spriteBatch.Draw(Sprite.GetTexture(), Position, color: Color.White, layerDepth: Position.Y / 360);
             Sprite.Draw(spriteBatch, Position);
 
-            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
+            //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
+
+            /*
+            Texture2D rect = new Texture2D(Main.graphics.GraphicsDevice, CollisionMask.Width, CollisionMask.Height);
+            Color[] data = new Color[CollisionMask.Width * CollisionMask.Height];
+            for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;
+            rect.SetData(data);
+            spriteBatch.Draw(rect, CollisionMask.Location.ToVector2(), Color.White);
+            */
         }
 
 
         public virtual void OnCollision(CollisionData collisionData)
         {
             Collisions.Merge(collisionData);
+
+            foreach (ICollidable c in collisionData.colliders)
+            {
+                if (c.Solid && Solid)
+                {
+                    ApplyDirecionalVelocity(Angle.FromVector(Position - c.Position), 5);
+                }
+            }
         }
 
 

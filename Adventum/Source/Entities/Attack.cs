@@ -18,7 +18,7 @@ namespace Adventum.Source.Entities
 
         public Attack(Entity parent, Point size, Vector2 direction, float lifespan, float speed) : base(parent.Position)
         {
-            Position += new Vector2(0, -16);
+            Position += new Vector2(0, 0);
 
             this.parent = parent;
 

@@ -106,25 +106,38 @@ namespace Adventum.Source
         {
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.SetRenderTarget(renderTarget);
-
             spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
             gameWorld.Draw(spriteBatch);
 
+
+            DrawCursor(spriteBatch);
+
             spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+            //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
+            spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
 
             
-
-            spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
 
             spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), GameWorld.deltaTime.FPS.ToString(), new Vector2(40, 40), Color.White);
             spriteBatch.End();
 
 
             base.Draw(gameTime);
+        }
+
+
+        public void DrawCursor(SpriteBatch spriteBatch)
+        {
+            Texture2D cursorTexture = ResourceManager.GetTexture("cursor");
+            Vector2 mousePosition = Mouse.GetState().Position.ToVector2();
+            mousePosition.X = mousePosition.X / graphics.PreferredBackBufferWidth * renderTarget.Width - cursorTexture.Width / 2;
+            mousePosition.Y = mousePosition.Y / graphics.PreferredBackBufferHeight * renderTarget.Height - cursorTexture.Height / 2;
+            spriteBatch.Draw(ResourceManager.GetTexture("cursor"), mousePosition, Color.White);
         }
     }
 }

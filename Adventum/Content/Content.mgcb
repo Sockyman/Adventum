@@ -21,6 +21,24 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/fontMain.spritefont
 
+#begin Shader/fullWhite.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shader/fullWhite.fx
+
+#begin Sound/enemyDeath0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/enemyDeath0.wav
+
+#begin Sound/enemyHit0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/enemyHit0.wav
+
 #begin SpriteSheet/AttackSwish.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -43,6 +61,30 @@
 /processorParam:TextureFormat=Color
 /build:Texture/attackSwish.png
 
+#begin Texture/attackSwish.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/attackSwish.png
+
+#begin Texture/cursor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/cursor.png
+
 #begin Texture/humanBase.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -90,6 +132,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/pixel.png
+
+#begin Texture/swirl.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/swirl.png
 
 #begin Texture/swirl.png
 /importer:TextureImporter
