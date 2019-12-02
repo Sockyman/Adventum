@@ -61,6 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Source\Core\Audio.cs" />
+    <Compile Include="Source\Core\IO\MouseButton.cs" />
     <Compile Include="Source\Entities\Attack.cs" />
     <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />

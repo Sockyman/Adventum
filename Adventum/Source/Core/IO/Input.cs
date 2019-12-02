@@ -52,6 +52,26 @@ namespace Adventum.Core.IO
             return keyboardState.IsKeyDown(key);
         }
 
+        public bool KeyCheck(MouseButton key)
+        {
+            return GetMouseButtonState(key) == ButtonState.Pressed;
+        }
+
+        public ButtonState GetMouseButtonState(MouseButton key)
+        {
+            switch (key)
+            {
+                case MouseButton.Left:
+                    return mouseState.LeftButton;
+                case MouseButton.Right:
+                    return mouseState.RightButton;
+                case MouseButton.Middle:
+                    return mouseState.MiddleButton;
+                default:
+                    return new ButtonState();
+            }
+        }
+
 
         public bool KeyCheckPressed(Keys key)
         {

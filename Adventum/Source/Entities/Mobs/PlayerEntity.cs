@@ -5,7 +5,6 @@ using MonoGame.Extended;
 using Adventum.Core.IO;
 using Adventum.Util;
 using Adventum.States;
-using Adventum.Data;
 using Adventum.Core.Collision;
 using Adventum.Data;
 
@@ -50,7 +49,7 @@ namespace Adventum.Entities.Mobs
 
             Move(movement, MaxMovementSpeed, false);
 
-            state.Facing = Utils.AngleToDirection(Angle.FromVector(Position - Mouse.GetState().Position.ToVector2()));
+            state.Facing = Utils.AngleToDirection(Angle.FromVector(input.MousePosition - Position));
         }
 
         public override void OnCollision(CollisionData collisionData)
