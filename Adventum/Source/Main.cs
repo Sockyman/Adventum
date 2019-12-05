@@ -106,11 +106,12 @@ namespace Adventum
         {
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.SetRenderTarget(renderTarget);
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
+            spriteBatch.Begin(SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp);
 
+            //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
             gameWorld.Draw(spriteBatch);
 
-
+            //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
             DrawCursor(spriteBatch);
 
             spriteBatch.End();

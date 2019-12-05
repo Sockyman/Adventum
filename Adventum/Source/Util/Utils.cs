@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Adventum.Data;
+using Adventum.Core.Resource;
 
 namespace Adventum.Util
 {
@@ -93,6 +94,21 @@ namespace Adventum.Util
                 default:
                     return new Vector2(-1, 0);
             }
+        }
+
+
+        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color)
+        {
+            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), rectangle, color);
+        }
+
+
+        public static void DrawHealthBar(SpriteBatch spriteBatch, Vector2 center, Point size, int maxValue, int value, Color backgroundColor, Color foregroundColor)
+        {
+            Rectangle bar = new Rectangle((center - size.ToVector2() / 2).ToPoint(), size);
+            DrawRectangle(spriteBatch, bar, backgroundColor);
+            bar.Width = bar.Width * value / maxValue;
+            DrawRectangle(spriteBatch, bar, foregroundColor);
         }
     }
 }

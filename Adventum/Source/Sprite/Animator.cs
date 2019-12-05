@@ -54,7 +54,7 @@ namespace Adventum.Sprite
             }
         }
         private float frameNumber;
-        public Direction Facing { get; private set; }
+        public Direction Facing { get; set; }
         public string AnimationName { get; private set; }
         public Animation ActiveAnimation
         {

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
+using MonoGame.Extended.Tiled;
 using Adventum.Data;
 using Adventum.Util;
 
@@ -132,6 +133,12 @@ namespace Adventum.Core.Resource
             if (shader != null)
                 return shader;
             throw new Exception("Shader {name} not found");
+        }
+
+
+        public static TiledMap GetMap(string name)
+        {
+            return content.Load<TiledMap>("Map" + "/" + name);
         }
     }
 }

@@ -11,6 +11,7 @@
 #-------------------------------- References --------------------------------#
 
 /reference:..\..\Adventum.Data\bin\Debug\Adventum.Data.dll
+/reference:..\..\Adventum.Data\bin\Debug\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -20,6 +21,28 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Font/fontMain.spritefont
+
+#begin Map/GrassTest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/GrassTest.png
+
+#begin Map/Test2.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:Map/Test2.tsx
+
+#begin Map/TestMap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/TestMap.tmx
 
 #begin Shader/fullWhite.fx
 /importer:EffectImporter
@@ -61,18 +84,6 @@
 /processorParam:TextureFormat=Color
 /build:Texture/attackSwish.png
 
-#begin Texture/attackSwish.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/attackSwish.png
-
 #begin Texture/cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -97,18 +108,6 @@
 /processorParam:TextureFormat=Color
 /build:Texture/humanBase.png
 
-#begin Texture/humanBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/humanBase.png
-
 #begin Texture/pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -120,30 +119,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/pixel.png
-
-#begin Texture/pixel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/pixel.png
-
-#begin Texture/swirl.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/swirl.png
 
 #begin Texture/swirl.png
 /importer:TextureImporter
@@ -169,7 +144,7 @@
 /processorParam:TextureFormat=Color
 /build:Texture/test.png
 
-#begin Texture/test.png
+#begin Texture/woodArrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -179,19 +154,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/test.png
-
-#begin Texture/zombieBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/zombieBase.png
+/build:Texture/woodArrow.png
 
 #begin Texture/zombieBase.png
 /importer:TextureImporter

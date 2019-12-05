@@ -12,7 +12,6 @@ technique Technique1
 float4 FullWhite(float2 coords: TEXCOORD0) : COLOR0
 {
 	float4 colour = tex2D(s0, coords);
-	colour.rgb = 1;
-	return colour;
+	return float4(1.0f, 1.0f, 1.0f, 0.0f);
 }
 
