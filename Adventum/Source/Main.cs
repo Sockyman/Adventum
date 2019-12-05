@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using Adventum.Core;
 using Adventum.Core.Resource;
 using Adventum.World;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Adventum
 {
@@ -12,10 +14,13 @@ namespace Adventum
     /// </summary>
     public class Main : Game
     {
+        public static Size windowSize = new Size(640, 360);
         public static GraphicsDeviceManager graphics;
         public static GameWorld gameWorld;
         public static RenderTarget2D renderTarget;
         SpriteBatch spriteBatch;
+
+        public static OrthographicCamera Camera { get; set; }
 
 
 
@@ -43,7 +48,8 @@ namespace Adventum
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            BoxingViewportAdapter viewPort = new BoxingViewportAdapter(Window, GraphicsDevice, windowSize.Width, windowSize.Height);
+            Camera = new OrthographicCamera(viewPort);
 
             base.Initialize();
 
@@ -59,7 +65,7 @@ namespace Adventum
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderTarget = new RenderTarget2D(GraphicsDevice, 640, 360);
+            renderTarget = new RenderTarget2D(GraphicsDevice, windowSize.Width, windowSize.Height);
 
 
             ResourceManager.LoadContent(Content);
@@ -105,28 +111,27 @@ namespace Adventum
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            spriteBatch.Begin(SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp);
+            GraphicsDevice.SetRenderTarget( renderTarget);
+            spriteBatch.Begin(SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
             //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
             gameWorld.Draw(spriteBatch);
 
-            //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
             DrawCursor(spriteBatch);
 
             spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-            //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
+
             spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
 
-            
 
-            spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), GameWorld.deltaTime.FPS.ToString(), new Vector2(40, 40), Color.White);
+            string debugString = GameWorld.deltaTime.FPS.ToString() + "   " + Camera.Position;
+            spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), debugString, new Vector2(40, 40), Color.White);
             spriteBatch.End();
-
+            
 
             base.Draw(gameTime);
         }

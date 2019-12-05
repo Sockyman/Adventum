@@ -42,6 +42,9 @@ namespace Adventum.World
             Map = ResourceManager.GetMap("TestMap");
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
 
+
+            //gameCamera = new OrthographicCamera(Main.graphics.GraphicsDevice);
+
             
             {
                 PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(200f)));
@@ -72,6 +75,9 @@ namespace Adventum.World
 
             entityManager.Update(delta);
             collisionManager.Update(delta);
+
+            if (EntityExists(player.player))
+                Main.Camera.LookAt(player.player.Position);
 
 
             if (input.KeyCheckPressed(Keys.F11))
