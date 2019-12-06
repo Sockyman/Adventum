@@ -18,12 +18,27 @@ namespace Adventum.Entities
         protected Random random;
 
         public Vector2 Position { get; set; }
+        /// <summary>
+        /// The number of distance the entity will move next framw in pixels per second.
+        /// </summary>
         public Vector2 Velocity { get; set; }
+        /// <summary>
+        /// Used only by EntityManager. Used so the velocity can be checked properly.
+        /// </summary>
         public Vector2 PreviousVelocity { get; set; }
 
+        /// <summary>
+        /// Works like inertia. Dampens each frame.
+        /// </summary>
         public Vector2 Motion { get; set; }
         public CollisionData Collisions { get; set; }
+        /// <summary>
+        /// Determines the CollisionMask. Centered around 0,0.
+        /// </summary>
         public Rectangle BoundingBox { get; set; }
+        /// <summary>
+        /// The actual recatangle which covers the entity.
+        /// </summary>
         public Rectangle CollisionMask
         {
             get
@@ -56,6 +71,9 @@ namespace Adventum.Entities
         }
 
 
+        /// <summary>
+        /// Ran in constructor to build state machine.
+        /// </summary>
         protected virtual void InitalizeBehavior()
         {
             state = new EntityState(EState.Idle, Direction.Down);
@@ -113,6 +131,11 @@ namespace Adventum.Entities
         }
 
 
+        /// <summary>
+        /// Changes the inertia.
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <param name="velocity"></param>
         public virtual void ApplyDirecionalVelocity(Angle angle, float velocity)
         {
             Vector2 direction = angle.ToVector(velocity);
@@ -136,7 +159,17 @@ namespace Adventum.Entities
         }
 
 
-        public virtual void Destroy()
+        /// <summary>
+        /// Called when the entity is destroyed. Can be used to create particles, drops, ect.
+        /// </summary>
+        public virtual void Die()
+        {
+            Destroy();
+        }
+        /// <summary>
+        /// Called when the entity is to be removed from the game (eg. being unloaded).
+        /// </summary>
+        public void Destroy()
         {
             World.GameWorld.entityManager.RemoveEntity(this);
         }

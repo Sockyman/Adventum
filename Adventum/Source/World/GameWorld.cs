@@ -42,9 +42,6 @@ namespace Adventum.World
             Map = ResourceManager.GetMap("TestMap");
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
 
-
-            //gameCamera = new OrthographicCamera(Main.graphics.GraphicsDevice);
-
             
             {
                 PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(200f)));
@@ -54,7 +51,7 @@ namespace Adventum.World
                     player = playerEntity
                 };
 
-                for (int i = 0; i < 100; i++)
+                for (int i = 0; i < 0; i++)
                     entityManager.CreateEntity(new Enemy(new Vector2(random.Next(640), random.Next(360))));
             }
 
@@ -79,6 +76,9 @@ namespace Adventum.World
             if (EntityExists(player.player))
                 Main.Camera.LookAt(player.player.Position);
 
+            //Main.Camera.Rotate(0.001f);
+            Main.Camera.ZoomOut(0.001f);
+
 
             if (input.KeyCheckPressed(Keys.F11))
             {
@@ -90,7 +90,7 @@ namespace Adventum.World
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            mapRenderer.Draw();
+            mapRenderer.Draw(Main.Camera.GetViewMatrix());
             entityManager.Draw(spriteBatch);
         }
 

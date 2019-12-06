@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
@@ -14,10 +16,13 @@ namespace Adventum
     /// </summary>
     public class Main : Game
     {
+        private static Main self;
         public static Size windowSize = new Size(640, 360);
         public static GraphicsDeviceManager graphics;
         public static GameWorld gameWorld;
         public static RenderTarget2D renderTarget;
+        public static StringBuilder debugString = new StringBuilder();
+
         SpriteBatch spriteBatch;
 
         public static OrthographicCamera Camera { get; set; }
@@ -26,6 +31,8 @@ namespace Adventum
 
         public Main()
         {
+            self = this;
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
@@ -99,6 +106,9 @@ namespace Adventum
 
             gameWorld.Update(gameTime);
 
+
+
+
             base.Update(gameTime);
         }
 
@@ -112,26 +122,47 @@ namespace Adventum
         {
             GraphicsDevice.Clear(Color.Black);
             GraphicsDevice.SetRenderTarget( renderTarget);
-            spriteBatch.Begin(SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
-            //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
-            gameWorld.Draw(spriteBatch);
+            /// Drawing at world position (Game).
+            {
+                spriteBatch.Begin(SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
-            DrawCursor(spriteBatch);
+                //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
+                gameWorld.Draw(spriteBatch);
 
-            spriteBatch.End();
+                spriteBatch.End();
+            }
+
+            /// Drawing at screen position (GUI).
+            {
+                spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
+
+                DrawCursor(spriteBatch);
+
+                spriteBatch.End();
+            }
+
 
             GraphicsDevice.SetRenderTarget(null);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
+            /// Drawing render target to screen and debug.
+            {
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
 
-            spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+                spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
 
 
-            string debugString = GameWorld.deltaTime.FPS.ToString() + "   " + Camera.Position;
-            spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), debugString, new Vector2(40, 40), Color.White);
-            spriteBatch.End();
-            
+
+                spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), debugString, new Vector2(40, 40), Color.White);
+                debugString = new StringBuilder("Adventum ");
+
+                DebugAdd(System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString());
+                DebugAdd(":");
+                DebugAdd(Camera.Position.ToString(), "CameraPosition:");
+
+
+                spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }
@@ -144,6 +175,13 @@ namespace Adventum
             mousePosition.X = mousePosition.X / graphics.PreferredBackBufferWidth * renderTarget.Width - cursorTexture.Width / 2;
             mousePosition.Y = mousePosition.Y / graphics.PreferredBackBufferHeight * renderTarget.Height - cursorTexture.Height / 2;
             spriteBatch.Draw(ResourceManager.GetTexture("cursor"), mousePosition, Color.White);
+        }
+
+
+        public static Main DebugAdd(string s, string title = "")
+        {
+            debugString.Append(title).Append(" ").Append(s).Append("    ");
+            return self;
         }
     }
 }

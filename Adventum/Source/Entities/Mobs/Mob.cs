@@ -105,10 +105,11 @@ namespace Adventum.Entities.Mobs
         }
 
 
-        public void Die()
+        public override void Die()
         {
             Audio.Play("enemyDeath0", 0.4f);
-            GameWorld.entityManager.RemoveEntity(this);
+
+            base.Die();
         }
     }
 }
