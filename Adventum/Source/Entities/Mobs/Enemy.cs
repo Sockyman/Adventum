@@ -26,7 +26,7 @@ namespace Adventum.Entities.Mobs
             state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 0f);
 
             state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () => random.Next(100) > 93 && state.clock.CurrentTime.TotalSeconds > 0.5)
-                .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(4)).AddStateTrigger(EState.Attack, () =>
+                .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(8)).AddStateTrigger(EState.Attack, () =>
                 {
                     return GameWorld.EntityExists(GameWorld.player.player) && Vector2.Distance(Position, GameWorld.player.player.Position) < 30 && 
                         Utils.AngleToDirection(Angle.FromVector(GameWorld.player.player.Position - Position)) == state.Facing;

@@ -8,8 +8,19 @@ using Adventum.Core.Resource;
 
 namespace Adventum.Util
 {
+
     public static class Utils
     {
+        public static float Wrap(float min, float max, float value)
+        {
+            return (float)(value - (max - min) * Math.Floor(value / (max - min)));
+        }
+        public static int Wrap(int min, int max, int value)
+        {
+            return value - (max - min) * (int)Math.Floor((float)value / ((float)max - (float)min));
+        }
+
+
         public static Vector2 Dampen(Vector2 vector, float dampening)
         {
             vector.X = Dampen(vector.X, dampening);
@@ -65,35 +76,33 @@ namespace Adventum.Util
         }
 
 
-        public static Direction AngleToDirection(Angle angle)
+        public static Direction AngleToDirection(Angle angle, bool cardinalLock = false)
         {
-            Vector2 vector = angle.ToVector(1);
-            vector.X = (float)Math.Round(vector.X);
-            vector.Y = (float)Math.Round(vector.Y);
+            Vector2 vec = angle.ToUnitVector();
+            float rad = (float)Math.Atan2(vec.X, -vec.Y);
 
-            if (vector.Y > 0)
-                return Direction.Down;
-            if (vector.Y < 0)
-                return Direction.Up;
-            if (vector.X > 0)
-                return Direction.Right;
-            return Direction.Left;
+            int directions = Enum.GetNames(typeof(Direction)).Length;
+
+
+            float j = (float)(rad / Math.PI / 2 * directions);
+            int i = (int)Math.Round(j) + directions / 2;
+            int direction = Wrap(0, directions, i);
+
+            if (cardinalLock)
+            {
+                direction = (direction + 1) / 2;
+            }
+
+            return (Direction)direction;
         }
 
 
         public static Vector2 DirectionToVector(Direction direction)
         {
-            switch (direction)
-            {
-                case Direction.Down:
-                    return new Vector2(0, 1);
-                case Direction.Up:
-                    return new Vector2(0, -1);
-                case Direction.Right:
-                    return new Vector2(1, 0);
-                default:
-                    return new Vector2(-1, 0);
-            }
+            float i = (float)direction;
+
+            float rad = (float)(i / Enum.GetNames(typeof(Direction)).Length * Math.PI * 2) + (float)Math.PI;
+            return new Vector2((float)Math.Sin(rad), -(float)Math.Cos(rad));
         }
 
 

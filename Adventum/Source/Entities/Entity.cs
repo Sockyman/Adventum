@@ -50,6 +50,7 @@ namespace Adventum.Entities
         }
         public EntityState state;
 
+        public bool Immovable { get; } = false;
         public bool Solid { get; set; }
         public Animator Sprite { get; set; }
 
@@ -103,7 +104,7 @@ namespace Adventum.Entities
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(Sprite.GetTexture(), Position, color: Color.White, layerDepth: Position.Y / 360);
-            Sprite.Draw(spriteBatch, Position);
+            Sprite.Draw(spriteBatch, Position, Color.White);
 
             //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
 

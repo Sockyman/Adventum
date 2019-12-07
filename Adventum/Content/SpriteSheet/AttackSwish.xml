@@ -12,7 +12,8 @@
           <cellOfOrigin>0 0</cellOfOrigin>
           <frames>1</frames>
           <FPS>0</FPS>
-          <directionMap>0 0 0 1 0 2 0 3</directionMap>
+          <directionMap>0 0 0 2 0 1 0 2 0 0 0 2 0 1 0 2</directionMap>
+          <flipMap>0 3 0 1 2 0 1 2</flipMap>
         </Value>
       </Item>
     </animations>

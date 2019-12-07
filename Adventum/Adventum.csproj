@@ -61,6 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Source\Core\Audio.cs" />
+    <Compile Include="Source\Core\Collision\WallColider.cs" />
     <Compile Include="Source\Core\IO\MouseButton.cs" />
     <Compile Include="Source\Entities\Arrow.cs" />
     <Compile Include="Source\Entities\Attack.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Util\DeltaTime.cs" />
     <Compile Include="Source\Util\Utils.cs" />
+    <Compile Include="Source\World\MapHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">

@@ -15,7 +15,7 @@ namespace Adventum.Entities.Mobs
         public Input input;
 
 
-        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 100)
+        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 3)
         {
             input = new Input();
         }
@@ -35,7 +35,7 @@ namespace Adventum.Entities.Mobs
             state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk")).AddEntranceTrigger(() =>
             {
                 //World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
-                World.GameWorld.entityManager.CreateEntity(new Arrow(this, input.MouseWorldPosition - Position, 2000));
+                World.GameWorld.entityManager.CreateEntity(new Arrow(this, input.MouseWorldPosition - Position, 2000, random.Next(-3, 3)));
             });
         }
 
@@ -50,7 +50,12 @@ namespace Adventum.Entities.Mobs
 
             Move(movement, MaxMovementSpeed, false);
 
-            state.Facing = Utils.AngleToDirection(Angle.FromVector(input.MouseWorldPosition - Position));
+            Vector2 centerPosition = Position;
+            centerPosition.Y -= Sprite.Sprite.frameSize.Y / 2;
+            state.Facing = Utils.AngleToDirection(Angle.FromVector(input.MouseWorldPosition - centerPosition));
+
+
+            Main.DebugAdd(state.Facing.ToString(), "PlayerFacing:");
         }
 
         public override void OnCollision(CollisionData collisionData)

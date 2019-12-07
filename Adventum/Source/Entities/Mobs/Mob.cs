@@ -66,6 +66,7 @@ namespace Adventum.Entities.Mobs
         {
             if (HitFrames < 0 || random.Next(2) != 0)
             {
+                //Sprite.Draw(spriteBatch, Position + new Vector2(-2, -2), new Color(Color.Black, 100));
                 base.Draw(spriteBatch);
             }
 

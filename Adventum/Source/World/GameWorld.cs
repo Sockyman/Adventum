@@ -13,6 +13,7 @@ using Adventum.Core;
 using Adventum.Core.IO;
 using Adventum.Core.Collision;
 using Adventum.Core.Resource;
+using Adventum.Data;
 
 namespace Adventum.World
 {
@@ -41,22 +42,20 @@ namespace Adventum.World
 
             Map = ResourceManager.GetMap("TestMap");
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
+            MapHandler.LoadMapObjects(Map);
 
             
             {
-                PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(200f)));
+                PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
                 playerEntity.input = input;
                 player = new Player(this, input)
                 {
                     player = playerEntity
                 };
 
-                for (int i = 0; i < 0; i++)
+                for (int i = 0; i < 10; i++)
                     entityManager.CreateEntity(new Enemy(new Vector2(random.Next(640), random.Next(360))));
             }
-
-
-            
         }
 
 
@@ -77,7 +76,6 @@ namespace Adventum.World
                 Main.Camera.LookAt(player.player.Position);
 
             //Main.Camera.Rotate(0.001f);
-            Main.Camera.ZoomOut(0.001f);
 
 
             if (input.KeyCheckPressed(Keys.F11))

@@ -25,6 +25,13 @@ namespace Adventum.Core.Collision
 
         public void Update(DeltaTime delta)
         {
+            void TestImmovability(ICollidable k, ICollidable l)
+            {
+                if (!k.Immovable && l.Immovable)
+                    k.Position -= k.Velocity * delta.Seconds;
+            }
+
+
             for (int i = 0; i < colliders.Count; i++)
             {
                 for (int j = i + 1; j < colliders.Count; j++)
@@ -33,6 +40,9 @@ namespace Adventum.Core.Collision
                     {
                         colliders[i].OnCollision(new CollisionData(colliders[j]));
                         colliders[j].OnCollision(new CollisionData(colliders[i]));
+
+                        TestImmovability(colliders[i], colliders[j]);
+                        TestImmovability(colliders[j], colliders[i]);
                     }
                 }
 

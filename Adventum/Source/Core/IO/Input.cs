@@ -52,8 +52,8 @@ namespace Adventum.Core.IO
             oldMouseState = mouseState;
             mouseState = Mouse.GetState();
 
-            Main.DebugAdd(MousePosition.ToString(), "MousePosition:");
-            Main.DebugAdd(MouseWorldPosition.ToString(), "MouseWorldPosition:");
+            Main.DebugAdd(MousePosition.ToPoint().ToString(), "MousePosition:");
+            Main.DebugAdd(MouseWorldPosition.ToPoint().ToString(), "MouseWorldPosition:");
         }
 
 

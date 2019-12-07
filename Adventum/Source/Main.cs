@@ -125,7 +125,7 @@ namespace Adventum
 
             /// Drawing at world position (Game).
             {
-                spriteBatch.Begin(SpriteSortMode.Immediate, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
+                spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
                 //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
                 gameWorld.Draw(spriteBatch);
@@ -158,7 +158,8 @@ namespace Adventum
 
                 DebugAdd(System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString());
                 DebugAdd(":");
-                DebugAdd(Camera.Position.ToString(), "CameraPosition:");
+                DebugAdd(((int)GameWorld.deltaTime.FPS).ToString(), "FPS:");
+                DebugAdd(Camera.Position.ToPoint().ToString(), "CameraPosition:");
 
 
                 spriteBatch.End();

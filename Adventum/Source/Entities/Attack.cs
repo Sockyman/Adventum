@@ -15,6 +15,7 @@ namespace Adventum.Entities
         public Entity parent;
         public float lifespan;
         public TimeSpan life;
+        public bool lockToParent = true;
 
         public Attack(Entity parent, Point size, Vector2 direction, float lifespan, float speed) : base(parent.Position)
         {
@@ -46,8 +47,8 @@ namespace Adventum.Entities
                 Destroy();
             }
 
-            //Position -= parent.PreviousVelocity;
-            Position += parent.Velocity * delta.Seconds;
+            if (lockToParent)
+                Position += parent.Velocity * delta.Seconds;
 
             life += delta.ElapsedGameTime;
         }

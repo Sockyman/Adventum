@@ -115,9 +115,9 @@ namespace Adventum.Sprite
 
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
-            spriteBatch.Draw(GetTexture(), position - Sprite.origin.ToVector2(), Color.White);
+            spriteBatch.Draw(GetTexture(), position - Sprite.origin.ToVector2(), color: color, effects: (SpriteEffects)ActiveAnimation.flipMap[(int)Facing]);
         }
     }
 }
