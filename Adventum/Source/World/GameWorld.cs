@@ -53,8 +53,8 @@ namespace Adventum.World
                     player = playerEntity
                 };
 
-                for (int i = 0; i < 10; i++)
-                    entityManager.CreateEntity(new Enemy(new Vector2(random.Next(640), random.Next(360))));
+                /*for (int i = 0; i < 0; i++)
+                    entityManager.CreateEntity(new Enemy(new Vector2(random.Next(640), random.Next(360))));*/
             }
         }
 

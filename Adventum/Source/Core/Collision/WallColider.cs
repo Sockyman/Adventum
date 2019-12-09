@@ -27,7 +27,6 @@ namespace Adventum.Core.Collision
         {
             Position = position.ToVector2();
             BoundingBox = new Rectangle(new Point(), size);
-            Console.WriteLine("Here");
         }
 
         public void OnCollision(CollisionData collisionData)

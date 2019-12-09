@@ -148,7 +148,7 @@ namespace Adventum
             {
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-
+                ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
                 spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
 
 
