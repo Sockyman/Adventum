@@ -74,7 +74,7 @@ namespace Adventum.Entities.Mobs
             {
                 Vector2 barCenter = Position;
                 barCenter.Y -= Sprite.Sprite.frameSize.Y;
-                Utils.DrawHealthBar(spriteBatch, barCenter, new Point(10, 2), MaxHealth, Health, Color.Red, Color.LimeGreen);
+                Utils.DrawHealthBar(spriteBatch, barCenter, new Point(10, 2), MaxHealth, Health, Color.Red, Color.LimeGreen, 1f);
             }
         }
 

@@ -125,7 +125,7 @@ namespace Adventum
 
             /// Drawing at world position (Game).
             {
-                spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
+                spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
                 //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
                 gameWorld.Draw(spriteBatch);

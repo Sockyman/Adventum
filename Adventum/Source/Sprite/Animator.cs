@@ -1,6 +1,7 @@
 ﻿using Adventum.Data;
 using Adventum.Core.Resource;
 using Adventum.Util;
+using Adventum.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -115,9 +116,9 @@ namespace Adventum.Sprite
 
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float layerDepth = 0f)
         {
-            spriteBatch.Draw(GetTexture(), position - Sprite.origin.ToVector2(), color: color, effects: (SpriteEffects)ActiveAnimation.flipMap[(int)Facing]);
+            spriteBatch.Draw(GetTexture(), position - Sprite.origin.ToVector2(), color: color, effects: (SpriteEffects)ActiveAnimation.flipMap[(int)Facing], layerDepth: layerDepth);
         }
     }
 }

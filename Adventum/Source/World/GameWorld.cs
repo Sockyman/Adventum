@@ -28,7 +28,7 @@ namespace Adventum.World
         public static Player player;
         public static Input input;
 
-        public TiledMap Map { get; private set; }
+        public static TiledMap Map { get; private set; }
         public TiledMapRenderer mapRenderer;
 
 

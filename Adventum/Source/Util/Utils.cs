@@ -106,18 +106,18 @@ namespace Adventum.Util
         }
 
 
-        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color)
+        public static void DrawRectangle(SpriteBatch spriteBatch, Rectangle rectangle, Color color, float layerDepth = 0f)
         {
-            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), rectangle, color);
+            spriteBatch.Draw(ResourceManager.GetTexture("pixel"), destinationRectangle: rectangle, color: color, layerDepth: layerDepth);
         }
 
 
-        public static void DrawHealthBar(SpriteBatch spriteBatch, Vector2 center, Point size, int maxValue, int value, Color backgroundColor, Color foregroundColor)
+        public static void DrawHealthBar(SpriteBatch spriteBatch, Vector2 center, Point size, int maxValue, int value, Color backgroundColor, Color foregroundColor, float layerDepth = 0f)
         {
             Rectangle bar = new Rectangle((center - size.ToVector2() / 2).ToPoint(), size);
-            DrawRectangle(spriteBatch, bar, backgroundColor);
+            DrawRectangle(spriteBatch, bar, backgroundColor, layerDepth - 0.00001f);
             bar.Width = bar.Width * value / maxValue;
-            DrawRectangle(spriteBatch, bar, foregroundColor);
+            DrawRectangle(spriteBatch, bar, foregroundColor, layerDepth);
         }
     }
 }

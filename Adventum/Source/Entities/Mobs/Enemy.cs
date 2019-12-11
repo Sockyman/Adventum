@@ -23,7 +23,7 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 0f);
+            state.AddState(EState.Idle);//.AddCountdownStateTrigger(EState.Walk, 0f);
 
             state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () => random.Next(100) > 93 && state.clock.CurrentTime.TotalSeconds > 0.5)
                 .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(8)).AddStateTrigger(EState.Attack, () =>

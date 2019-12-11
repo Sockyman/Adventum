@@ -4,6 +4,7 @@ using Adventum.Core.Resource;
 using Adventum.Sprite;
 using Adventum.States;
 using Adventum.Util;
+using Adventum.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -104,7 +105,7 @@ namespace Adventum.Entities
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(Sprite.GetTexture(), Position, color: Color.White, layerDepth: Position.Y / 360);
-            Sprite.Draw(spriteBatch, Position, Color.White);
+            Sprite.Draw(spriteBatch, Position, Color.White, Position.Y / GameWorld.Map.HeightInPixels);
 
             //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
 
