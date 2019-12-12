@@ -44,11 +44,6 @@
 /processor:TiledMapProcessor
 /build:Map/TestMap.tmx
 
-#begin Map/TestMap.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:Map/TestMap.tmx
-
 #begin Shader/deSaturate.fx
 /importer:EffectImporter
 /processor:EffectProcessor
@@ -95,18 +90,6 @@
 /processorParam:TextureFormat=Color
 /build:Texture/attackSwish.png
 
-#begin Texture/attackSwish.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/attackSwish.png
-
 #begin Texture/baseTile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -131,30 +114,6 @@
 /processorParam:TextureFormat=Color
 /build:Texture/cursor.png
 
-#begin Texture/cursor.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/cursor.png
-
-#begin Texture/humanBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/humanBase.png
-
 #begin Texture/humanBase.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -179,7 +138,7 @@
 /processorParam:TextureFormat=Color
 /build:Texture/pixel.png
 
-#begin Texture/pixel.png
+#begin Texture/reaper.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -189,19 +148,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Texture/pixel.png
-
-#begin Texture/swirl.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/swirl.png
+/build:Texture/reaper.png
 
 #begin Texture/swirl.png
 /importer:TextureImporter
@@ -227,18 +174,6 @@
 /processorParam:TextureFormat=Color
 /build:Texture/test.png
 
-#begin Texture/test.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/test.png
-
 #begin Texture/woodArrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -250,30 +185,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/woodArrow.png
-
-#begin Texture/woodArrow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/woodArrow.png
-
-#begin Texture/zombieBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/zombieBase.png
 
 #begin Texture/zombieBase.png
 /importer:TextureImporter

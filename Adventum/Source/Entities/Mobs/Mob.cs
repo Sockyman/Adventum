@@ -96,7 +96,7 @@ namespace Adventum.Entities.Mobs
             {
                 Health -= damage;
 
-                HitFrames = 0.6f;
+                HitFrames = 0.1f;
 
                 direction.Revolutions += random.Next(-1, 1) / 10;
                 ApplyDirecionalVelocity(direction, 500);
