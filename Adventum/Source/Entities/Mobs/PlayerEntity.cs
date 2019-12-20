@@ -15,7 +15,7 @@ namespace Adventum.Entities.Mobs
         public Input input;
 
 
-        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 3)
+        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 5)
         {
             input = new Input();
             maxHitFrames = 0.6f;
@@ -35,8 +35,8 @@ namespace Adventum.Entities.Mobs
             ).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left));
             state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk")).AddEntranceTrigger(() =>
             {
-                //World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
-                World.GameWorld.entityManager.CreateEntity(new Arrow(this, input.MouseWorldPosition - Position, 2000, random.Next(-3, 3)));
+                World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
+                //World.GameWorld.entityManager.CreateEntity(new Arrow(this, input.MouseWorldPosition - Position, 2000, random.Next(-3, 3)));
             });
         }
 

@@ -16,6 +16,7 @@ namespace Adventum.Entities
         public float lifespan;
         public TimeSpan life;
         public bool lockToParent = true;
+        protected CollisionData previousCollisions;
 
         public Attack(Entity parent, Point size, Vector2 direction, float lifespan, float speed) : base(parent.Position)
         {
@@ -35,6 +36,8 @@ namespace Adventum.Entities
             life = new TimeSpan();
 
             ApplyDirecionalVelocity(Angle.FromVector(direction), speed);
+
+            previousCollisions = new CollisionData();
         }
 
 
@@ -60,11 +63,14 @@ namespace Adventum.Entities
 
             foreach (ICollidable collider in collisionData.colliders)
             {
-                if (collider is Mob && collider != parent)
+                if (!previousCollisions.colliders.Contains(collider) && collider is Mob && collider != parent && ((Mob)collider).HitFrames < 1)
                 {
                     ((Mob)collider).Hurt(1, Angle.FromVector(Utils.DirectionToVector(state.Facing)));
                 }
             }
+
+
+            previousCollisions.Merge(collisionData);
         }
     }
 }

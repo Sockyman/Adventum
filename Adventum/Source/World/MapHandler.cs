@@ -11,6 +11,9 @@ namespace Adventum.World
 {
     public static class MapHandler
     {
+        public static Random random = new Random();
+
+
         public static void LoadMapObjects(TiledMap map)
         {
             TiledMapObjectLayer collisionLayer = map.GetLayer<TiledMapObjectLayer>("Collision");
@@ -35,7 +38,10 @@ namespace Adventum.World
 
         public static void LoadEntityObject(TiledMapTileObject entity)
         {
-            GameWorld.entityManager.CreateEntity(new Enemy(entity.Position));
+            if (random.Next(2) > 0)
+                GameWorld.entityManager.CreateEntity(new Reaper(entity.Position));
+            else
+                GameWorld.entityManager.CreateEntity(new Zombie(entity.Position));
         }
     }
 }

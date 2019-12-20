@@ -68,6 +68,8 @@
     <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
+    <Compile Include="Source\Entities\Mobs\Reaper.cs" />
+    <Compile Include="Source\Entities\Mobs\Zombie.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />
@@ -181,12 +183,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\SpriteSheet\HumanoidBase.xml" />
-    <Content Include="Content\Texture\humanBase.png" />
-    <Content Include="Content\Texture\pixel.png" />
-    <Content Include="Content\Texture\test.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Adventum.Data\Adventum.Data.csproj">
