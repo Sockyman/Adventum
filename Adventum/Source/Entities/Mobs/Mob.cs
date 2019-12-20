@@ -19,6 +19,8 @@ namespace Adventum.Entities.Mobs
         public int Health { get; set; }
         public float HitFrames { get; private set; }
 
+        protected float maxHitFrames = 0.1f;
+
 
         public Mob(Vector2 position) : base(position)
         {
@@ -96,7 +98,7 @@ namespace Adventum.Entities.Mobs
             {
                 Health -= damage;
 
-                HitFrames = 0.1f;
+                HitFrames = maxHitFrames;
 
                 direction.Revolutions += random.Next(-1, 1) / 10;
                 ApplyDirecionalVelocity(direction, 500);
