@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using MonoGame.Extended.Collisions;
 using Adventum.Entities;
 using Adventum.Entities.Mobs;
 using Adventum.Util;
@@ -22,7 +23,7 @@ namespace Adventum.World
         public static Random random;
 
         public static EntityManager entityManager;
-        public static CollisionManager collisionManager;
+        //public static CollisionManager collisionManager;
         public static DeltaTime deltaTime;
 
         public static Player player;
@@ -31,18 +32,21 @@ namespace Adventum.World
         public static TiledMap Map { get; private set; }
         public TiledMapRenderer mapRenderer;
 
+        public static CollisionWorld collisionWorld;
 
         public GameWorld()
         {
             random = new Random();
 
-            collisionManager = new CollisionManager();
+            //collisionManager = new CollisionManager();
             entityManager = new EntityManager();
             input = new Input();
 
             Map = ResourceManager.GetMap("TestMap");
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
             MapHandler.LoadMapObjects(Map);
+
+            collisionWorld = new CollisionWorld(Vector2.Zero);
 
             
             {
@@ -70,7 +74,9 @@ namespace Adventum.World
             player.Update(delta);
 
             entityManager.Update(delta);
-            collisionManager.Update(delta);
+            //collisionManager.Update(delta);
+
+            collisionWorld.Update(delta);
 
             if (EntityExists(player.player))
                 Main.Camera.LookAt(player.player.Position);
@@ -97,5 +103,6 @@ namespace Adventum.World
         {
             return entityManager.EntityExists(entity);
         }
+
     }
 }

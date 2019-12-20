@@ -6,6 +6,7 @@ using Adventum.Sprite;
 using Adventum.Entities.Mobs;
 using Adventum.Data;
 using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using Adventum.Core.Collision;
 
 namespace Adventum.Entities
@@ -57,11 +58,11 @@ namespace Adventum.Entities
         }
 
 
-        public override void OnCollision(CollisionData collisionData)
+        public override void OnCollision(CollisionInfo collisionData)
         {
             base.OnCollision(collisionData);
 
-            foreach (ICollidable collider in collisionData.colliders)
+            /*foreach (ICollidable collider in collisionData.colliders)
             {
                 if (!previousCollisions.colliders.Contains(collider) && collider is Mob && collider != parent && ((Mob)collider).HitFrames < 1)
                 {
@@ -70,7 +71,7 @@ namespace Adventum.Entities
             }
 
 
-            previousCollisions.Merge(collisionData);
+            previousCollisions.Merge(collisionData);*/
         }
     }
 }

@@ -56,6 +56,13 @@ namespace Adventum.Core.Collision
         }
 
 
+
+        public void CheckCollisions(ICollidable collider)
+        {
+
+        }
+
+
         public void AddCollider(ICollidable collider)
         {
             collidersToAdd.Add(collider);

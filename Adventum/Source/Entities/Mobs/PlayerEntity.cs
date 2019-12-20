@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using Adventum.Core.IO;
 using Adventum.Util;
 using Adventum.States;
@@ -59,7 +60,7 @@ namespace Adventum.Entities.Mobs
             Main.DebugAdd(state.Facing.ToString(), "PlayerFacing:");
         }
 
-        public override void OnCollision(CollisionData collisionData)
+        public override void OnCollision(CollisionInfo collisionData)
         {
             base.OnCollision(collisionData);
         }

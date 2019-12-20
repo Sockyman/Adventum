@@ -5,6 +5,7 @@ using Adventum.Data;
 using Adventum.States;
 using Adventum.Sprite;
 using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using Adventum.Core;
 using Adventum.Core.Collision;
 using Adventum.Util;
@@ -18,6 +19,9 @@ namespace Adventum.Entities.Mobs
         public int MaxHealth { get; private set; } = 2;
         public int Health { get; set; }
         public float HitFrames { get; private set; }
+
+
+        protected float maxHitFrames = 0.1f;
 
 
         public Mob(Vector2 position) : base(position)
@@ -84,7 +88,7 @@ namespace Adventum.Entities.Mobs
             base.Move(angle, changeDirection);
         }
 
-        public override void OnCollision(CollisionData collisionData)
+        public override void OnCollision(CollisionInfo collisionData)
         {
             base.OnCollision(collisionData);
         }
@@ -96,7 +100,7 @@ namespace Adventum.Entities.Mobs
             {
                 Health -= damage;
 
-                HitFrames = 0.1f;
+                HitFrames = maxHitFrames;
 
                 direction.Revolutions += random.Next(-1, 1) / 10;
                 ApplyDirecionalVelocity(direction, 500);

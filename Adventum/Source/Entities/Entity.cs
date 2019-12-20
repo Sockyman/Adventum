@@ -8,11 +8,12 @@ using Adventum.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using System;
 
 namespace Adventum.Entities
 {
-    public abstract class Entity : ICollidable
+    public abstract class Entity : IActorTarget
     {
         public const float MaxMovementSpeed = 200;
 
@@ -36,7 +37,7 @@ namespace Adventum.Entities
         /// <summary>
         /// Determines the CollisionMask. Centered around 0,0.
         /// </summary>
-        public Rectangle BoundingBox { get; set; }
+        public RectangleF BoundingBox { get; set; }
         /// <summary>
         /// The actual recatangle which covers the entity.
         /// </summary>
@@ -44,7 +45,7 @@ namespace Adventum.Entities
         {
             get
             {
-                Rectangle mask = BoundingBox;
+                Rectangle mask = BoundingBox.ToRectangle();
                 mask.Location += Position.ToPoint();
                 return mask;
             }
@@ -119,9 +120,11 @@ namespace Adventum.Entities
         }
 
 
-        public virtual void OnCollision(CollisionData collisionData)
+        public virtual void OnCollision(CollisionInfo collisionData)
         {
-            Collisions.Merge(collisionData);
+
+
+            /*Collisions.Merge(collisionData);
 
             foreach (ICollidable c in collisionData.colliders)
             {
@@ -129,7 +132,7 @@ namespace Adventum.Entities
                 {
                     ApplyDirecionalVelocity(Angle.FromVector(Position - c.Position), 5);
                 }
-            }
+            }*/
         }
 
 

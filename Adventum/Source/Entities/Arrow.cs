@@ -7,6 +7,7 @@ using Adventum.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 
 namespace Adventum.Entities
 {
@@ -42,11 +43,11 @@ namespace Adventum.Entities
             base.Draw(spriteBatch);
         }
 
-        public override void OnCollision(CollisionData collisionData)
+        public override void OnCollision(CollisionInfo collisionData)
         {
             base.OnCollision(collisionData);
 
-            if (collisionData.TestTypeCollision<Mob>())
+            /*if (collisionData.TestTypeCollision<Mob>())
             {
                 Mob m = (Mob)collisionData.TypeCollision<Mob>();
 
@@ -54,7 +55,7 @@ namespace Adventum.Entities
                 {
                     piercing--;
                 }
-            }
+            }*/
         }
     }
 }
