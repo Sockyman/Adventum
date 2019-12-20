@@ -18,6 +18,7 @@ namespace Adventum.Entities.Mobs
         public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 3)
         {
             input = new Input();
+            maxHitFrames = 0.6f;
         }
 
 
