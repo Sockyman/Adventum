@@ -8,6 +8,8 @@ using Adventum.Core;
 using Adventum.Core.Resource;
 using Adventum.World;
 using MonoGame.Extended.ViewportAdapters;
+using GeonBit.UI;
+using GeonBit.UI.Entities;
 
 namespace Adventum
 {
@@ -22,6 +24,8 @@ namespace Adventum
         public static GameWorld gameWorld;
         public static RenderTarget2D renderTarget;
         public static StringBuilder debugString = new StringBuilder();
+
+        public static UserInterface Ui;
 
         SpriteBatch spriteBatch;
 
@@ -77,6 +81,20 @@ namespace Adventum
 
             ResourceManager.LoadContent(Content);
 
+
+            UserInterface.Initialize(Content, BuiltinThemes.editor);
+            UserInterface.Active.UseRenderTarget = true;
+            UserInterface.Active.SamplerState = SamplerState.PointClamp;
+
+            UserInterface.Active.GlobalScale = 1.75f;
+            UserInterface.Active.ShowCursor = false;
+
+            Panel panel = new Panel(new Vector2(100, 100), anchor: Anchor.TopLeft);
+            UserInterface.Active.AddEntity(panel);
+            Button b = new Button("Hi");
+            panel.AddChild(b);
+
+
             gameWorld = new GameWorld();
         }
 
@@ -107,7 +125,7 @@ namespace Adventum
             gameWorld.Update(gameTime);
 
 
-
+            UserInterface.Active.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -121,7 +139,13 @@ namespace Adventum
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            GraphicsDevice.SetRenderTarget( renderTarget);
+
+            UserInterface.Active.Draw(spriteBatch);
+            
+            UserInterface.Active.RenderTargetTransformMatrix = Camera.GetViewMatrix();
+
+            GraphicsDevice.SetRenderTarget(renderTarget);
+
 
             /// Drawing at world position (Game).
             {
@@ -137,11 +161,14 @@ namespace Adventum
             {
                 spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
+                spriteBatch.Draw(UserInterface.Active.RenderTarget, new Rectangle(0, 0, windowSize.Width, windowSize.Height), Color.White);
+
                 DrawCursor(spriteBatch);
 
                 spriteBatch.End();
             }
 
+            
 
             GraphicsDevice.SetRenderTarget(null);
             /// Drawing render target to screen and debug.
@@ -150,6 +177,7 @@ namespace Adventum
 
                 ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
                 spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+                
 
 
 
@@ -161,9 +189,10 @@ namespace Adventum
                 DebugAdd(((int)GameWorld.deltaTime.FPS).ToString(), "FPS:");
                 DebugAdd(Camera.Position.ToPoint().ToString(), "CameraPosition:");
 
-
                 spriteBatch.End();
             }
+
+            //UserInterface.Active.DrawMainRenderTarget(spriteBatch);
 
             base.Draw(gameTime);
         }
