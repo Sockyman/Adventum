@@ -46,7 +46,7 @@ namespace Adventum.Entities.Mobs
 
             state.AddState(EState.Walk).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
 
-            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.25f);
+            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.25f).AddEntranceTrigger(() => UseMain());
         }
 
 
@@ -111,6 +111,12 @@ namespace Adventum.Entities.Mobs
             Audio.Play("enemyDeath0", 0.4f);
 
             base.Die();
+        }
+
+
+        public virtual void UseMain()
+        {
+            GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
         }
     }
 }

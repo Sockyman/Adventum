@@ -119,5 +119,13 @@ namespace Adventum.Util
             bar.Width = bar.Width * value / maxValue;
             DrawRectangle(spriteBatch, bar, foregroundColor, layerDepth);
         }
+
+
+        public static Vector2 ScaleToScreen(Vector2 toScale)
+        {
+            Vector2 ratio = toScale / Main.windowSize.ToVector2();
+
+            return ratio * new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight);
+        }
     }
 }

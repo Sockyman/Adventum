@@ -25,30 +25,24 @@ namespace Adventum.Core.Collision
 
         public void Update(DeltaTime delta)
         {
-            void TestImmovability(ICollidable k, ICollidable l)
+            foreach (ICollidable source in colliders)
             {
-                if (!k.Immovable && l.Immovable)
-                    k.Position -= k.Velocity * delta.Seconds;
-            }
 
+                Vector2 tempVelocity = source.PreviousVelocity * delta.Seconds;
+                source.Position += tempVelocity;
+                source.PreviousVelocity = source.Velocity;
+                source.Velocity = Vector2.Zero;
 
-            for (int i = 0; i < colliders.Count; i++)
-            {
-                for (int j = i + 1; j < colliders.Count; j++)
+                foreach (ICollidable other in colliders)
                 {
-                    if (colliders[i].CollisionMask.Intersects(colliders[j].CollisionMask)) // && colliders[j] != colliders[i])
+                    if (source.CollisionMask.Intersects(other.CollisionMask) && other != source) // && colliders[j] != colliders[i])
                     {
-                        colliders[i].OnCollision(new CollisionData(colliders[j]));
-                        colliders[j].OnCollision(new CollisionData(colliders[i]));
+                        source.OnCollision(new CollisionData(other));
 
-                        TestImmovability(colliders[i], colliders[j]);
-                        TestImmovability(colliders[j], colliders[i]);
+                        if (!source.Immovable && other.Immovable && source.Solid)
+                            source.Position -= tempVelocity;
                     }
                 }
-
-                colliders[i].Position += colliders[i].PreviousVelocity * delta.Seconds;
-                colliders[i].PreviousVelocity = colliders[i].Velocity;
-                colliders[i].Velocity = Vector2.Zero;
             }
 
 

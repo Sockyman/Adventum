@@ -61,12 +61,11 @@ namespace Adventum.Entities
         {
             base.OnCollision(collisionData);
 
-            foreach (ICollidable collider in collisionData.colliders)
+            ICollidable other = collisionData.Other;
+
+            if (!previousCollisions.colliders.Contains(other) && other is Mob && other != parent && ((Mob)other).HitFrames < 1)
             {
-                if (!previousCollisions.colliders.Contains(collider) && collider is Mob && collider != parent && ((Mob)collider).HitFrames < 1)
-                {
-                    ((Mob)collider).Hurt(1, Angle.FromVector(Utils.DirectionToVector(state.Facing)));
-                }
+                ((Mob)other).Hurt(1, Angle.FromVector(Utils.DirectionToVector(state.Facing)));
             }
 
 

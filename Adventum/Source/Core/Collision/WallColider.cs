@@ -20,7 +20,7 @@ namespace Adventum.Core.Collision
             }
         }
         public bool Immovable { get; set; } = true;
-        public bool Solid { get; set; } = true;
+        public bool Solid { get; set; } = false;
 
 
         public WallColider(Point position, Point size)

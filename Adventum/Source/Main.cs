@@ -19,13 +19,11 @@ namespace Adventum
     public class Main : Game
     {
         private static Main self;
-        public static Size windowSize = new Size(640, 360);
+        public static Point windowSize = new Point(640, 360);
         public static GraphicsDeviceManager graphics;
         public static GameWorld gameWorld;
         public static RenderTarget2D renderTarget;
         public static StringBuilder debugString = new StringBuilder();
-
-        public static UserInterface Ui;
 
         SpriteBatch spriteBatch;
 
@@ -59,7 +57,7 @@ namespace Adventum
         /// </summary>
         protected override void Initialize()
         {
-            BoxingViewportAdapter viewPort = new BoxingViewportAdapter(Window, GraphicsDevice, windowSize.Width, windowSize.Height);
+            BoxingViewportAdapter viewPort = new BoxingViewportAdapter(Window, GraphicsDevice, windowSize.X, windowSize.Y);
             Camera = new OrthographicCamera(viewPort);
 
             base.Initialize();
@@ -76,23 +74,18 @@ namespace Adventum
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderTarget = new RenderTarget2D(GraphicsDevice, windowSize.Width, windowSize.Height);
+            renderTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
 
 
             ResourceManager.LoadContent(Content);
 
 
-            UserInterface.Initialize(Content, BuiltinThemes.editor);
+            UserInterface.Initialize(Content, "a");
             UserInterface.Active.UseRenderTarget = true;
             UserInterface.Active.SamplerState = SamplerState.PointClamp;
 
-            UserInterface.Active.GlobalScale = 1.75f;
+            UserInterface.Active.GlobalScale = 1f;
             UserInterface.Active.ShowCursor = false;
-
-            Panel panel = new Panel(new Vector2(100, 100), anchor: Anchor.TopLeft);
-            UserInterface.Active.AddEntity(panel);
-            Button b = new Button("Hi");
-            panel.AddChild(b);
 
 
             gameWorld = new GameWorld();
@@ -121,11 +114,25 @@ namespace Adventum
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F11))
+            {
+                graphics.IsFullScreen = true;
+                graphics.ApplyChanges();
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.F10))
+            {
+                graphics.IsFullScreen = false;
+                graphics.ApplyChanges();
+            }
+
 
             gameWorld.Update(gameTime);
 
 
             UserInterface.Active.Update(gameTime);
+            DebugAdd(UserInterface.Active.ActiveEntity.ToString(), "ActiveControl:");
+            DebugAdd(((int)GameWorld.deltaTime.FPS).ToString(), "FPS:");
+
 
             base.Update(gameTime);
         }
@@ -142,7 +149,7 @@ namespace Adventum
 
             UserInterface.Active.Draw(spriteBatch);
             
-            UserInterface.Active.RenderTargetTransformMatrix = Camera.GetViewMatrix();
+            //UserInterface.Active.RenderTargetTransformMatrix = Camera.GetViewMatrix();
 
             GraphicsDevice.SetRenderTarget(renderTarget);
 
@@ -161,7 +168,7 @@ namespace Adventum
             {
                 spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
-                spriteBatch.Draw(UserInterface.Active.RenderTarget, new Rectangle(0, 0, windowSize.Width, windowSize.Height), Color.White);
+                //spriteBatch.Draw(UserInterface.Active.RenderTarget, new Rectangle(0, 0, windowSize.Width, windowSize.Height), Color.White);
 
                 DrawCursor(spriteBatch);
 
@@ -186,10 +193,11 @@ namespace Adventum
 
                 DebugAdd(System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString());
                 DebugAdd(":");
-                DebugAdd(((int)GameWorld.deltaTime.FPS).ToString(), "FPS:");
                 DebugAdd(Camera.Position.ToPoint().ToString(), "CameraPosition:");
 
                 spriteBatch.End();
+
+                UserInterface.Active.DrawMainRenderTarget(spriteBatch);
             }
 
             //UserInterface.Active.DrawMainRenderTarget(spriteBatch);
@@ -204,7 +212,7 @@ namespace Adventum
             Vector2 mousePosition = Mouse.GetState().Position.ToVector2();
             mousePosition.X = mousePosition.X / graphics.PreferredBackBufferWidth * renderTarget.Width - cursorTexture.Width / 2;
             mousePosition.Y = mousePosition.Y / graphics.PreferredBackBufferHeight * renderTarget.Height - cursorTexture.Height / 2;
-            spriteBatch.Draw(ResourceManager.GetTexture("cursor"), mousePosition, Color.White);
+            spriteBatch.Draw(cursorTexture, mousePosition, Color.White);
         }
 
 

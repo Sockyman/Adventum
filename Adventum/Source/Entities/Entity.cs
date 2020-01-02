@@ -122,13 +122,9 @@ namespace Adventum.Entities
         public virtual void OnCollision(CollisionData collisionData)
         {
             Collisions.Merge(collisionData);
-
-            foreach (ICollidable c in collisionData.colliders)
+            if (collisionData.Other.Solid && Solid)
             {
-                if (c.Solid && Solid)
-                {
-                    ApplyDirecionalVelocity(Angle.FromVector(Position - c.Position), 5);
-                }
+                ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 5);
             }
         }
 

@@ -51,6 +51,7 @@ namespace Adventum.World
         private static void LoadCollisionObject(TiledMapRectangleObject rectangle)
         {
             WallColider collider = new WallColider(rectangle.Position.ToPoint(), new Point((int)rectangle.Size.Width, (int)rectangle.Size.Height));
+            GameWorld.collisionManager.AddCollider(collider);
         }
 
 

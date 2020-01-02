@@ -28,10 +28,6 @@ namespace Adventum.Entities.Mobs
                 {
                     return GameWorld.EntityExists(GameWorld.player.player) && Vector2.Distance(Position, GameWorld.player.player.Position) < 30 &&
                         Utils.AngleToDirection(Angle.FromVector(GameWorld.player.player.Position - Position)) == state.Facing;
-                })
-                .AddUpdateTrigger(() =>
-                {
-                    Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed / 2, true);
                 });
 
             state.AddState(EState.Attack).AddEntranceTrigger(() =>

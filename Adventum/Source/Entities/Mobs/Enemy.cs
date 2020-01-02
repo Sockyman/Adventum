@@ -23,7 +23,10 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            
+            state.AddState(EState.Walk).AddUpdateTrigger(() =>
+            {
+                Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed / 2, true);
+            });
         }
 
 

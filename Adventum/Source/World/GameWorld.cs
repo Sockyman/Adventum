@@ -13,7 +13,9 @@ using Adventum.Core;
 using Adventum.Core.IO;
 using Adventum.Core.Collision;
 using Adventum.Core.Resource;
+using Adventum.UI;
 using Adventum.Data;
+using GeonBit.UI;
 
 namespace Adventum.World
 {
@@ -44,6 +46,8 @@ namespace Adventum.World
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
             MapHandler.LoadMapObjects(Map);
 
+            UserInterface.Active.AddEntity(new GameplayScreen());
+
             
             {
                 PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
@@ -66,7 +70,9 @@ namespace Adventum.World
 
             mapRenderer.Update(gameTime);
 
-            input.Update();
+            
+            input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
+
             player.Update(delta);
 
             entityManager.Update(delta);
@@ -78,11 +84,7 @@ namespace Adventum.World
             //Main.Camera.Rotate(0.001f);
 
 
-            if (input.KeyCheckPressed(Keys.F11))
-            {
-                Main.graphics.IsFullScreen = !Main.graphics.IsFullScreen;
-                Main.graphics.ApplyChanges();
-            }
+            
         }
 
 
