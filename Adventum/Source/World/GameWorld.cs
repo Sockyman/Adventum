@@ -36,30 +36,22 @@ namespace Adventum.World
 
         public GameWorld()
         {
-            random = new Random();
-
-            collisionManager = new CollisionManager();
-            entityManager = new EntityManager();
-            input = new Input();
-
-            Map = ResourceManager.GetMap("TestMap");
-            mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
-            MapHandler.LoadMapObjects(Map);
-
+            random = new Random();            
+            input = new Input();          
             UserInterface.Active.AddEntity(new GameplayScreen());
 
+            ClearManagers();
             
+            PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
+            playerEntity.input = input;
+            player = new Player(this, input)
             {
-                PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
-                playerEntity.input = input;
-                player = new Player(this, input)
-                {
-                    player = playerEntity
-                };
+                player = playerEntity
+            };
 
-                /*for (int i = 0; i < 0; i++)
-                    entityManager.CreateEntity(new Enemy(new Vector2(random.Next(640), random.Next(360))));*/
-            }
+
+
+            LoadLevel("lvl1");
         }
 
 
@@ -92,6 +84,31 @@ namespace Adventum.World
         {
             mapRenderer.Draw(Main.Camera.GetViewMatrix());
             entityManager.Draw(spriteBatch);
+            //mapRenderer.Draw(2, Main.Camera.GetViewMatrix(), depth: 0);
+        }
+
+
+
+        public void LoadLevel(string levelName)
+        {
+            ClearManagers(player.player);
+
+            Map = ResourceManager.GetMap(levelName);
+            mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
+            MapHandler.LoadMapObjects(Map);
+        }
+
+
+        private void ClearManagers()
+        {
+            entityManager = new EntityManager();
+            collisionManager = new CollisionManager();
+        }
+        private void ClearManagers(Mob toKeep)
+        {
+            ClearManagers();
+
+            entityManager.CreateEntity(toKeep);
         }
 
 

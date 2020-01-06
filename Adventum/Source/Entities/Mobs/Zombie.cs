@@ -32,9 +32,16 @@ namespace Adventum.Entities.Mobs
 
             state.AddState(EState.Attack).AddEntranceTrigger(() =>
             {
-                GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.075f, 500));
+                
                 //GameWorld.entityManager.CreateEntity(new Arrow(this, GameWorld.player.player.Position - Position, 2000));
             });
+        }
+
+        public override void UseMain()
+        {
+            base.UseMain();
+
+            //GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.075f, 500));
         }
     }
 }

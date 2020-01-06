@@ -43,7 +43,7 @@ namespace Adventum.Sprite
                 FrameNumber = value;
             }
         }
-        private float FrameNumber
+        public float FrameNumber
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Adventum.Sprite
             }
             set
             {
-                frameNumber = value - ((float)Math.Floor(value / ((float)ActiveAnimation.frames + 1)) * ActiveAnimation.frames);
+                frameNumber = value - ((float)Math.Floor(value / ((float)ActiveAnimation.frames)) * ActiveAnimation.frames);
             }
         }
         private float frameNumber;
@@ -71,6 +71,17 @@ namespace Adventum.Sprite
         public Animator(string spriteSheet, string texture)
         {
             Sprite = ResourceManager.GetSpriteSheet(spriteSheet);
+            SpriteTexture = ResourceManager.GetTexture(texture);
+            TextureName = texture;
+
+            AnimationName = Sprite.defaultAnimation;
+
+            FrameIndex = 0;
+        }
+
+        public Animator(SpriteSheet spriteSheet, string texture)
+        {
+            Sprite = spriteSheet;
             SpriteTexture = ResourceManager.GetTexture(texture);
             TextureName = texture;
 
@@ -108,7 +119,9 @@ namespace Adventum.Sprite
 
         public Texture2D GetTexture()
         {
-            return TextureGrid[FrameIndex + ActiveAnimation.directionMap.GetDirection(Facing).X, ActiveAnimation.cellOfOrigin.Y + ActiveAnimation.directionMap.GetDirection(Facing).Y];
+            int tgx = ActiveAnimation.cellOfOrigin.X + FrameIndex + ActiveAnimation.directionMap.GetDirection(Facing).X;
+            int tgy = ActiveAnimation.cellOfOrigin.Y + ActiveAnimation.directionMap.GetDirection(Facing).Y;
+            return TextureGrid[tgx, tgy];
 
             /*return Utils.GetTexturePart(textureData, SpriteTexture.Width, new Rectangle(ActiveAnimation.cellOfOrigin.X + (FrameIndex + ActiveAnimation.directionMap.GetDirection(Facing).X) * Sprite.frameSize.X,
                 (ActiveAnimation.cellOfOrigin.Y + ActiveAnimation.directionMap.GetDirection(Facing).Y) * Sprite.frameSize.Y, Sprite.frameSize.X, Sprite.frameSize.Y));*/

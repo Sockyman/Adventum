@@ -36,6 +36,9 @@ namespace Adventum.Core.Resource
 
             texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
             texturesLoaded["pixel"].SetData( new Color[] { Color.White } );
+
+            texturesLoaded[""] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
+            texturesLoaded[""].SetData(new Color[] { Color.Transparent });
         }
 
 

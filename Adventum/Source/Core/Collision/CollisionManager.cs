@@ -40,7 +40,20 @@ namespace Adventum.Core.Collision
                         source.OnCollision(new CollisionData(other));
 
                         if (!source.Immovable && other.Immovable && source.Solid)
+                        {
                             source.Position -= tempVelocity;
+
+                            if ((tempVelocity.X > 0 && source.CollisionMask.Width + source.CollisionMask.X <= other.CollisionMask.X) ||
+                                (tempVelocity.X < 0 && source.CollisionMask.X >= other.CollisionMask.X + other.CollisionMask.Width))
+                            {
+                                source.Position = new Vector2(source.Position.X, source.Position.Y + tempVelocity.Y);
+                            }
+                            else if ((tempVelocity.Y > 0 && source.CollisionMask.Height + source.CollisionMask.Y <= other.CollisionMask.Y) ||
+                                (tempVelocity.Y < 0 && source.CollisionMask.Y >= other.CollisionMask.Y + other.CollisionMask.Height))
+                            {
+                                source.Position = new Vector2(source.Position.X + tempVelocity.X, source.Position.Y);
+                            }
+                        }
                     }
                 }
             }

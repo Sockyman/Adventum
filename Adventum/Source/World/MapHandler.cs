@@ -27,6 +27,7 @@ namespace Adventum.World
             d[0] = (TiledMapTileObject t) => new Mob(t.Position);
             d[1] = (TiledMapTileObject t) => new Zombie(t.Position);
             d[2] = (TiledMapTileObject t) => new Reaper(t.Position);
+            d[3] = (TiledMapTileObject t) => new Tree(t.Position);
 
             return d;
         }
@@ -36,6 +37,7 @@ namespace Adventum.World
         {
             TiledMapObjectLayer collisionLayer = map.GetLayer<TiledMapObjectLayer>("Collision");
             TiledMapObjectLayer entityLayer = map.GetLayer<TiledMapObjectLayer>("Entity");
+            TiledMapObjectLayer misicLayer = map.GetLayer<TiledMapObjectLayer>("Misic");
 
             foreach (TiledMapRectangleObject o in collisionLayer.Objects)
             {
@@ -45,6 +47,11 @@ namespace Adventum.World
             foreach (TiledMapTileObject o in entityLayer.Objects)
             {
                 LoadEntityObject(o);
+            }
+
+            foreach (TiledMapObject o in misicLayer.Objects)
+            {
+                LoadMisicObject(o);
             }
         }
 
@@ -60,6 +67,12 @@ namespace Adventum.World
             TiledMapTilesetTile tile = entity.Tile;
             if (tile != null)
                 GameWorld.entityManager.CreateEntity(loaders[tile.LocalTileIdentifier - 1].Invoke(entity));
+        }
+
+        private static void LoadMisicObject(TiledMapObject obj)
+        {
+            if (obj.Name == "Player Start")
+                GameWorld.player.player.Position = obj.Position;
         }
     }
 }

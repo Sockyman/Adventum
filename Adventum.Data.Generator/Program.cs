@@ -36,9 +36,9 @@ namespace Adventum.Data.Generator
         {
             SpriteSheet data = new SpriteSheet
             {
-                name = "AttackSwish",
-                origin = new Point(16, 32),
-                frameSize = new Point(32),
+                name = "Tree",
+                origin = new Point(32, 128),
+                frameSize = new Point(64, 128),
                 animations = new Dictionary<string, Animation>(),
                 defaultAnimation = "base"
             };
@@ -47,8 +47,8 @@ namespace Adventum.Data.Generator
             {
                 cellOfOrigin = new Point(0),
                 frames = 1,
-                FPS = 15,
-                directionMap = DirectionMap.standardMobMap
+                FPS = 0,
+                directionMap = new DirectionMap()
             };
 
             data.animations["base"] = ani;

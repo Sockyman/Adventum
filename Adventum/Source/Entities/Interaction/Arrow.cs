@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace Adventum.Entities
+namespace Adventum.Entities.Interaction
 {
     class Arrow : Attack
     {

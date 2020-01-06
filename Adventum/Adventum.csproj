@@ -63,13 +63,15 @@
     <Compile Include="Source\Core\Audio.cs" />
     <Compile Include="Source\Core\Collision\WallColider.cs" />
     <Compile Include="Source\Core\IO\MouseButton.cs" />
-    <Compile Include="Source\Entities\Arrow.cs" />
-    <Compile Include="Source\Entities\Attack.cs" />
+    <Compile Include="Source\Entities\Interaction\Arrow.cs" />
+    <Compile Include="Source\Entities\Interaction\Attack.cs" />
+    <Compile Include="Source\Entities\Interaction\Interact.cs" />
     <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
     <Compile Include="Source\Entities\Mobs\Reaper.cs" />
     <Compile Include="Source\Entities\Mobs\Zombie.cs" />
+    <Compile Include="Source\Entities\Tree.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />

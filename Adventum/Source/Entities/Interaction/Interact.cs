@@ -8,27 +8,28 @@ using Adventum.Data;
 using MonoGame.Extended;
 using Adventum.Core.Collision;
 
-namespace Adventum.Entities
+namespace Adventum.Entities.Interaction
 {
-    class Attack : Entity
+    class Interact : Entity
     {
         public Entity parent;
         public float lifespan;
         public TimeSpan life;
-        public bool lockToParent = true;
+        public bool lockToParent;
         protected CollisionData previousCollisions;
 
-        public Attack(Entity parent, Point size, Vector2 direction, float lifespan, float speed) : base(parent.Position)
+        public Interact(Entity parent, Point size, Vector2 direction, float lifespan, float speed, bool lockToParent) : base(parent.Position)
         {
             Solid = false;
 
             Position += new Vector2(0, 0);
 
             this.parent = parent;
+            this.lockToParent = lockToParent;
 
             state.Facing = Utils.AngleToDirection(Angle.FromVector(direction));
 
-            Sprite = new Animator("AttackSwish", "attackSwish");
+            Sprite = new Animator("", "None");
 
             SetBounds(size);
 

@@ -66,10 +66,12 @@ namespace Adventum.Util
         {
             Color[] data = new Color[rectangle.Width * rectangle.Height];
 
-            for (int y = 0; y < rectangle.Height; y++)
-                for (int x = 0; x < rectangle.Width; x++)
-                    data[x + y * rectangle.Height] = texture[x + rectangle.X + (y + rectangle.Y) * textureWidth];
-
+            for (int x = 0; x < rectangle.Width; x++)
+                for (int y = 0; y < rectangle.Height; y++)
+                {
+                    Color c = texture[x + rectangle.X + (y + rectangle.Y) * textureWidth];
+                    data[x + y * rectangle.Width] = c;
+                }
             Texture2D final = new Texture2D(Main.graphics.GraphicsDevice, rectangle.Width, rectangle.Height);
             final.SetData<Color>(data);
             return final;

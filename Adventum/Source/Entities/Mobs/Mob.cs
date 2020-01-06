@@ -9,6 +9,7 @@ using Adventum.Core;
 using Adventum.Core.Collision;
 using Adventum.Util;
 using Adventum.World;
+using Adventum.Entities.Interaction;
 using Adventum.Core.Resource;
 
 namespace Adventum.Entities.Mobs

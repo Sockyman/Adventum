@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Data="Adventum.Data">
+  <Asset Type="Data:SpriteSheet">
+    <name>Tree</name>
+    <defaultAnimation>base</defaultAnimation>
+    <frameSize>64 128</frameSize>
+    <origin>32 128</origin>
+    <animations>
+      <Item>
+        <Key>base</Key>
+        <Value>
+          <cellOfOrigin>0 0</cellOfOrigin>
+          <frames>4</frames>
+          <FPS>1</FPS>
+          <directionMap>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</directionMap>
+          <flipMap>0 0 0 0 0 0 0 0</flipMap>
+        </Value>
+      </Item>
+    </animations>
+  </Asset>
+</XnaContent>
