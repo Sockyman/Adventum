@@ -32,7 +32,7 @@ namespace Adventum.World
 
         public static void LoadCollisionObject(TiledMapRectangleObject rectangle)
         {
-            WallColider collider = new WallColider(rectangle.Position.ToPoint(), new Point((int)rectangle.Size.Width, (int)rectangle.Size.Height));
+            WallColider collider = new WallColider(rectangle.Position.ToPoint(), new Point((int)rectangle.Size.Width, (int)rectangle.Size.Height));            
         }
 
 
