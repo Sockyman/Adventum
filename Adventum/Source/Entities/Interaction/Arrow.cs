@@ -17,12 +17,10 @@ namespace Adventum.Entities.Interaction
         public int offset = GameWorld.random.Next(-acuracy, acuracy);
 
 
-        public Arrow(Entity parent, Vector2 direction, float speed, int offset = 0) : base(parent, new Point(16), new Angle(Angle.FromVector(direction).Degrees + offset, AngleType.Degree).ToUnitVector(), 2000, speed)
+        public Arrow(Entity parent, Vector2 direction, float speed, int offset = 0) 
+            : base(parent, new Point(16), new Angle(Angle.FromVector(direction).Degrees + offset, AngleType.Degree).ToUnitVector(), 2000, speed, false, "arrow", 1)
         {
-            Sprite = new Sprite.Animator("AttackSwish", "woodArrow");
-            lockToParent = false;
-
-            //Velocity += new Vector2(random.Next(-acuracy, acuracy), random.Next(-acuracy, acuracy)) / 10;
+            
         }
 
 
@@ -55,6 +53,14 @@ namespace Adventum.Entities.Interaction
                     piercing--;
                 }
             }
+        }
+
+
+        public override void OnInteract(Entity entity)
+        {
+            base.OnInteract(entity);
+
+
         }
     }
 }

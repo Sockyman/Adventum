@@ -119,7 +119,7 @@ namespace Adventum.Entities.Mobs
 
         public virtual void UseMain()
         {
-            GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
+            GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500, true, "attackSwish", 1));
         }
     }
 }

@@ -10,7 +10,7 @@ using Adventum.Core.Collision;
 
 namespace Adventum.Entities.Interaction
 {
-    class Interact : Entity
+    public class Interact : Entity
     {
         public Entity parent;
         public float lifespan;
@@ -29,7 +29,7 @@ namespace Adventum.Entities.Interaction
 
             state.Facing = Utils.AngleToDirection(Angle.FromVector(direction));
 
-            Sprite = new Animator("", "None");
+            Sprite = new Animator("None", "");
 
             SetBounds(size);
 
@@ -64,13 +64,19 @@ namespace Adventum.Entities.Interaction
 
             ICollidable other = collisionData.Other;
 
-            if (!previousCollisions.colliders.Contains(other) && other is Mob && other != parent && ((Mob)other).HitFrames < 1)
+            if (!previousCollisions.colliders.Contains(other) && other is Entity && other != parent)
             {
-                ((Mob)other).Hurt(1, Angle.FromVector(Utils.DirectionToVector(state.Facing)));
+                OnInteract((Entity)other);
             }
 
 
             previousCollisions.Merge(collisionData);
+        }
+
+
+        public virtual void OnInteract(Entity entity)
+        {
+
         }
     }
 }

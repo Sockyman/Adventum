@@ -191,9 +191,7 @@ namespace Adventum
                 spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), debugString, new Vector2(40, 40), Color.White);
                 debugString = new StringBuilder("Adventum ");
 
-                DebugAdd(System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString());
-                DebugAdd(":");
-                DebugAdd(Camera.Position.ToPoint().ToString(), "CameraPosition:");
+                DebugAdd(System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString());    
 
                 spriteBatch.End();
 
