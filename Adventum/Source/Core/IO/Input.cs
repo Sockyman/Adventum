@@ -44,12 +44,20 @@ namespace Adventum.Core.IO
         }
 
 
-        public void Update()
+        public void Update(bool disable)
         {
-            oldKeyboardState = keyboardState;
-            keyboardState = Keyboard.GetState();
-
             oldMouseState = mouseState;
+            oldKeyboardState = keyboardState;
+
+            if (disable)
+            {
+                keyboardState = new KeyboardState();
+                mouseState = new MouseState(oldMouseState.X, oldMouseState.Y, 0, ButtonState.Released, ButtonState.Released, ButtonState.Released, ButtonState.Released, ButtonState.Released);
+
+                return;
+            }
+
+            keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();
 
             Main.DebugAdd(MousePosition.ToPoint().ToString(), "MousePosition:");

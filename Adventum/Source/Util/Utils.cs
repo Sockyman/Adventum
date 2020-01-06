@@ -66,10 +66,12 @@ namespace Adventum.Util
         {
             Color[] data = new Color[rectangle.Width * rectangle.Height];
 
-            for (int y = 0; y < rectangle.Height; y++)
-                for (int x = 0; x < rectangle.Width; x++)
-                    data[x + y * rectangle.Height] = texture[x + rectangle.X + (y + rectangle.Y) * textureWidth];
-
+            for (int x = 0; x < rectangle.Width; x++)
+                for (int y = 0; y < rectangle.Height; y++)
+                {
+                    Color c = texture[x + rectangle.X + (y + rectangle.Y) * textureWidth];
+                    data[x + y * rectangle.Width] = c;
+                }
             Texture2D final = new Texture2D(Main.graphics.GraphicsDevice, rectangle.Width, rectangle.Height);
             final.SetData<Color>(data);
             return final;
@@ -118,6 +120,14 @@ namespace Adventum.Util
             DrawRectangle(spriteBatch, bar, backgroundColor, layerDepth - 0.00001f);
             bar.Width = bar.Width * value / maxValue;
             DrawRectangle(spriteBatch, bar, foregroundColor, layerDepth);
+        }
+
+
+        public static Vector2 ScaleToScreen(Vector2 toScale)
+        {
+            Vector2 ratio = toScale / Main.windowSize.ToVector2();
+
+            return ratio * new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight);
         }
     }
 }

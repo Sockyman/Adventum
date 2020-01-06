@@ -51,7 +51,7 @@ namespace Adventum.Entities
         }
         public EntityState state;
 
-        public bool Immovable { get; } = false;
+        public bool Immovable { get; set; } = false;
         public bool Solid { get; set; }
         public Animator Sprite { get; set; }
 
@@ -109,26 +109,22 @@ namespace Adventum.Entities
 
             //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
 
-            /*
-            Texture2D rect = new Texture2D(Main.graphics.GraphicsDevice, CollisionMask.Width, CollisionMask.Height);
+            
+            /*Texture2D rect = new Texture2D(Main.graphics.GraphicsDevice, CollisionMask.Width, CollisionMask.Height);
             Color[] data = new Color[CollisionMask.Width * CollisionMask.Height];
             for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;
             rect.SetData(data);
-            spriteBatch.Draw(rect, CollisionMask.Location.ToVector2(), Color.White);
-            */
+            spriteBatch.Draw(rect, CollisionMask.Location.ToVector2(), Color.White);*/
+            
         }
 
 
         public virtual void OnCollision(CollisionData collisionData)
         {
             Collisions.Merge(collisionData);
-
-            foreach (ICollidable c in collisionData.colliders)
+            if (collisionData.Other.Solid && Solid)
             {
-                if (c.Solid && Solid)
-                {
-                    ApplyDirecionalVelocity(Angle.FromVector(Position - c.Position), 5);
-                }
+                ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 5);
             }
         }
 

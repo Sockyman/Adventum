@@ -13,7 +13,9 @@ using Adventum.Core;
 using Adventum.Core.IO;
 using Adventum.Core.Collision;
 using Adventum.Core.Resource;
+using Adventum.UI;
 using Adventum.Data;
+using GeonBit.UI;
 
 namespace Adventum.World
 {
@@ -34,28 +36,22 @@ namespace Adventum.World
 
         public GameWorld()
         {
-            random = new Random();
+            random = new Random();            
+            input = new Input();          
+            UserInterface.Active.AddEntity(new GameplayScreen());
 
-            collisionManager = new CollisionManager();
-            entityManager = new EntityManager();
-            input = new Input();
-
-            Map = ResourceManager.GetMap("TestMap");
-            mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
-            MapHandler.LoadMapObjects(Map);
-
+            ClearManagers();
             
+            PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
+            playerEntity.input = input;
+            player = new Player(this, input)
             {
-                PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
-                playerEntity.input = input;
-                player = new Player(this, input)
-                {
-                    player = playerEntity
-                };
+                player = playerEntity
+            };
 
-                /*for (int i = 0; i < 0; i++)
-                    entityManager.CreateEntity(new Enemy(new Vector2(random.Next(640), random.Next(360))));*/
-            }
+
+
+            LoadLevel("lvl1");
         }
 
 
@@ -66,7 +62,9 @@ namespace Adventum.World
 
             mapRenderer.Update(gameTime);
 
-            input.Update();
+            
+            input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
+
             player.Update(delta);
 
             entityManager.Update(delta);
@@ -78,11 +76,7 @@ namespace Adventum.World
             //Main.Camera.Rotate(0.001f);
 
 
-            if (input.KeyCheckPressed(Keys.F11))
-            {
-                Main.graphics.IsFullScreen = !Main.graphics.IsFullScreen;
-                Main.graphics.ApplyChanges();
-            }
+            
         }
 
 
@@ -90,6 +84,31 @@ namespace Adventum.World
         {
             mapRenderer.Draw(Main.Camera.GetViewMatrix());
             entityManager.Draw(spriteBatch);
+            //mapRenderer.Draw(2, Main.Camera.GetViewMatrix(), depth: 0);
+        }
+
+
+
+        public void LoadLevel(string levelName)
+        {
+            ClearManagers(player.player);
+
+            Map = ResourceManager.GetMap(levelName);
+            mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
+            MapHandler.LoadMapObjects(Map);
+        }
+
+
+        private void ClearManagers()
+        {
+            entityManager = new EntityManager();
+            collisionManager = new CollisionManager();
+        }
+        private void ClearManagers(Mob toKeep)
+        {
+            ClearManagers();
+
+            entityManager.CreateEntity(toKeep);
         }
 
 

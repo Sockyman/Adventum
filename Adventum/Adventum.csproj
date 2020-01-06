@@ -63,13 +63,15 @@
     <Compile Include="Source\Core\Audio.cs" />
     <Compile Include="Source\Core\Collision\WallColider.cs" />
     <Compile Include="Source\Core\IO\MouseButton.cs" />
-    <Compile Include="Source\Entities\Arrow.cs" />
-    <Compile Include="Source\Entities\Attack.cs" />
+    <Compile Include="Source\Entities\Interaction\Arrow.cs" />
+    <Compile Include="Source\Entities\Interaction\Attack.cs" />
+    <Compile Include="Source\Entities\Interaction\Interact.cs" />
     <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
     <Compile Include="Source\Entities\Mobs\Reaper.cs" />
     <Compile Include="Source\Entities\Mobs\Zombie.cs" />
+    <Compile Include="Source\Entities\Tree.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />
@@ -82,6 +84,9 @@
     <Compile Include="Source\States\Fsm.cs" />
     <Compile Include="Source\States\State.cs" />
     <Compile Include="Source\States\Trigger.cs" />
+    <Compile Include="Source\UI\GameplayScreen.cs" />
+    <Compile Include="Source\UI\TextBox.cs" />
+    <Compile Include="Source\UI\UIHandler.cs" />
     <Compile Include="Source\World\GameWorld.cs" />
     <Compile Include="Source\Entities\Entity.cs" />
     <Compile Include="Source\Entities\Mobs\Mob.cs" />
@@ -93,6 +98,12 @@
     <Compile Include="Source\World\MapHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="DataTypes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GeonBit.UI.3.4.0.1\lib\geonbitui\DataTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="GeonBit.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GeonBit.UI.3.4.0.1\lib\geonbitui\GeonBit.UI.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Extended, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Extended.3.7.0\lib\netstandard2.0\MonoGame.Extended.dll</HintPath>
     </Reference>
@@ -171,7 +182,6 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
@@ -189,6 +199,9 @@
       <Project>{cc90f701-eac0-49d9-b3dd-1ac93eeec12d}</Project>
       <Name>Adventum.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\Item\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

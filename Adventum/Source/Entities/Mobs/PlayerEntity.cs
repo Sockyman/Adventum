@@ -18,7 +18,6 @@ namespace Adventum.Entities.Mobs
         public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 5)
         {
             input = new Input();
-            maxHitFrames = 0.6f;
         }
 
 
@@ -29,15 +28,14 @@ namespace Adventum.Entities.Mobs
             state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left)).AddStateTrigger(EState.Walk, () =>
                 PreviousVelocity != Vector2.Zero
             );
+
             Trigger<EState> t = state.AddState(EState.Idle).RecentTrigger();
+
             state.AddState(EState.Walk).AttachTrigger(t).AddStateTrigger(EState.Idle, () =>
                 PreviousVelocity == Vector2.Zero
             ).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left));
-            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk")).AddEntranceTrigger(() =>
-            {
-                World.GameWorld.entityManager.CreateEntity(new Attack(this, new Point(32), Utils.DirectionToVector(state.Facing), 0.1f, 500));
-                //World.GameWorld.entityManager.CreateEntity(new Arrow(this, input.MouseWorldPosition - Position, 2000, random.Next(-3, 3)));
-            });
+
+            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
         }
 
 
@@ -62,6 +60,12 @@ namespace Adventum.Entities.Mobs
         public override void OnCollision(CollisionData collisionData)
         {
             base.OnCollision(collisionData);
+        }
+
+
+        public override void UseMain()
+        {
+            base.UseMain();
         }
     }
 }
