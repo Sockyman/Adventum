@@ -6,6 +6,8 @@
   <terrain name="Water" tile="23"/>
   <terrain name="Wood Wall" tile="81"/>
   <terrain name="Tile Roof" tile="117"/>
+  <terrain name="Sand" tile="96"/>
+  <terrain name="Interior Stone Brick" tile="104"/>
  </terraintypes>
  <tile id="1" terrain=",,,0"/>
  <tile id="2" terrain=",,0,0"/>
@@ -80,6 +82,8 @@
  <tile id="33" terrain=",0,,"/>
  <tile id="34" terrain="0,0,,"/>
  <tile id="35" terrain="0,,,"/>
+ <tile id="36" terrain="0,0,0,0"/>
+ <tile id="37" terrain="0,0,0,0"/>
  <tile id="38" terrain=",1,,">
   <animation>
    <frame tileid="38" duration="1000"/>
@@ -103,6 +107,12 @@
  <tile id="51" terrain=",,2,"/>
  <tile id="52" terrain="2,2,2,"/>
  <tile id="53" terrain="2,2,,2"/>
+ <tile id="54">
+  <animation>
+   <frame tileid="54" duration="1000"/>
+   <frame tileid="55" duration="1000"/>
+  </animation>
+ </tile>
  <tile id="65" terrain=",2,,2"/>
  <tile id="66" terrain="2,2,2,2"/>
  <tile id="67" terrain="2,,2,"/>
@@ -118,10 +128,36 @@
  <tile id="87" terrain=",,3,"/>
  <tile id="89" terrain="3,,3,3"/>
  <tile id="90" terrain=",3,3,3"/>
+ <tile id="96" terrain=",,,4"/>
+ <tile id="97" terrain=",,4,4"/>
+ <tile id="98" terrain=",,4,"/>
+ <tile id="99" terrain="4,4,4,"/>
+ <tile id="100" terrain="4,4,,4"/>
  <tile id="101" terrain=",3,,3"/>
  <tile id="102" terrain="3,3,3,3"/>
  <tile id="103" terrain="3,,3,"/>
+ <tile id="104" terrain=",,,5"/>
+ <tile id="105" terrain=",,5,5"/>
+ <tile id="106" terrain=",,5,"/>
+ <tile id="107" terrain="5,5,5,"/>
+ <tile id="108" terrain="5,5,,5"/>
+ <tile id="112" terrain=",4,,4"/>
+ <tile id="113" terrain="4,4,4,4"/>
+ <tile id="114" terrain="4,,4,"/>
+ <tile id="115" terrain="4,,4,4"/>
+ <tile id="116" terrain=",4,4,4"/>
  <tile id="117" terrain=",3,,"/>
  <tile id="118" terrain="3,3,,"/>
  <tile id="119" terrain="3,,,"/>
+ <tile id="120" terrain=",5,,5"/>
+ <tile id="121" terrain="5,5,5,5"/>
+ <tile id="122" terrain="5,,5,"/>
+ <tile id="123" terrain="5,,5,5"/>
+ <tile id="124" terrain=",5,5,5"/>
+ <tile id="128" terrain=",4,,"/>
+ <tile id="129" terrain="4,4,,"/>
+ <tile id="130" terrain="4,,,"/>
+ <tile id="136" terrain=",5,,"/>
+ <tile id="137" terrain="5,5,,"/>
+ <tile id="138" terrain="5,,,"/>
 </tileset>

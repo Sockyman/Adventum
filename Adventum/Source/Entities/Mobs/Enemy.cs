@@ -25,7 +25,7 @@ namespace Adventum.Entities.Mobs
 
             state.AddState(EState.Walk).AddUpdateTrigger(() =>
             {
-                Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed / 2, true);
+                Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed, true);
             });
         }
 

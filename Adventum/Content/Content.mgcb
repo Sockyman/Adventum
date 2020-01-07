@@ -1669,20 +1669,87 @@
 /processor:PassThroughProcessor
 /build:SpriteSheet/AttackSwish.xml
 
+#begin SpriteSheet/AttackSwish.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/AttackSwish.xml
+
+#begin SpriteSheet/AttackSwish.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/AttackSwish.xml
+
 #begin SpriteSheet/File.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:SpriteSheet/File.xml
+
+#begin SpriteSheet/File.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/File.xml
+
+#begin SpriteSheet/File.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/File.xml
+
+#begin SpriteSheet/Furniture2.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Furniture2.xml
 
 #begin SpriteSheet/HumanoidBase.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:SpriteSheet/HumanoidBase.xml
 
+#begin SpriteSheet/HumanoidBase.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/HumanoidBase.xml
+
+#begin SpriteSheet/HumanoidBase.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/HumanoidBase.xml
+
+#begin SpriteSheet/None.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/None.xml
+
+#begin SpriteSheet/None.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/None.xml
+
 #begin SpriteSheet/Tree.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:SpriteSheet/Tree.xml
+
+#begin SpriteSheet/Tree.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Tree.xml
+
+#begin SpriteSheet/Tree.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Tree.xml
+
+#begin Texture/attackSwish.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/attackSwish.png
 
 #begin Texture/attackSwish.png
 /importer:TextureImporter
@@ -1708,6 +1775,42 @@
 /processorParam:TextureFormat=Color
 /build:Texture/baseTile.png
 
+#begin Texture/baseTile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/baseTile.png
+
+#begin Texture/baseTileOLD.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/baseTileOLD.png
+
+#begin Texture/chair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/chair.png
+
 #begin Texture/cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1719,6 +1822,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/cursor.png
+
+#begin Texture/cursor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/cursor.png
+
+#begin Texture/humanBase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/humanBase.png
 
 #begin Texture/humanBase.png
 /importer:TextureImporter
@@ -1744,6 +1871,18 @@
 /processorParam:TextureFormat=Color
 /build:Texture/Item/broadSword.png
 
+#begin Texture/Item/broadSword.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/Item/broadSword.png
+
 #begin Texture/Item/dagger.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1755,6 +1894,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/Item/dagger.png
+
+#begin Texture/Item/dagger.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/Item/dagger.png
+
+#begin Texture/Item/greatSword.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/Item/greatSword.png
 
 #begin Texture/Item/greatSword.png
 /importer:TextureImporter
@@ -1780,6 +1943,18 @@
 /processorParam:TextureFormat=Color
 /build:Texture/Item/starterSword.png
 
+#begin Texture/Item/starterSword.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/Item/starterSword.png
+
 #begin Texture/pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1791,6 +1966,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/pixel.png
+
+#begin Texture/pixel.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/pixel.png
+
+#begin Texture/reaper.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/reaper.png
 
 #begin Texture/reaper.png
 /importer:TextureImporter
@@ -1816,6 +2015,30 @@
 /processorParam:TextureFormat=Color
 /build:Texture/swirl.png
 
+#begin Texture/swirl.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/swirl.png
+
+#begin Texture/test.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/test.png
+
 #begin Texture/test.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1840,6 +2063,30 @@
 /processorParam:TextureFormat=Color
 /build:Texture/tree.png
 
+#begin Texture/tree.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/tree.png
+
+#begin Texture/treeOLD.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/treeOLD.png
+
 #begin Texture/woodArrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1851,6 +2098,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/woodArrow.png
+
+#begin Texture/woodArrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/woodArrow.png
+
+#begin Texture/zombieBase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/zombieBase.png
 
 #begin Texture/zombieBase.png
 /importer:TextureImporter

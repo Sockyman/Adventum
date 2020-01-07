@@ -14,7 +14,7 @@ namespace Adventum.Entities
 {
     public abstract class Entity : ICollidable
     {
-        public const float MaxMovementSpeed = 200;
+        public virtual float MaxMovementSpeed => 200;
 
         protected Random random;
 
@@ -124,7 +124,7 @@ namespace Adventum.Entities
             Collisions.Merge(collisionData);
             if (collisionData.Other.Solid && Solid)
             {
-                ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 5);
+                ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 10);
             }
         }
 

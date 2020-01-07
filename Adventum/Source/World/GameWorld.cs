@@ -31,6 +31,21 @@ namespace Adventum.World
         public static Input input;
 
         public static TiledMap Map { get; private set; }
+        public static PlayerEntity PlayerMob
+        {
+            get
+            {
+                return player.player;
+            }
+        }
+        public static bool PlayerExists
+        {
+            get
+            {
+                return EntityExists(PlayerMob);
+            }
+        }
+
         public TiledMapRenderer mapRenderer;
 
 
@@ -70,8 +85,8 @@ namespace Adventum.World
             entityManager.Update(delta);
             collisionManager.Update(delta);
 
-            if (EntityExists(player.player))
-                Main.Camera.LookAt(player.player.Position);
+            if (EntityExists(PlayerMob))
+                Main.Camera.LookAt(PlayerMob.Position);
 
             //Main.Camera.Rotate(0.001f);
 
@@ -96,6 +111,8 @@ namespace Adventum.World
             Map = ResourceManager.GetMap(levelName);
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
             MapHandler.LoadMapObjects(Map);
+
+            entityManager.CreateEntity(new Entities.Decor.Furniture(PlayerMob.Position, "chair"));
         }
 
 

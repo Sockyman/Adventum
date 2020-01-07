@@ -17,10 +17,10 @@ namespace Adventum.Entities.Interaction
         public int offset = GameWorld.random.Next(-acuracy, acuracy);
 
 
-        public Arrow(Entity parent, Vector2 direction, float speed, int offset = 0) 
-            : base(parent, new Point(16), new Angle(Angle.FromVector(direction).Degrees + offset, AngleType.Degree).ToUnitVector(), 2000, speed, false, "arrow", 1)
+        public Arrow(Entity parent, Vector2 direction, float speed = 2000, int offset = 0) 
+            : base(parent, new Point(16), new Angle(Angle.FromVector(direction).Degrees + offset, AngleType.Degree).ToUnitVector(), 2000, speed, false, "woodArrow", 1)
         {
-            
+            Solid = true;
         }
 
 

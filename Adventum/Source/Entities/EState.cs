@@ -6,6 +6,7 @@ namespace Adventum.States
         None,
         Idle,
         Walk,
-        Attack
+        Attack,
+        Charging
     }
 }

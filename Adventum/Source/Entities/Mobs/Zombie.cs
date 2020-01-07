@@ -12,6 +12,8 @@ namespace Adventum.Entities.Mobs
 {
     class Zombie : Enemy
     {
+        public override float MaxMovementSpeed => base.MaxMovementSpeed / 2;
+
         public Zombie(Vector2 position) : base(position, "zombieBase", maxHealth: 2)
         {
         }
@@ -21,20 +23,20 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 0f);
+            state.AddState(EState.Idle).AddStateTrigger(EState.Walk, () => true);
 
             state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () => random.Next(100) > 93 && state.clock.CurrentTime.TotalSeconds > 0.5)
                 .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(8)).AddStateTrigger(EState.Attack, () =>
                 {
-                    return GameWorld.EntityExists(GameWorld.player.player) && Vector2.Distance(Position, GameWorld.player.player.Position) < 30 &&
-                        Utils.AngleToDirection(Angle.FromVector(GameWorld.player.player.Position - Position)) == state.Facing;
+                    return GameWorld.PlayerExists && Vector2.Distance(Position, GameWorld.PlayerMob.Position) < 30 &&
+                        Utils.AngleToDirection(Angle.FromVector(GameWorld.PlayerMob.Position - Position)) == state.Facing;
+                }).AddUpdateTrigger(() =>
+                {
+                    if (GameWorld.PlayerExists && Vector2.Distance(Position, GameWorld.PlayerMob.Position) < 200)
+                    {
+                        state.Facing = Utils.AngleToDirection(Angle.FromVector(GameWorld.PlayerMob.Position - Position));
+                    }
                 });
-
-            state.AddState(EState.Attack).AddEntranceTrigger(() =>
-            {
-                
-                //GameWorld.entityManager.CreateEntity(new Arrow(this, GameWorld.player.player.Position - Position, 2000));
-            });
         }
 
         public override void UseMain()
