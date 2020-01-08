@@ -1663,6 +1663,12 @@
 /processorParam:DebugMode=Auto
 /build:Shader/fullWhite.fx
 
+#begin Shader/lightEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shader/lightEffect.fx
+
 #begin Sound/enemyDeath0.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1824,6 +1830,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/Item/starterSword.png
+
+#begin Texture/lightMask.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/lightMask.png
 
 #begin Texture/pixel.png
 /importer:TextureImporter
