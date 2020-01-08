@@ -16,7 +16,7 @@ namespace Adventum.Entities.Decor
             Sprite = new Sprite.Animator("Furniture2", texture);
             state.Facing = facing;
 
-            SetBounds(new Point(32));
+            SetBounds(new Point(16));
         }
     }
 }

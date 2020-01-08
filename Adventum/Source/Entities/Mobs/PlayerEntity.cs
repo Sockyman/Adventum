@@ -15,7 +15,7 @@ namespace Adventum.Entities.Mobs
         public Input input;
 
 
-        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 5)
+        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 100)
         {
             input = new Input();
         }

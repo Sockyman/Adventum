@@ -13,7 +13,7 @@
           <frames>1</frames>
           <FPS>0</FPS>
           <directionMap>0 0 0 0 0 1 0 1 0 0 0 0 0 1 0 1</directionMap>
-          <flipMap>0 0 1 1 0 0 0 0</flipMap>
+          <flipMap>0 0 0 0 0 0 1 1</flipMap>
         </Value>
       </Item>
     </animations>

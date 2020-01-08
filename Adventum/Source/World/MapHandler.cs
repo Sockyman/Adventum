@@ -6,6 +6,8 @@ using MonoGame.Extended.Tiled;
 using Adventum.Core.Collision;
 using Adventum.Entities;
 using Adventum.Entities.Mobs;
+using Adventum.Entities.Decor;
+using Adventum.Data;
 
 namespace Adventum.World
 {
@@ -28,6 +30,7 @@ namespace Adventum.World
             d[1] = (TiledMapTileObject t) => new Zombie(t.Position);
             d[2] = (TiledMapTileObject t) => new Reaper(t.Position);
             d[3] = (TiledMapTileObject t) => new Tree(t.Position);
+            d[4] = (TiledMapTileObject t) => new Furniture(t.Position, "Chair", (Direction)Int32.Parse(t.Properties["Direction"]));
 
             return d;
         }

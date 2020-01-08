@@ -66,7 +66,7 @@ namespace Adventum.World
 
 
 
-            LoadLevel("lvl1");
+            LoadLevel("dungeon");
         }
 
 
@@ -111,8 +111,6 @@ namespace Adventum.World
             Map = ResourceManager.GetMap(levelName);
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
             MapHandler.LoadMapObjects(Map);
-
-            entityManager.CreateEntity(new Entities.Decor.Furniture(PlayerMob.Position, "chair"));
         }
 
 

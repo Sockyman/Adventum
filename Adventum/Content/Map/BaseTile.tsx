@@ -160,4 +160,14 @@
  <tile id="136" terrain=",5,,"/>
  <tile id="137" terrain="5,5,,"/>
  <tile id="138" terrain="5,,,"/>
+ <tile id="155">
+  <animation>
+   <frame tileid="155" duration="2000"/>
+   <frame tileid="139" duration="100"/>
+   <frame tileid="155" duration="2000"/>
+   <frame tileid="139" duration="100"/>
+   <frame tileid="155" duration="2000"/>
+   <frame tileid="139" duration="7000"/>
+  </animation>
+ </tile>
 </tileset>
