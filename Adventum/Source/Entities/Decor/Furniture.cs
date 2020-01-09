@@ -8,15 +8,20 @@ using Adventum.Data;
 
 namespace Adventum.Entities.Decor
 {
-    class Furniture : Entity
+    class Furniture : Entity, ILightEmiter
     {
-        public Furniture(Vector2 position, string texture, Direction facing = Direction.Down) : base(position)
+        public int LightRadius { get; set; } = 0;
+        public Color LightColor { get; set; } = Color.White;
+
+
+        public Furniture(Vector2 position, string texture, string spriteSheet = "Furniture2", int size = 16, Direction facing = Direction.Down, int lightRadius = 0) : base(position)
         {
             Solid = true;
-            Sprite = new Sprite.Animator("Furniture2", texture);
+            Sprite = new Sprite.Animator(spriteSheet, texture);
             state.Facing = facing;
+            LightRadius = lightRadius;
 
-            SetBounds(new Point(16));
+            SetBounds(new Point(size));
         }
     }
 }

@@ -48,8 +48,11 @@ namespace Adventum.Entities.Mobs
             state.AddState(EState.Idle).AddEntranceTrigger(() => Sprite.TryChangeAnimation("idle"));
 
             state.AddState(EState.Walk).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
 
             state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.25f).AddEntranceTrigger(() => UseMain());
+
+            state.AddState(EState.Interact).AddCountdownStateTrigger(EState.Idle, 0.25f).AddEntranceTrigger(() => UseSecondary()).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
         }
 
 
@@ -120,6 +123,12 @@ namespace Adventum.Entities.Mobs
         public virtual void UseMain()
         {
             GameWorld.entityManager.CreateEntity(new MeleeAttack(this, state.Facing, 1));
+        }
+
+
+        public virtual void UseSecondary()
+        {
+            
         }
     }
 }

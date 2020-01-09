@@ -31,7 +31,7 @@ namespace Adventum.Core.Collision
 
         public void OnCollision(CollisionData collisionData)
         {
-            Console.WriteLine(collisionData.Other.ToString());
+            
         }
 
     }

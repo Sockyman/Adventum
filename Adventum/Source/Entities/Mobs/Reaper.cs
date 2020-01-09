@@ -39,7 +39,7 @@ namespace Adventum.Entities.Mobs
                     }
                 });
 
-            state.AddState(EState.Charging).AddCountdownStateTrigger(EState.Attack, 0.8f).AddUpdateTrigger(() =>
+            state.AddState(EState.Charging).AddCountdownStateTrigger(EState.Attack, 0.5f).AddUpdateTrigger(() =>
             {
                 Move(-Utils.DirectionToVector(state.Facing), 100);
             });

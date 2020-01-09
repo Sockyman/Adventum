@@ -10,10 +10,12 @@ using Adventum.Data;
 
 namespace Adventum.Entities.Mobs
 {
-    public class PlayerEntity : Mob
+    public class PlayerEntity : Mob, ILightEmiter
     {
         public Input input;
 
+        public int LightRadius => 75;
+        public Color LightColor => Color.White;
 
         public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 100)
         {
@@ -27,15 +29,16 @@ namespace Adventum.Entities.Mobs
 
             state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left)).AddStateTrigger(EState.Walk, () =>
                 PreviousVelocity != Vector2.Zero
-            );
+            ).AddStateTrigger(EState.Interact, () => input.KeyCheck(MouseButton.Right));
 
             Trigger<EState> t = state.AddState(EState.Idle).RecentTrigger();
 
             state.AddState(EState.Walk).AttachTrigger(t).AddStateTrigger(EState.Idle, () =>
                 PreviousVelocity == Vector2.Zero
-            ).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left));
+            ).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left)).AddStateTrigger(EState.Interact, () => input.KeyCheck(MouseButton.Right));
 
-            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            
+
         }
 
 
@@ -66,6 +69,14 @@ namespace Adventum.Entities.Mobs
         public override void UseMain()
         {
             base.UseMain();
+        }
+
+
+        public override void UseSecondary()
+        {
+            base.UseSecondary();
+
+            World.GameWorld.entityManager.CreateEntity(new Interaction.Examine(this, Utils.DirectionToVector(state.Facing)));
         }
     }
 }

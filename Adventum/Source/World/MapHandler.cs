@@ -7,6 +7,7 @@ using Adventum.Core.Collision;
 using Adventum.Entities;
 using Adventum.Entities.Mobs;
 using Adventum.Entities.Decor;
+using Adventum.Entities.Interaction;
 using Adventum.Data;
 
 namespace Adventum.World
@@ -26,11 +27,18 @@ namespace Adventum.World
         {
             var d = new Dictionary<int, EntityLoader>();
 
+            Vector2 offset = new Vector2(16, 0);
             d[0] = (TiledMapTileObject t) => new Mob(t.Position);
-            d[1] = (TiledMapTileObject t) => new Zombie(t.Position);
-            d[2] = (TiledMapTileObject t) => new Reaper(t.Position);
-            d[3] = (TiledMapTileObject t) => new Tree(t.Position);
-            d[4] = (TiledMapTileObject t) => new Furniture(t.Position, "Chair", (Direction)Int32.Parse(t.Properties["Direction"]));
+            d[1] = (TiledMapTileObject t) => new Zombie(t.Position + offset);
+            d[2] = (TiledMapTileObject t) => new Reaper(t.Position + offset);
+            d[3] = (TiledMapTileObject t) => new Tree(t.Position + offset);
+            d[4] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "Chair", facing: (Direction)Int32.Parse(t.Properties["Direction"]));
+            d[5] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
+                Int32.Parse(t.Properties["Radius"]));
+            d[6] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
+                Int32.Parse(t.Properties["Radius"]), false);
+            d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"]);
+            d[8] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
 
             return d;
         }
@@ -56,6 +64,9 @@ namespace Adventum.World
             {
                 LoadMisicObject(o);
             }
+
+
+            Main.LightColor = new Color(uint.Parse(misicLayer.Properties["Light"].Replace("#",""), System.Globalization.NumberStyles.HexNumber));
         }
 
         private static void LoadCollisionObject(TiledMapRectangleObject rectangle)

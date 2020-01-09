@@ -48,12 +48,33 @@ namespace Adventum.World
 
         public TiledMapRenderer mapRenderer;
 
+        public static GameplayScreen gameplayScreen = new GameplayScreen();
+
+        public static GeonBit.UI.Entities.Entity CurrentActiveControl
+        {
+            get
+            {
+                return currentActiveControl;
+            }
+            set
+            {
+                if (currentActiveControl != null)
+                {
+                    currentActiveControl.RemoveFromParent();
+                    Audio.Play("closeTextbox");
+                }
+
+                currentActiveControl = value;
+            }
+        }
+        private static GeonBit.UI.Entities.Entity currentActiveControl = null;
+
 
         public GameWorld()
         {
             random = new Random();            
             input = new Input();          
-            UserInterface.Active.AddEntity(new GameplayScreen());
+            UserInterface.Active.AddEntity(gameplayScreen);
 
             ClearManagers();
             
@@ -80,6 +101,9 @@ namespace Adventum.World
             
             input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
 
+            if (input.KeyCheckPressed(Core.IO.MouseButton.Right))
+                CurrentActiveControl = null;
+
             player.Update(delta);
 
             entityManager.Update(delta);
@@ -100,6 +124,12 @@ namespace Adventum.World
             mapRenderer.Draw(Main.Camera.GetViewMatrix());
             entityManager.Draw(spriteBatch);
             //mapRenderer.Draw(2, Main.Camera.GetViewMatrix(), depth: 0);
+        }
+
+
+        public void DrawLight(SpriteBatch spriteBatch, Texture2D lightMask)
+        {
+            entityManager.DrawLight(spriteBatch, lightMask);
         }
 
 

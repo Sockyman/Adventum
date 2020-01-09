@@ -68,5 +68,18 @@ namespace Adventum.Core
                 e.Draw(spriteBatch);
             }
         }
+
+
+        public void DrawLight(SpriteBatch spriteBatch, Texture2D lightMask)
+        {
+            foreach(Entity e in entities)
+            {
+                if (e is ILightEmiter)
+                {
+                    ILightEmiter emiter = (ILightEmiter)e;
+                    spriteBatch.Draw(lightMask, new Rectangle(emiter.Position.ToPoint() - new Point(emiter.LightRadius) - new Point(0, 16), new Point(emiter.LightRadius * 2)), emiter.LightColor);
+                }
+            }
+        }
     }
 }

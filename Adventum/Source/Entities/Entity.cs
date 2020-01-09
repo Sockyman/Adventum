@@ -56,6 +56,9 @@ namespace Adventum.Entities
         public Animator Sprite { get; set; }
 
 
+        public bool visible = true;
+
+
 
         public Entity(Vector2 position)
         {
@@ -104,10 +107,11 @@ namespace Adventum.Entities
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(Sprite.GetTexture(), Position, color: Color.White, layerDepth: Position.Y / 360);
-            Sprite.Draw(spriteBatch, Position, Color.White, Position.Y / GameWorld.Map.HeightInPixels);
+            
+            if (visible)
+                Sprite.Draw(spriteBatch, Position, Color.White, Position.Y / GameWorld.Map.HeightInPixels);
 
-            //spriteBatch.Draw(ResourceManager.GetTexture("pixel"), Position, Color.White);
+            
 
             
             /*Texture2D rect = new Texture2D(Main.graphics.GraphicsDevice, CollisionMask.Width, CollisionMask.Height);

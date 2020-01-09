@@ -29,6 +29,9 @@ namespace Adventum.UI
 
         public TextBox(string title, string text, PanelSkin skin = PanelSkin.Default) : base(new Vector2(500, 200), skin, Anchor.BottomCenter)
         {
+            Core.Audio.Play("openTextbox");
+            World.GameWorld.CurrentActiveControl = this;
+
             if (title != "")
             {
                 head = new Header(title);
@@ -36,7 +39,8 @@ namespace Adventum.UI
 
                 AddChild(new HorizontalLine());
             }
-            
+
+            text = text.Replace("/n", "\n");
             Paragraph p = new Paragraph(text);
             AddChild(p);
         }

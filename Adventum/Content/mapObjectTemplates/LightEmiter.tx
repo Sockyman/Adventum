@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../Map/EntityMarker.tsx"/>
+ <object type="Entity" gid="8" width="32" height="32">
+  <properties>
+   <property name="Color" type="color" value="#ffffffff"/>
+   <property name="Direction" type="int" value="0"/>
+   <property name="Radius" type="int" value="150"/>
+  </properties>
+ </object>
+</template>

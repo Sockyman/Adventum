@@ -1669,6 +1669,12 @@
 /processorParam:DebugMode=Auto
 /build:Shader/lightEffect.fx
 
+#begin Sound/closeTextbox.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/closeTextbox.wav
+
 #begin Sound/enemyDeath0.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1680,6 +1686,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/enemyHit0.wav
+
+#begin Sound/openTextbox.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/openTextbox.wav
 
 #begin SpriteSheet/AttackSwish.xml
 /importer:XmlImporter
@@ -1705,6 +1717,16 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:SpriteSheet/None.xml
+
+#begin SpriteSheet/Table.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Table.xml
+
+#begin SpriteSheet/Torch.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Torch.xml
 
 #begin SpriteSheet/Tree.xml
 /importer:XmlImporter
@@ -1879,6 +1901,18 @@
 /processorParam:TextureFormat=Color
 /build:Texture/swirl.png
 
+#begin Texture/table.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/table.png
+
 #begin Texture/test.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1890,6 +1924,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/test.png
+
+#begin Texture/torch.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/torch.png
 
 #begin Texture/tree.png
 /importer:TextureImporter

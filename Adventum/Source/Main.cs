@@ -23,7 +23,12 @@ namespace Adventum
         public static GraphicsDeviceManager graphics;
         public static GameWorld gameWorld;
         public static RenderTarget2D renderTarget;
+        public static RenderTarget2D lightsTarget;
+        public static RenderTarget2D uiTarget;
         public static StringBuilder debugString = new StringBuilder();
+
+        public static Color LightColor { get; set; } = Color.White;
+
 
         SpriteBatch spriteBatch;
 
@@ -75,6 +80,8 @@ namespace Adventum
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             renderTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
+            lightsTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
+            uiTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
 
 
             ResourceManager.LoadContent(Content);
@@ -161,15 +168,31 @@ namespace Adventum
                 //ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
                 gameWorld.Draw(spriteBatch);
 
+
                 spriteBatch.End();
             }
 
+
+            /// Drawing Lighting effects
+            GraphicsDevice.SetRenderTarget(lightsTarget);
+            {
+                GraphicsDevice.Clear(LightColor);
+
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
+                var lm = ResourceManager.GetTexture("lightMask");
+                gameWorld.DrawLight(spriteBatch, lm);
+
+                spriteBatch.End();
+            }
+
+            GraphicsDevice.SetRenderTarget(uiTarget);
             /// Drawing at screen position (GUI).
             {
+                GraphicsDevice.Clear(Color.Transparent);
+
                 spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
-                //spriteBatch.Draw(UserInterface.Active.RenderTarget, new Rectangle(0, 0, windowSize.Width, windowSize.Height), Color.White);
-
+                
                 DrawCursor(spriteBatch);
 
                 spriteBatch.End();
@@ -183,8 +206,19 @@ namespace Adventum
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
 
                 ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
+
+                ResourceManager.GetShader("lightEffect").Parameters["lightMask"].SetValue(lightsTarget);
+                ResourceManager.GetShader("lightEffect").CurrentTechnique.Passes[0].Apply();
                 spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
-                
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
+
+                ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
+
+
+                spriteBatch.Draw(uiTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+
 
 
 
@@ -202,6 +236,7 @@ namespace Adventum
 
             base.Draw(gameTime);
         }
+
 
 
         public void DrawCursor(SpriteBatch spriteBatch)
