@@ -128,7 +128,7 @@ namespace Adventum.Entities
             Collisions.Merge(collisionData);
             if (collisionData.Other.Solid && Solid)
             {
-                ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 10);
+                ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 5000 * GameWorld.deltaTime.Seconds);
             }
         }
 
