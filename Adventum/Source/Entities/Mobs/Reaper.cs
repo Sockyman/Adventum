@@ -15,6 +15,8 @@ namespace Adventum.Entities.Mobs
     {
         public override float MaxMovementSpeed => base.MaxMovementSpeed / 4;
 
+        public Vector2 pointing = new Vector2();
+
 
         public Reaper(Vector2 position) : base(position, "reaper", maxHealth: 5)
         {
@@ -42,7 +44,7 @@ namespace Adventum.Entities.Mobs
             state.AddState(EState.Charging).AddCountdownStateTrigger(EState.Attack, 0.5f).AddUpdateTrigger(() =>
             {
                 Move(-Utils.DirectionToVector(state.Facing), 100);
-            });
+            }).AddEntranceTrigger(() => pointing = GameWorld.PlayerMob.Position);
 
             state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Walk, 0.23f);
 
@@ -52,7 +54,7 @@ namespace Adventum.Entities.Mobs
 
         public override void UseMain()
         {
-            GameWorld.entityManager.CreateEntity(new Arrow(this, Utils.DirectionToVector(state.Facing)));
+            GameWorld.entityManager.CreateEntity(new Arrow(this, pointing - GameWorld.PlayerMob.Position));
         }
     }
 }
