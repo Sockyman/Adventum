@@ -20,6 +20,8 @@ namespace Adventum.Entities.Mobs
         public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 100)
         {
             input = new Input();
+
+			alignment = Alignment.Good;
         }
 
 

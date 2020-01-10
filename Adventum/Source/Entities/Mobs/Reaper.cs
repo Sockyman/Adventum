@@ -8,6 +8,7 @@ using Adventum.Util;
 using Adventum.Data;
 using Adventum.Sprite;
 using Adventum.Entities.Interaction;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Adventum.Entities.Mobs
 {
@@ -55,6 +56,13 @@ namespace Adventum.Entities.Mobs
         public override void UseMain()
         {
             GameWorld.entityManager.CreateEntity(new Arrow(this, pointing - GameWorld.PlayerMob.Position));
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            spriteBatch.Draw(Core.Resource.ResourceManager.GetTexture("pixel"), pointing, Color.Red);
         }
     }
 }

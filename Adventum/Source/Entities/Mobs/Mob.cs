@@ -22,6 +22,8 @@ namespace Adventum.Entities.Mobs
 
         protected float maxHitFrames = 0.1f;
 
+		public Alignment alignment = Alignment.Neutral;
+
 
         public Mob(Vector2 position) : base(position)
         {

@@ -10,12 +10,11 @@ using MonoGame.Extended;
 
 namespace Adventum.Entities.Mobs
 {
-    class Enemy : Mob
+    public class Enemy : Mob
     {
         public Enemy(Vector2 position, string texture, string spriteSheet = "HumanoidBase", int boundingSize = 16, int maxHealth = 10) : base(position, texture, spriteSheet, boundingSize, maxHealth)
         {
-            
-            
+			alignment = Alignment.Evil;
         }
 
 

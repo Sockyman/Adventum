@@ -25,7 +25,7 @@ namespace Adventum.Entities.Interaction
         {
             base.OnInteract(entity);
 
-            if (entity is Mob && ((Mob)entity).HitFrames < 1)
+            if (entity is Mob && ((Mob)entity).HitFrames < 1 && (parent is Mob ? ((Mob)parent).alignment != ((Mob)entity).alignment : true))
             {
                 ((Mob)entity).Hurt(damage, Angle.FromVector(Utils.DirectionToVector(state.Facing)));
             }

@@ -1718,6 +1718,11 @@
 /processor:PassThroughProcessor
 /build:SpriteSheet/None.xml
 
+#begin SpriteSheet/Slime.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Slime.xml
+
 #begin SpriteSheet/Table.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -1888,6 +1893,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/reaper.png
+
+#begin Texture/slime.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/slime.png
 
 #begin Texture/swirl.png
 /importer:TextureImporter

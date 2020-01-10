@@ -28,7 +28,7 @@ namespace Adventum.World
             var d = new Dictionary<int, EntityLoader>();
 
             Vector2 offset = new Vector2(16, 0);
-            d[0] = (TiledMapTileObject t) => new Mob(t.Position);
+            d[0] = (TiledMapTileObject t) => new Mob(t.Position + offset);
             d[1] = (TiledMapTileObject t) => new Zombie(t.Position + offset);
             d[2] = (TiledMapTileObject t) => new Reaper(t.Position + offset);
             d[3] = (TiledMapTileObject t) => new Tree(t.Position + offset);
@@ -39,8 +39,9 @@ namespace Adventum.World
                 Int32.Parse(t.Properties["Radius"]), false);
             d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"]);
             d[8] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
+			d[9] = (TiledMapTileObject t) => new Slime(t.Position + offset);
 
-            return d;
+			return d;
         }
 
 

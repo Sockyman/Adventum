@@ -12,6 +12,8 @@ namespace Adventum.Entities
 
         public bool flicker = true;
 
+        public int startingRadius;
+
         public Torch(Vector2 position, Color lightColor, int lightRadius = 150, bool visible = true) : base(position)
         {
             Solid = false;
@@ -19,6 +21,7 @@ namespace Adventum.Entities
             this.visible = visible;
 
             LightRadius = lightRadius;
+            startingRadius = LightRadius;
             LightColor = lightColor;
 
             Sprite = new Sprite.Animator("Torch", "torch");
@@ -31,6 +34,7 @@ namespace Adventum.Entities
             if (flicker && random.Next(10) == 0)
             {
                 LightRadius += random.Next(-2, 3);
+                LightRadius = MathHelper.Clamp(LightRadius, startingRadius - 10, startingRadius + 10);
             }
         }
     }

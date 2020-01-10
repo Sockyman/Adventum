@@ -78,7 +78,12 @@ namespace Adventum.Util
         }
 
 
-        public static Direction AngleToDirection(Angle angle, bool cardinalLock = false)
+
+		public static Direction VectorToDirection(Vector2 angle, bool cardinalLock = false)
+		{
+			return AngleToDirection(Angle.FromVector(angle), cardinalLock);
+		}
+		public static Direction AngleToDirection(Angle angle, bool cardinalLock = false)
         {
             Vector2 vec = angle.ToUnitVector();
             float rad = (float)Math.Atan2(vec.X, -vec.Y);
