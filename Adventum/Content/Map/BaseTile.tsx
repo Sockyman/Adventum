@@ -9,6 +9,7 @@
   <terrain name="Sand" tile="96"/>
   <terrain name="Interior Stone Brick" tile="104"/>
   <terrain name="Water Stone" tile="11"/>
+  <terrain name="Exterior Stone Brick" tile="215"/>
  </terraintypes>
  <tile id="1" terrain=",,,0"/>
  <tile id="2" terrain=",,0,0"/>
@@ -96,8 +97,8 @@
  <tile id="104" terrain=",,,5"/>
  <tile id="105" terrain=",,5,5"/>
  <tile id="106" terrain=",,5,"/>
- <tile id="107" terrain="5,5,5,"/>
- <tile id="108" terrain="5,5,,5"/>
+ <tile id="107" terrain="7,7,7,"/>
+ <tile id="108" terrain="7,7,,7"/>
  <tile id="112" terrain=",4,,4"/>
  <tile id="113" terrain="4,4,4,4"/>
  <tile id="114" terrain="4,,4,"/>
@@ -109,8 +110,8 @@
  <tile id="120" terrain=",5,,5"/>
  <tile id="121" terrain="5,5,5,5"/>
  <tile id="122" terrain="5,,5,"/>
- <tile id="123" terrain="5,,5,5"/>
- <tile id="124" terrain=",5,5,5"/>
+ <tile id="123" terrain="7,,7,7"/>
+ <tile id="124" terrain=",7,7,7"/>
  <tile id="128" terrain=",4,,"/>
  <tile id="129" terrain="4,4,,"/>
  <tile id="130" terrain="4,,,"/>
@@ -127,4 +128,13 @@
    <frame tileid="139" duration="7000"/>
   </animation>
  </tile>
+ <tile id="182" terrain=",,,7"/>
+ <tile id="183" terrain=",,7,7"/>
+ <tile id="184" terrain=",,7,"/>
+ <tile id="198" terrain=",7,,7"/>
+ <tile id="199" terrain="7,7,7,7"/>
+ <tile id="200" terrain="7,,7,"/>
+ <tile id="214" terrain=",7,,"/>
+ <tile id="215" terrain="7,7,,"/>
+ <tile id="216" terrain="7,,,"/>
 </tileset>

@@ -87,7 +87,7 @@ namespace Adventum.World
 
 
 
-            LoadLevel("dungeon");
+            LoadLevel("beach");
         }
 
 

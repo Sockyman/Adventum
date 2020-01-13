@@ -15,6 +15,7 @@ namespace Adventum.Entities
             Sprite.FrameNumber += (float)random.NextDouble() * 4;
 
             Immovable = true;
+			Solid = false;
 
             SetBounds(new Point(16));
         }

@@ -34,40 +34,41 @@ namespace Adventum.Core.Collision
                 source.PreviousVelocity = source.Velocity;
                 source.Velocity = Vector2.Zero;
 
-                foreach (ICollidable other in colliders)
-                {
-                    if (source.CollisionMask.Intersects(other.CollisionMask) && other != source) // && colliders[j] != colliders[i])
-                    {
-                        source.OnCollision(new CollisionData(other));
+				if (!(source is WallColider) && !(source is Tree))
+					foreach (ICollidable other in colliders)
+					{
+						if (source.CollisionMask.Intersects(other.CollisionMask) && other != source) // && colliders[j] != colliders[i])
+						{
+							source.OnCollision(new CollisionData(other));
 
-                        if (!source.Immovable && other.Immovable && source.Solid)
-                        {
-                            source.Position -= tempVelocity;
+							if (!source.Immovable && other.Immovable && source.Solid)
+							{
+								source.Position -= tempVelocity;
 
 
-                            if ((tempVelocity.X > 0 && source.CollisionMask.Width + source.CollisionMask.X <= other.CollisionMask.X) ||
-                                (tempVelocity.X < 0 && source.CollisionMask.X >= other.CollisionMask.X + other.CollisionMask.Width))
-                            {
-                                source.Position = new Vector2(source.Position.X, source.Position.Y + tempVelocity.Y);
-                                if (source is Entities.Entity)
-                                {
-                                    Entity e = (Entity)source;
-                                    e.Motion = new Vector2(0, e.Motion.Y);
-                                }
-                            }
-                            else if ((tempVelocity.Y > 0 && source.CollisionMask.Height + source.CollisionMask.Y <= other.CollisionMask.Y) ||
-                                (tempVelocity.Y < 0 && source.CollisionMask.Y >= other.CollisionMask.Y + other.CollisionMask.Height))
-                            {
-                                source.Position = new Vector2(source.Position.X + tempVelocity.X, source.Position.Y);
-                                if (source is Entities.Entity)
-                                {
-                                    Entity e = (Entity)source;
-                                    e.Motion = new Vector2(e.Motion.X, 0);
-                                }
-                            }
-                        }
-                    }
-                }
+								if ((tempVelocity.X > 0 && source.CollisionMask.Width + source.CollisionMask.X <= other.CollisionMask.X) ||
+									(tempVelocity.X < 0 && source.CollisionMask.X >= other.CollisionMask.X + other.CollisionMask.Width))
+								{
+									source.Position = new Vector2(source.Position.X, source.Position.Y + tempVelocity.Y);
+									if (source is Entities.Entity)
+									{
+										Entity e = (Entity)source;
+										e.Motion = new Vector2(0, e.Motion.Y);
+									}
+								}
+								else if ((tempVelocity.Y > 0 && source.CollisionMask.Height + source.CollisionMask.Y <= other.CollisionMask.Y) ||
+									(tempVelocity.Y < 0 && source.CollisionMask.Y >= other.CollisionMask.Y + other.CollisionMask.Height))
+								{
+									source.Position = new Vector2(source.Position.X + tempVelocity.X, source.Position.Y);
+									if (source is Entities.Entity)
+									{
+										Entity e = (Entity)source;
+										e.Motion = new Vector2(e.Motion.X, 0);
+									}
+								}
+							}
+						}
+					}
             }
 
 

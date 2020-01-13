@@ -10,7 +10,10 @@ namespace Adventum.Entities.Mobs
 {
     public class Slime : Enemy
     {
-        public Slime(Vector2 position) : base(position, "slime", "Slime", 32, 3)
+		public override float MaxMovementSpeed => base.MaxMovementSpeed / 2;
+
+
+		public Slime(Vector2 position) : base(position, "slime", "Slime", 32, 3)
         {
 			
         }
@@ -26,11 +29,10 @@ namespace Adventum.Entities.Mobs
 			state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () =>  Sprite != null ? state.clock.CurrentTime.TotalSeconds > Sprite.Sprite.animations["walk"].frames * (1 / (float)Sprite.Sprite.animations["walk"].FPS) : false)
 				.AddEntranceTrigger(() =>
 				{
-					if (World.GameWorld.PlayerExists && Vector2.Distance(Position, World.GameWorld.PlayerMob.Position) < 50)
+					if (World.GameWorld.PlayerExists && Vector2.Distance(Position, World.GameWorld.PlayerMob.Position) < 100)
 						state.Facing = Util.Utils.VectorToDirection(World.GameWorld.PlayerMob.Position - Position);
 					else
 						state.Facing = (Direction)random.Next(0, 8);
-
 				});
         }
 

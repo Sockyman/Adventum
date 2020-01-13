@@ -17,7 +17,7 @@ namespace Adventum.Entities.Mobs
         public int LightRadius => 75;
         public Color LightColor => Color.White;
 
-        public PlayerEntity(Vector2 position) : base(position, "humanBase", "HumanoidBase", maxHealth: 100)
+        public PlayerEntity(Vector2 position) : base(position, "playerBase", "HumanoidBase", maxHealth: 10)
         {
             input = new Input();
 
@@ -65,6 +65,12 @@ namespace Adventum.Entities.Mobs
         public override void OnCollision(CollisionData collisionData)
         {
             base.OnCollision(collisionData);
+
+			if (collisionData.Other is Door)
+			{
+				Core.Audio.Play("LevelChange");
+				Main.gameWorld.LoadLevel(((Door)collisionData.Other).level);
+			}
         }
 
 

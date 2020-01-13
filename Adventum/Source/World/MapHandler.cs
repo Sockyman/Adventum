@@ -40,6 +40,7 @@ namespace Adventum.World
             d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"]);
             d[8] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
 			d[9] = (TiledMapTileObject t) => new Slime(t.Position + offset);
+			d[10] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"]);
 
 			return d;
         }

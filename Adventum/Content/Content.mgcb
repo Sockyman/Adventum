@@ -1625,6 +1625,11 @@
 /processor:TiledMapTilesetProcessor
 /build:Map/BaseTile.tsx
 
+#begin Map/beach.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/beach.tmx
+
 #begin Map/dungeon.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
@@ -1686,6 +1691,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/enemyHit0.wav
+
+#begin Sound/levelChange.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/levelChange.wav
 
 #begin Sound/openTextbox.wav
 /importer:WavImporter
@@ -1881,6 +1892,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/pixel.png
+
+#begin Texture/playerBase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/playerBase.png
 
 #begin Texture/reaper.png
 /importer:TextureImporter

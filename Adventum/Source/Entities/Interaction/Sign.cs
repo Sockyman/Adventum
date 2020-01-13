@@ -17,14 +17,21 @@ namespace Adventum.Entities.Interaction
 
             Sprite = new Sprite.Animator("Furniture2", "chair");
 
+			Solid = false;
+
             this.text = text;
             this.title = title;
         }
 
 
-        public void OnExamine()
+        public virtual void OnExamine()
         {
-            World.GameWorld.gameplayScreen.AddChild(new TextBox(title, text));
+			Show();
         }
+
+		public void Show()
+		{
+			World.GameWorld.gameplayScreen.AddChild(new TextBox(title, text));
+		}
     }
 }

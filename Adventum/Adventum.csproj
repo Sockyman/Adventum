@@ -65,6 +65,7 @@
     <Compile Include="Source\Core\IO\MouseButton.cs" />
     <Compile Include="Source\Entities\Alignment.cs" />
     <Compile Include="Source\Entities\Decor\Furniture.cs" />
+    <Compile Include="Source\Entities\Door.cs" />
     <Compile Include="Source\Entities\ILightEmiter.cs" />
     <Compile Include="Source\Entities\Interaction\Arrow.cs" />
     <Compile Include="Source\Entities\Interaction\Attack.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Source\Entities\Interaction\Interact.cs" />
     <Compile Include="Source\Entities\Interaction\MeleeAttack.cs" />
     <Compile Include="Source\Entities\Interaction\Sign.cs" />
+    <Compile Include="Source\Entities\Interaction\Thought.cs" />
     <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
