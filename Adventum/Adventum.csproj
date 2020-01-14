@@ -81,6 +81,7 @@
     <Compile Include="Source\Entities\Mobs\Reaper.cs" />
     <Compile Include="Source\Entities\Mobs\Slime.cs" />
     <Compile Include="Source\Entities\Mobs\Zombie.cs" />
+    <Compile Include="Source\Entities\Particles\Particle.cs" />
     <Compile Include="Source\Entities\Torch.cs" />
     <Compile Include="Source\Entities\Tree.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
