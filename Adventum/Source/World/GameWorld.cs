@@ -16,6 +16,7 @@ using Adventum.Core.Resource;
 using Adventum.UI;
 using Adventum.Data;
 using GeonBit.UI;
+using MonoGame.Extended.Timers;
 
 namespace Adventum.World
 {
@@ -31,6 +32,7 @@ namespace Adventum.World
         public static Input input;
 
         public static TiledMap Map { get; private set; }
+		public static string levelName = "";
         public static PlayerEntity PlayerMob
         {
             get
@@ -45,6 +47,8 @@ namespace Adventum.World
                 return EntityExists(PlayerMob);
             }
         }
+
+		public CountdownTimer deathTimer;
 
         public TiledMapRenderer mapRenderer;
 
@@ -64,6 +68,7 @@ namespace Adventum.World
                     Audio.Play("closeTextbox");
                 }
 
+				
                 currentActiveControl = value;
             }
         }
@@ -88,6 +93,13 @@ namespace Adventum.World
 
 
             LoadLevel("beach");
+
+
+			TextBox tb = new TextBox("Welcome to Adventum", "Controls:\nWAS & D to move,\nLeft click to attack,\nRight click to read signs,\nRight click to close this menu",
+				GeonBit.UI.Entities.PanelSkin.Fancy);
+
+			gameplayScreen.AddChild(tb);
+			//CurrentActiveControl = tb;
         }
 
 
@@ -115,7 +127,19 @@ namespace Adventum.World
             //Main.Camera.Rotate(0.001f);
 
 
-            
+            if (!PlayerExists)
+			{
+				deathTimer.Update(deltaTime);
+
+				if (deathTimer.TimeRemaining.TotalSeconds <= 0)
+				{
+					player.player = new PlayerEntity(new Vector2())
+					{
+						input = GameWorld.input
+					};
+					LoadLevel(levelName);
+				}
+			}
         }
 
 
@@ -141,6 +165,8 @@ namespace Adventum.World
             Map = ResourceManager.GetMap(levelName);
             mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
             MapHandler.LoadMapObjects(Map);
+
+			GameWorld.levelName = levelName;
         }
 
 
@@ -148,12 +174,15 @@ namespace Adventum.World
         {
             entityManager = new EntityManager();
             collisionManager = new CollisionManager();
+			deathTimer = new CountdownTimer(5);
         }
         private void ClearManagers(Mob toKeep)
         {
             ClearManagers();
 
             entityManager.CreateEntity(toKeep);
+
+			
         }
 
 

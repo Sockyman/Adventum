@@ -62,7 +62,7 @@ namespace Adventum.Entities.Mobs
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(Core.Resource.ResourceManager.GetTexture("pixel"), pointing, Color.Red);
+            //spriteBatch.Draw(Core.Resource.ResourceManager.GetTexture("pixel"), pointing, Color.Red);
         }
     }
 }
