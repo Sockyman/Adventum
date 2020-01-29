@@ -42,7 +42,7 @@ namespace Adventum.Entities.Mobs
                     }
                 });
 
-            state.AddState(EState.Charging).AddCountdownStateTrigger(EState.Attack, 0.5f).AddUpdateTrigger(() =>
+            state.AddState(EState.Charging).AddCountdownStateTrigger(EState.Attack, 1f).AddUpdateTrigger(() =>
             {
                 Move(-Utils.DirectionToVector(state.Facing), 100);
             }).AddEntranceTrigger(() => pointing = GameWorld.PlayerMob.Position);
@@ -55,7 +55,7 @@ namespace Adventum.Entities.Mobs
 
         public override void UseMain()
         {
-            GameWorld.entityManager.CreateEntity(new Arrow(this, pointing - GameWorld.PlayerMob.Position));
+            GameWorld.entityManager.CreateEntity(new Arrow(this, pointing - Position));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

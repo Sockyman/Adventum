@@ -29,12 +29,21 @@ namespace Adventum.Core.IO
         {
             get
             {
-                return Main.Camera.ScreenToWorld(mouseState.Position.ToVector2());
+				return Main.Camera.ScreenToWorld(mouseState.Position.ToVector2());
+				//return Main.Camera.Position + mouseState.Position.ToVector2();
             }
         }
+		public Vector2 MouseWorldPosition2
+		{
+			get
+			{
+				//return Main.Camera.ScreenToWorld(mouseState.Position.ToVector2());
+				return Main.Camera.Position + mouseState.Position.ToVector2();
+			}
+		}
 
 
-        public Input()
+		public Input()
         {
             keyboardState = new KeyboardState();
             oldKeyboardState = new KeyboardState();
@@ -59,9 +68,6 @@ namespace Adventum.Core.IO
 
             keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();
-
-            Main.DebugAdd(MousePosition.ToPoint().ToString(), "MousePosition:");
-            Main.DebugAdd(MouseWorldPosition.ToPoint().ToString(), "MouseWorldPosition:");
         }
 
 

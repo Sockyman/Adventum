@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Data="Adventum.Data">
+  <Asset Type="Data:ParticleEffect">
+    <sprite>Blood</sprite>
+    <texture>blood</texture>
+    <color>FFFF0000</color>
+    <mixColor>FFFF0000</mixColor>
+    <speed>300 500</speed>
+    <direction>0 1</direction>
+    <lifeSpan>2 5</lifeSpan>
+  </Asset>
+</XnaContent>

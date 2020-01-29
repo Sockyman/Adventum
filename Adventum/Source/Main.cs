@@ -137,7 +137,7 @@ namespace Adventum
 
 
             UserInterface.Active.Update(gameTime);
-            DebugAdd(UserInterface.Active.ActiveEntity.ToString(), "ActiveControl:");
+            //DebugAdd(UserInterface.Active.ActiveEntity.ToString(), "ActiveControl:");
             DebugAdd(((int)GameWorld.deltaTime.FPS).ToString(), "FPS:");
 
 

@@ -8,6 +8,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Adventum.Entities;
 using Adventum.Entities.Mobs;
+using Adventum.Entities.Particles;
 using Adventum.Util;
 using Adventum.Core;
 using Adventum.Core.IO;
@@ -147,8 +148,8 @@ namespace Adventum.World
         {
             mapRenderer.Draw(Main.Camera.GetViewMatrix());
             entityManager.Draw(spriteBatch);
-            //mapRenderer.Draw(2, Main.Camera.GetViewMatrix(), depth: 0);
-        }
+			spriteBatch.Draw(ResourceManager.GetTexture("pixel"), input.MouseWorldPosition, color: Color.Red, layerDepth: 1f);
+		}
 
 
         public void DrawLight(SpriteBatch spriteBatch, Texture2D lightMask)
@@ -190,5 +191,17 @@ namespace Adventum.World
         {
             return entityManager.EntityExists(entity);
         }
+
+
+		public static void SpawnParticles(int amount, string particle, Vector2 position)
+		{
+			ParticleEffect effect = ResourceManager.GetParticle(particle);
+
+			for (int i = 0; i < amount; i++)
+			{
+				Particle p = Particle.GenerateFromEffect(effect, position);
+				entityManager.CreateEntity(p);
+			}
+		}
     }
 }

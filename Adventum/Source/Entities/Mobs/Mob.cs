@@ -20,7 +20,7 @@ namespace Adventum.Entities.Mobs
         public int Health { get; set; }
         public float HitFrames { get; private set; }
 
-        protected float maxHitFrames = 0.1f;
+        protected float maxHitFrames = 0.2f;
 
 		public Alignment alignment = Alignment.Neutral;
 
@@ -110,6 +110,8 @@ namespace Adventum.Entities.Mobs
                 ApplyDirecionalVelocity(direction, 500);
 
                 Audio.Play("enemyHit0", 0.4f);
+
+				GameWorld.SpawnParticles(1, "blood", Position);
             }
         }
 
@@ -117,6 +119,8 @@ namespace Adventum.Entities.Mobs
         public override void Die()
         {
             Audio.Play("enemyDeath0", 0.4f);
+
+			GameWorld.SpawnParticles(10, "blood", Position);
 
             base.Die();
         }

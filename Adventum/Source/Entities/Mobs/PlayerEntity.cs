@@ -48,6 +48,8 @@ namespace Adventum.Entities.Mobs
         {
             base.Update(delta);
 
+			maxHitFrames = 0.6f;
+
             Vector2 movement = new Vector2();
             movement.X += input.CheckAxis(Keys.A, Keys.D);
             movement.Y += input.CheckAxis(Keys.W, Keys.S);
@@ -57,9 +59,6 @@ namespace Adventum.Entities.Mobs
             Vector2 centerPosition = Position;
             centerPosition.Y -= Sprite.Sprite.frameSize.Y / 2;
             state.Facing = Utils.AngleToDirection(Angle.FromVector(input.MouseWorldPosition - centerPosition));
-
-
-            Main.DebugAdd(state.Facing.ToString(), "PlayerFacing:");
         }
 
         public override void OnCollision(CollisionData collisionData)

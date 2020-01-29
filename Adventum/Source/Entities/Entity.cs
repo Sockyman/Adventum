@@ -55,6 +55,8 @@ namespace Adventum.Entities
         public bool Solid { get; set; }
         public Animator Sprite { get; set; }
 
+		public Color drawColor = Color.White;
+
 
         public bool visible = true;
 
@@ -109,7 +111,7 @@ namespace Adventum.Entities
         {
             
             if (visible)
-                Sprite.Draw(spriteBatch, Position, Color.White, Position.Y / GameWorld.Map.HeightInPixels);
+                Sprite.Draw(spriteBatch, Position, drawColor, Position.Y / GameWorld.Map.HeightInPixels);
 
             
 

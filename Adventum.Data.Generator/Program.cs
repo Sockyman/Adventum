@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace Adventum.Data.Generator
 {
@@ -12,10 +13,10 @@ namespace Adventum.Data.Generator
     {
         static void Main(string[] args)
         {
-            //DirectionMap data = DirectionMap.standardMobMap;
+			//DirectionMap data = DirectionMap.standardMobMap;
 
 
-            SerializeSpriteSheet();
+			SerializeParticleEffect();
         }
 
 
@@ -55,5 +56,21 @@ namespace Adventum.Data.Generator
 
             Serialize(data);
         }
+
+
+		static void SerializeParticleEffect()
+		{
+			ParticleEffect data = new ParticleEffect()
+			{
+				color = Color.Red,
+				mixColor = Color.Orange,
+				lifeSpan = new Vector2(2, 5),
+				speed = new Vector2(300, 500),
+				direction = new Vector2(0, 1)
+				
+			};
+
+			Serialize(data);
+		}
     }
 }

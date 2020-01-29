@@ -11,6 +11,9 @@ namespace Adventum.Util
 
     public static class Utils
     {
+		public static Random random = new Random();
+
+
         public static float Wrap(float min, float max, float value)
         {
             return (float)(value - (max - min) * Math.Floor(value / (max - min)));
@@ -134,5 +137,11 @@ namespace Adventum.Util
 
             return ratio * new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight);
         }
+
+
+		public static float RandomRange(Vector2 range)
+		{
+			return random.NextSingle(range.X, range.Y);
+		}
     }
 }

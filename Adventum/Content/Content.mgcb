@@ -1650,6 +1650,11 @@
 /processor:TiledMapProcessor
 /build:Map/TestMap.tmx
 
+#begin Particle/blood.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Particle/blood.xml
+
 #begin Shader/darken.fx
 /importer:EffectImporter
 /processor:EffectProcessor
@@ -1709,6 +1714,11 @@
 /processor:PassThroughProcessor
 /build:SpriteSheet/AttackSwish.xml
 
+#begin SpriteSheet/Blood.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Blood.xml
+
 #begin SpriteSheet/File.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -1749,6 +1759,18 @@
 /processor:PassThroughProcessor
 /build:SpriteSheet/Tree.xml
 
+#begin Texture/alert.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/alert.png
+
 #begin Texture/attackSwish.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1784,6 +1806,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/baseTileOLD.png
+
+#begin Texture/blood.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/blood.png
 
 #begin Texture/chair.png
 /importer:TextureImporter

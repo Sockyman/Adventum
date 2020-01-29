@@ -3,6 +3,7 @@
  <tileset firstgid="1" source="../Map/EntityMarker.tsx"/>
  <object type="Entity" gid="12" width="32" height="32">
   <properties>
+   <property name="Cache Level" type="bool" value="false"/>
    <property name="Direction" type="int" value="0"/>
    <property name="Level" value=""/>
   </properties>

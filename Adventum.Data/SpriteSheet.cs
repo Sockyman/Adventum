@@ -6,19 +6,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Adventum.Data
 {
-    public enum Direction
-    {
-        Down,
-        DownLeft,
-        Left,
-        UpLeft,
-        Up,
-        UpRight,
-        Right,
-        DownRight
-    }
-
-
     public class SpriteSheet
     {
         public string name = "";

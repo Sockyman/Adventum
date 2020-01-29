@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Adventum.Util;
 using Adventum.Entities;
+using Adventum.Entities.Particles;
 
 namespace Adventum.Core.Collision
 {
@@ -34,7 +35,7 @@ namespace Adventum.Core.Collision
                 source.PreviousVelocity = source.Velocity;
                 source.Velocity = Vector2.Zero;
 
-				if (!(source is WallColider) && !(source is Tree))
+				if (!(source is WallColider) && !(source is Tree) && !(source is Particle))
 					foreach (ICollidable other in colliders)
 					{
 						if (source.CollisionMask.Intersects(other.CollisionMask) && other != source) // && colliders[j] != colliders[i])

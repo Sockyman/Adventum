@@ -37,7 +37,7 @@ namespace Adventum.World
                 Int32.Parse(t.Properties["Radius"]));
             d[6] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
                 Int32.Parse(t.Properties["Radius"]), false);
-            d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"]);
+            d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"], int.Parse(t.Properties["Skin"]));
             d[8] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
 			d[9] = (TiledMapTileObject t) => new Slime(t.Position + offset);
 			d[10] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"]);
@@ -89,6 +89,13 @@ namespace Adventum.World
         {
             if (obj.Name == "Player Start")
                 GameWorld.player.player.Position = obj.Position;
+
+			if (obj.Type == "Thought" && obj is TiledMapRectangleObject)
+			{
+				var rObj = (TiledMapRectangleObject)obj;
+				GameWorld.entityManager.CreateEntity(new Thought(new Rectangle(rObj.Position.ToPoint(), new Point((int)rObj.Size.Width,
+					(int)rObj.Size.Height)), rObj.Properties["Title"], rObj.Properties["Text"], int.Parse(rObj.Properties["Skin"])));
+			}
         }
     }
 }

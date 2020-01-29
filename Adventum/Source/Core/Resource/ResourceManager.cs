@@ -21,9 +21,10 @@ namespace Adventum.Core.Resource
         private static Dictionary<string, SpriteFont> fontsLoaded;
         private static Dictionary<string, Effect> shadersLoaded;
         private static Dictionary<string, SoundEffect> soundsLoaded;
+		private static Dictionary<string, ParticleEffect> particlesLoaded;
 
 
-        public static void LoadContent(ContentManager content)
+		public static void LoadContent(ContentManager content)
         {
             ResourceManager.content = content;
 
@@ -33,8 +34,9 @@ namespace Adventum.Core.Resource
             fontsLoaded = new Dictionary<string, SpriteFont>();
             shadersLoaded = new Dictionary<string, Effect>();
             soundsLoaded = new Dictionary<string, SoundEffect>();
+			particlesLoaded = new Dictionary<string, ParticleEffect>();
 
-            texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
+			texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
             texturesLoaded["pixel"].SetData( new Color[] { Color.White } );
 
             texturesLoaded[""] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
@@ -143,5 +145,13 @@ namespace Adventum.Core.Resource
         {
             return content.Load<TiledMap>("Map" + "/" + name);
         }
-    }
+
+		public static ParticleEffect GetParticle(string name)
+		{
+			ParticleEffect p = LoadItem("Particle", name, particlesLoaded);
+			if (p != null)
+				return p;
+			throw new Exception("ParticleEffect {name} not found");
+		}
+	}
 }
