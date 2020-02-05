@@ -54,7 +54,7 @@ namespace Adventum.Entities.Mobs
 			MeleeAttack attack = new MeleeAttack(this, state.Facing, 1);
 			attack.visible = false;
 
-			World.GameWorld.entityManager.CreateEntity(attack);
+			World.GameWorld.EntityManager.CreateEntity(attack);
 		}
 	}
 }

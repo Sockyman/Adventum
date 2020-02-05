@@ -111,7 +111,7 @@ namespace Adventum.Entities
         {
             
             if (visible)
-                Sprite.Draw(spriteBatch, Position, drawColor, Position.Y / GameWorld.Map.HeightInPixels);
+                Sprite.Draw(spriteBatch, Position, drawColor, Position.Y / GameWorld.level.Map.HeightInPixels);
 
             
 
@@ -175,7 +175,7 @@ namespace Adventum.Entities
         /// </summary>
         public void Destroy()
         {
-            World.GameWorld.entityManager.RemoveEntity(this);
+            GameWorld.EntityManager.RemoveEntity(this);
         }
     }
 }

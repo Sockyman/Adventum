@@ -12,7 +12,10 @@ namespace Adventum.Core
 
         public static void Play(string soundName, float pitchOffset = 0)
         {
-            ResourceManager.GetSound(soundName).Play(1, random.Next((int)(100 * -pitchOffset), (int)(100 * pitchOffset)) / 100, 0);
+            if (soundName != "")
+            {
+                ResourceManager.GetSound(soundName).Play(1, random.Next((int)(100 * -pitchOffset), (int)(100 * pitchOffset)) / 100, 0);
+            }
         }
     }
 }

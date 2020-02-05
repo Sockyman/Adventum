@@ -7,10 +7,14 @@ namespace Adventum.Entities
 	public class Door : Entity
 	{
 		public string level;
+		public bool cacheLevel;
 
-		public Door(Vector2 position, string level) : base(position)
+		public Door(Vector2 position, string level, bool cacheLevel) : base(position)
 		{
 			this.level = level;
+			this.cacheLevel = cacheLevel;
+
+			SetBounds(new Point(16));
 
 			Solid = false;
 

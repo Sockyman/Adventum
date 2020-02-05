@@ -55,7 +55,7 @@ namespace Adventum.Entities.Mobs
 
         public override void UseMain()
         {
-            GameWorld.entityManager.CreateEntity(new Arrow(this, pointing - Position));
+            GameWorld.EntityManager.CreateEntity(new Arrow(this, pointing - Position));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

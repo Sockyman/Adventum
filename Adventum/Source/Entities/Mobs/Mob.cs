@@ -20,6 +20,13 @@ namespace Adventum.Entities.Mobs
         public int Health { get; set; }
         public float HitFrames { get; private set; }
 
+
+        public virtual string HitSound => "enemyHit0";
+        public virtual string DeathSound => "enemyDeath0";
+        public virtual string AmbientSound => "";
+        public virtual float AmbientChance => 0.035f;
+
+
         protected float maxHitFrames = 0.2f;
 
 		public Alignment alignment = Alignment.Neutral;
@@ -32,7 +39,6 @@ namespace Adventum.Entities.Mobs
 
             Health = MaxHealth;
         }
-
         public Mob(Vector2 position, string texture, string spriteSheet, int boundingSize = 16, int maxHealth = 10) : base(position)
         {
             Sprite = new Animator(spriteSheet, texture);
@@ -66,6 +72,13 @@ namespace Adventum.Entities.Mobs
                 Die();
             }
 
+
+            if (random.NextDouble() < AmbientChance * delta.Seconds)
+            {
+                Audio.Play(AmbientSound);
+            }
+
+
             HitFrames -= delta.Seconds;
         }
 
@@ -78,12 +91,12 @@ namespace Adventum.Entities.Mobs
                 base.Draw(spriteBatch);
             }
 
-            if (Health < MaxHealth)
+            /*if (Health < MaxHealth)
             {
                 Vector2 barCenter = Position;
                 barCenter.Y -= Sprite.Sprite.frameSize.Y;
                 Utils.DrawHealthBar(spriteBatch, barCenter, new Point(10, 2), MaxHealth, Health, Color.Red, Color.LimeGreen, 1f);
-            }
+            }*/
         }
 
 
@@ -109,18 +122,18 @@ namespace Adventum.Entities.Mobs
                 direction.Revolutions += random.Next(-1, 1) / 10;
                 ApplyDirecionalVelocity(direction, 500);
 
-                Audio.Play("enemyHit0", 0.4f);
+                Audio.Play(HitSound, 0.4f);
 
-				GameWorld.SpawnParticles(1, "blood", Position);
+				GameWorld.SpawnParticles(random.Next(1, 3), "blood", Position);
             }
         }
 
 
         public override void Die()
         {
-            Audio.Play("enemyDeath0", 0.4f);
+            Audio.Play(DeathSound, 0.4f);
 
-			GameWorld.SpawnParticles(10, "blood", Position);
+			GameWorld.SpawnParticles(random.Next(5, 15), "blood", Position);
 
             base.Die();
         }
@@ -128,7 +141,7 @@ namespace Adventum.Entities.Mobs
 
         public virtual void UseMain()
         {
-            GameWorld.entityManager.CreateEntity(new MeleeAttack(this, state.Facing, 1));
+            GameWorld.EntityManager.CreateEntity(new MeleeAttack(this, state.Facing, 1));
         }
 
 

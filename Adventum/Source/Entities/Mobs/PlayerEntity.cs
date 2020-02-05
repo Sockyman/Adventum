@@ -67,8 +67,10 @@ namespace Adventum.Entities.Mobs
 
 			if (collisionData.Other is Door)
 			{
-				Core.Audio.Play("LevelChange");
-				Main.gameWorld.LoadLevel(((Door)collisionData.Other).level);
+                Door door = (Door)collisionData.Other;
+
+                Core.Audio.Play("LevelChange");
+				Main.gameWorld.LoadLevel(door.level, door.cacheLevel, this);
 			}
         }
 
@@ -83,7 +85,7 @@ namespace Adventum.Entities.Mobs
         {
             base.UseSecondary();
 
-            World.GameWorld.entityManager.CreateEntity(new Interaction.Examine(this, Utils.DirectionToVector(state.Facing)));
+            World.GameWorld.EntityManager.CreateEntity(new Interaction.Examine(this, Utils.DirectionToVector(state.Facing)));
         }
     }
 }

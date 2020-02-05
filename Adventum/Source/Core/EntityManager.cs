@@ -25,7 +25,7 @@ namespace Adventum.Core
         public Entity CreateEntity(Entity entity)
         {
             entitiesToAdd.Add(entity);
-            GameWorld.collisionManager.AddCollider(entity);
+            GameWorld.level.collisionManager.AddCollider(entity);
             return entity;
         }
 
@@ -37,7 +37,7 @@ namespace Adventum.Core
                 
             }
             entitiesToRemove.Add(entity);
-            GameWorld.collisionManager.RemoveCollider(entity);
+            GameWorld.level.collisionManager.RemoveCollider(entity);
         }
 
 

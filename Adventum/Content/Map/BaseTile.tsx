@@ -10,6 +10,7 @@
   <terrain name="Interior Stone Brick" tile="104"/>
   <terrain name="Water Stone" tile="11"/>
   <terrain name="Exterior Stone Brick" tile="215"/>
+  <terrain name="Interior Wood Wall" tile="160"/>
  </terraintypes>
  <tile id="1" terrain=",,,0"/>
  <tile id="2" terrain=",,0,0"/>
@@ -128,9 +129,22 @@
    <frame tileid="139" duration="7000"/>
   </animation>
  </tile>
+ <tile id="160" terrain=",,,8"/>
+ <tile id="161" terrain=",,8,8"/>
+ <tile id="162" terrain=",,8,"/>
+ <tile id="163" terrain="8,8,8,"/>
+ <tile id="164" terrain="8,8,,8"/>
+ <tile id="176" terrain=",8,,8"/>
+ <tile id="177" terrain="8,8,8,8"/>
+ <tile id="178" terrain="8,,8,"/>
+ <tile id="179" terrain="8,,8,8"/>
+ <tile id="180" terrain=",8,8,8"/>
  <tile id="182" terrain=",,,7"/>
  <tile id="183" terrain=",,7,7"/>
  <tile id="184" terrain=",,7,"/>
+ <tile id="192" terrain=",8,,"/>
+ <tile id="193" terrain="8,8,,"/>
+ <tile id="194" terrain="8,,,"/>
  <tile id="198" terrain=",7,,7"/>
  <tile id="199" terrain="7,7,7,7"/>
  <tile id="200" terrain="7,,7,"/>

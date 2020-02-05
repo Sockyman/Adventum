@@ -21,114 +21,119 @@ using MonoGame.Extended.Timers;
 
 namespace Adventum.World
 {
-    public class GameWorld
-    {
-        public static Random random;
+	public class GameWorld
+	{
+		private const string startingLevel = "beach";
 
-        public static EntityManager entityManager;
-        public static CollisionManager collisionManager;
-        public static DeltaTime deltaTime;
 
-        public static Player player;
-        public static Input input;
+		public static Random random;
 
-        public static TiledMap Map { get; private set; }
-		public static string levelName = "";
-        public static PlayerEntity PlayerMob
-        {
-            get
-            {
-                return player.player;
-            }
-        }
-        public static bool PlayerExists
-        {
-            get
-            {
-                return EntityExists(PlayerMob);
-            }
-        }
+		
+		public static DeltaTime deltaTime;
+
+		public static Player player;
+		public static Input input;
+
+
+		public static Level level;
+
+		public static EntityManager EntityManager
+		{
+			get
+			{
+				return level.entityManager;
+			}
+		}
+
+		
+		public static PlayerEntity PlayerMob
+		{
+			get
+			{
+				return player.player;
+			}
+		}
+		public static bool PlayerExists
+		{
+			get
+			{
+				return EntityExists(PlayerMob);
+			}
+		}
 
 		public CountdownTimer deathTimer;
 
-        public TiledMapRenderer mapRenderer;
+		public TiledMapRenderer mapRenderer;
 
-        public static GameplayScreen gameplayScreen = new GameplayScreen();
+		public static GameplayScreen gameplayScreen = new GameplayScreen();
 
-        public static GeonBit.UI.Entities.Entity CurrentActiveControl
-        {
-            get
-            {
-                return currentActiveControl;
-            }
-            set
-            {
-                if (currentActiveControl != null)
-                {
-                    currentActiveControl.RemoveFromParent();
-                    Audio.Play("closeTextbox");
-                }
+		public static GeonBit.UI.Entities.Entity CurrentActiveControl
+		{
+			get
+			{
+				return currentActiveControl;
+			}
+			set
+			{
+				if (currentActiveControl != null)
+				{
+					currentActiveControl.RemoveFromParent();
+					//Audio.Play("closeTextbox");
+				}
 
 				
-                currentActiveControl = value;
-            }
-        }
-        private static GeonBit.UI.Entities.Entity currentActiveControl = null;
+				currentActiveControl = value;
+			}
+		}
+		private static GeonBit.UI.Entities.Entity currentActiveControl = null;
 
-
-        public GameWorld()
-        {
-            random = new Random();            
-            input = new Input();          
-            UserInterface.Active.AddEntity(gameplayScreen);
-
-            ClearManagers();
-            
-            PlayerEntity playerEntity = (PlayerEntity)entityManager.CreateEntity(new PlayerEntity(new Vector2(0f)));
-            playerEntity.input = input;
-            player = new Player(this, input)
-            {
-                player = playerEntity
-            };
+		private Dictionary<string, Level> levelCache;
 
 
 
-            LoadLevel("beach");
+		public GameWorld()
+		{
+			random = new Random();            
+			input = new Input();          
+			UserInterface.Active.AddEntity(gameplayScreen);
+
+			levelCache = new Dictionary<string, Level>();
+			
+			PlayerEntity playerEntity = new PlayerEntity(new Vector2(0f));
+			playerEntity.input = input;
+			player = new Player(this, input)
+			{
+				player = playerEntity
+			};
 
 
-			TextBox tb = new TextBox("Welcome to Adventum", "Controls:\nWAS & D to move,\nLeft click to attack,\nRight click to read signs,\nRight click to close this menu",
-				GeonBit.UI.Entities.PanelSkin.Fancy);
-
-			gameplayScreen.AddChild(tb);
-			//CurrentActiveControl = tb;
-        }
+			LoadLevel(startingLevel, false, playerEntity);
+		}
 
 
-        public void Update(GameTime gameTime)
-        {
-            DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
-            deltaTime = delta;
+		public void Update(GameTime gameTime)
+		{
+			DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
+			deltaTime = delta;
 
-            mapRenderer.Update(gameTime);
+			mapRenderer.Update(gameTime);
 
-            
-            input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
+			
+			input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
 
-            if (input.KeyCheckPressed(Core.IO.MouseButton.Right))
-                CurrentActiveControl = null;
+			if (input.KeyCheckPressed(Core.IO.MouseButton.Right))
+				CurrentActiveControl = null;
 
-            player.Update(delta);
+			player.Update(delta);
 
-            entityManager.Update(delta);
-            collisionManager.Update(delta);
+			level.Update(delta);
 
-            if (EntityExists(PlayerMob))
-                Main.Camera.LookAt(PlayerMob.Position);
-
-            //Main.Camera.Rotate(0.001f);
-
-
-            if (!PlayerExists)
+			if (PlayerExists)
+			{
+				Main.DebugAdd(PlayerMob.Position.ToString(), "Player Position:");
+				Main.Camera.LookAt(PlayerMob.Position);
+			}
+			else
 			{
 				deathTimer.Update(deltaTime);
 
@@ -138,59 +143,56 @@ namespace Adventum.World
 					{
 						input = GameWorld.input
 					};
-					LoadLevel(levelName);
+					LoadLevel(level.name, false, PlayerMob);
 				}
 			}
-        }
-
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            mapRenderer.Draw(Main.Camera.GetViewMatrix());
-            entityManager.Draw(spriteBatch);
-			spriteBatch.Draw(ResourceManager.GetTexture("pixel"), input.MouseWorldPosition, color: Color.Red, layerDepth: 1f);
 		}
 
 
-        public void DrawLight(SpriteBatch spriteBatch, Texture2D lightMask)
-        {
-            entityManager.DrawLight(spriteBatch, lightMask);
-        }
+		public void Draw(SpriteBatch spriteBatch)
+		{
+			mapRenderer.Draw(Main.Camera.GetViewMatrix());
+			EntityManager.Draw(spriteBatch);
+			//spriteBatch.Draw(ResourceManager.GetTexture("pixel"), input.MouseWorldPosition, color: Color.Red, layerDepth: 1f);
+		}
+
+
+		public void DrawLight(SpriteBatch spriteBatch, Texture2D lightMask)
+		{
+			EntityManager.DrawLight(spriteBatch, lightMask);
+		}
 
 
 
-        public void LoadLevel(string levelName)
-        {
-            ClearManagers(player.player);
+		public void LoadLevel(string levelName, bool cacheLevel, params Entity[] toAdd)
+		{
+			if (cacheLevel)
+			{
+				levelCache[level.name] = level;
+				level.Cache();
+			}
 
-            Map = ResourceManager.GetMap(levelName);
-            mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, Map);
-            MapHandler.LoadMapObjects(Map);
+			if (levelCache.ContainsKey(levelName))
+			{
+				level = levelCache[levelName];
+			}
+			else
+			{
+				level = new Level(levelName, toAdd);
+			}
 
-			GameWorld.levelName = levelName;
-        }
+			level.Load();
 
+			mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, level.Map);
 
-        private void ClearManagers()
-        {
-            entityManager = new EntityManager();
-            collisionManager = new CollisionManager();
 			deathTimer = new CountdownTimer(5);
-        }
-        private void ClearManagers(Mob toKeep)
-        {
-            ClearManagers();
-
-            entityManager.CreateEntity(toKeep);
-
-			
-        }
+		}
 
 
-        public static bool EntityExists(Entity entity)
-        {
-            return entityManager.EntityExists(entity);
-        }
+		public static bool EntityExists(Entity entity)
+		{
+			return EntityManager.EntityExists(entity);
+		}
 
 
 		public static void SpawnParticles(int amount, string particle, Vector2 position)
@@ -200,8 +202,8 @@ namespace Adventum.World
 			for (int i = 0; i < amount; i++)
 			{
 				Particle p = Particle.GenerateFromEffect(effect, position);
-				entityManager.CreateEntity(p);
+				EntityManager.CreateEntity(p);
 			}
 		}
-    }
+	}
 }

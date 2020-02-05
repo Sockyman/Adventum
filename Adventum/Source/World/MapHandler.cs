@@ -18,8 +18,9 @@ namespace Adventum.World
 
         private static Dictionary<int, EntityLoader> loaders = BuildLoaders();
 
-
         private static Random random = new Random();
+
+        private static Level level;
 
 
 
@@ -40,26 +41,32 @@ namespace Adventum.World
             d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"], int.Parse(t.Properties["Skin"]));
             d[8] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
 			d[9] = (TiledMapTileObject t) => new Slime(t.Position + offset);
-			d[10] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"]);
+			d[10] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
 
 			return d;
         }
 
 
-        public static void LoadMapObjects(TiledMap map)
+        public static void LoadMapObjects(Level level, bool cached = false)
         {
+            MapHandler.level = level;
+            TiledMap map = level.Map;
+
             TiledMapObjectLayer collisionLayer = map.GetLayer<TiledMapObjectLayer>("Collision");
             TiledMapObjectLayer entityLayer = map.GetLayer<TiledMapObjectLayer>("Entity");
             TiledMapObjectLayer misicLayer = map.GetLayer<TiledMapObjectLayer>("Misic");
 
-            foreach (TiledMapRectangleObject o in collisionLayer.Objects)
+            if (!cached)
             {
-                LoadCollisionObject(o);
-            }
+                foreach (TiledMapRectangleObject o in collisionLayer.Objects)
+                {
+                    LoadCollisionObject(o);
+                }
 
-            foreach (TiledMapTileObject o in entityLayer.Objects)
-            {
-                LoadEntityObject(o);
+                foreach (TiledMapTileObject o in entityLayer.Objects)
+                {
+                    LoadEntityObject(o);
+                }
             }
 
             foreach (TiledMapObject o in misicLayer.Objects)
@@ -74,7 +81,7 @@ namespace Adventum.World
         private static void LoadCollisionObject(TiledMapRectangleObject rectangle)
         {
             WallColider collider = new WallColider(rectangle.Position.ToPoint(), new Point((int)rectangle.Size.Width, (int)rectangle.Size.Height));
-            GameWorld.collisionManager.AddCollider(collider);
+            level.collisionManager.AddCollider(collider);
         }
 
 
@@ -82,18 +89,18 @@ namespace Adventum.World
         {
             TiledMapTilesetTile tile = entity.Tile;
             if (tile != null)
-                GameWorld.entityManager.CreateEntity(loaders[tile.LocalTileIdentifier - 1].Invoke(entity));
+                level.entityManager.CreateEntity(loaders[tile.LocalTileIdentifier - 1].Invoke(entity));
         }
 
         private static void LoadMisicObject(TiledMapObject obj)
         {
-            if (obj.Name == "Player Start")
+            if (obj.Type == "Player Start")
                 GameWorld.player.player.Position = obj.Position;
 
 			if (obj.Type == "Thought" && obj is TiledMapRectangleObject)
 			{
 				var rObj = (TiledMapRectangleObject)obj;
-				GameWorld.entityManager.CreateEntity(new Thought(new Rectangle(rObj.Position.ToPoint(), new Point((int)rObj.Size.Width,
+				level.entityManager.CreateEntity(new Thought(new Rectangle(rObj.Position.ToPoint(), new Point((int)rObj.Size.Width,
 					(int)rObj.Size.Height)), rObj.Properties["Title"], rObj.Properties["Text"], int.Parse(rObj.Properties["Skin"])));
 			}
         }
