@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
-using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using Adventum.Entities;
 using Adventum.Entities.Mobs;
@@ -12,7 +9,7 @@ using Adventum.Entities.Particles;
 using Adventum.Util;
 using Adventum.Core;
 using Adventum.Core.IO;
-using Adventum.Core.Collision;
+using Adventum.GameStates;
 using Adventum.Core.Resource;
 using Adventum.UI;
 using Adventum.Data;
@@ -21,7 +18,7 @@ using MonoGame.Extended.Timers;
 
 namespace Adventum.World
 {
-	public class GameWorld
+	public class GameWorld : GameState
 	{
 		private const string startingLevel = "beach";
 
@@ -61,11 +58,10 @@ namespace Adventum.World
 			}
 		}
 
-		public CountdownTimer deathTimer;
+		public static CountdownTimer deathTimer;
 
-		public TiledMapRenderer mapRenderer;
+		public static TiledMapRenderer mapRenderer;
 
-		public static GameplayScreen gameplayScreen = new GameplayScreen();
 
 		public static GeonBit.UI.Entities.Entity CurrentActiveControl
 		{
@@ -78,7 +74,6 @@ namespace Adventum.World
 				if (currentActiveControl != null)
 				{
 					currentActiveControl.RemoveFromParent();
-					//Audio.Play("closeTextbox");
 				}
 
 				
@@ -87,15 +82,14 @@ namespace Adventum.World
 		}
 		private static GeonBit.UI.Entities.Entity currentActiveControl = null;
 
-		private Dictionary<string, Level> levelCache;
+		private static Dictionary<string, Level> levelCache;
 
 
 
-		public GameWorld()
+		public GameWorld() : base(new GameplayScreen())
 		{
 			random = new Random();            
 			input = new Input();          
-			UserInterface.Active.AddEntity(gameplayScreen);
 
 			levelCache = new Dictionary<string, Level>();
 			
@@ -111,12 +105,13 @@ namespace Adventum.World
 		}
 
 
-		public void Update(GameTime gameTime)
+		public override void Update(DeltaTime delta)
 		{
-			DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
+			base.Update(delta);
+
 			deltaTime = delta;
 
-			mapRenderer.Update(gameTime);
+			mapRenderer.Update(delta);
 
 			
 			input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
@@ -130,7 +125,6 @@ namespace Adventum.World
 
 			if (PlayerExists)
 			{
-				Main.DebugAdd(PlayerMob.Position.ToString(), "Player Position:");
 				Main.Camera.LookAt(PlayerMob.Position);
 			}
 			else
@@ -149,8 +143,10 @@ namespace Adventum.World
 		}
 
 
-		public void Draw(SpriteBatch spriteBatch)
+		public override void Draw(SpriteBatch spriteBatch)
 		{
+			base.Draw(spriteBatch);
+
 			mapRenderer.Draw(Main.Camera.GetViewMatrix());
 			EntityManager.Draw(spriteBatch);
 			//spriteBatch.Draw(ResourceManager.GetTexture("pixel"), input.MouseWorldPosition, color: Color.Red, layerDepth: 1f);
@@ -164,7 +160,7 @@ namespace Adventum.World
 
 
 
-		public void LoadLevel(string levelName, bool cacheLevel, params Entity[] toAdd)
+		public  static void LoadLevel(string levelName, bool cacheLevel, params Entity[] toAdd)
 		{
 			if (cacheLevel)
 			{

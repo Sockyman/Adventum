@@ -6,6 +6,7 @@ using Adventum.Core.IO;
 using Adventum.Util;
 using Adventum.States;
 using Adventum.Core.Collision;
+using Adventum.World;
 using Adventum.Data;
 
 namespace Adventum.Entities.Mobs
@@ -70,7 +71,7 @@ namespace Adventum.Entities.Mobs
                 Door door = (Door)collisionData.Other;
 
                 Core.Audio.Play("LevelChange");
-				Main.gameWorld.LoadLevel(door.level, door.cacheLevel, this);
+				GameWorld.LoadLevel(door.level, door.cacheLevel, this);
 			}
         }
 

@@ -14,8 +14,6 @@ namespace Adventum.UI
 
         public GameplayScreen() : base(new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight), PanelSkin.None)
         {
-
-
             Locked = true;
             Visible = true;
 

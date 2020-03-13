@@ -1635,6 +1635,11 @@
 /processor:TiledMapProcessor
 /build:Map/dungeon.tmx
 
+#begin Map/dungeon_shop.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/dungeon_shop.tmx
+
 #begin Map/EntityMarker.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
@@ -1696,6 +1701,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/enemyHit0.wav
+
+#begin Sound/enemyHit1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/enemyHit1.wav
 
 #begin Sound/levelChange.wav
 /importer:WavImporter
@@ -1794,18 +1805,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/baseTile.png
-
-#begin Texture/baseTileOLD.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/baseTileOLD.png
 
 #begin Texture/blood.png
 /importer:TextureImporter
@@ -2011,6 +2010,18 @@
 /processorParam:TextureFormat=Color
 /build:Texture/test.png
 
+#begin Texture/title.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/title.png
+
 #begin Texture/torch.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2034,18 +2045,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/tree.png
-
-#begin Texture/treeOLD.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Texture/treeOLD.png
 
 #begin Texture/woodArrow.png
 /importer:TextureImporter

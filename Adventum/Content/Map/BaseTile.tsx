@@ -11,6 +11,7 @@
   <terrain name="Water Stone" tile="11"/>
   <terrain name="Exterior Stone Brick" tile="215"/>
   <terrain name="Interior Wood Wall" tile="160"/>
+  <terrain name="Path" tile="59"/>
  </terraintypes>
  <tile id="1" terrain=",,,0"/>
  <tile id="2" terrain=",,0,0"/>
@@ -72,6 +73,11 @@
    <frame tileid="57" duration="1000"/>
   </animation>
  </tile>
+ <tile id="59" terrain=",,,9"/>
+ <tile id="60" terrain=",,9,9"/>
+ <tile id="61" terrain=",,9,"/>
+ <tile id="62" terrain="9,9,9,"/>
+ <tile id="63" terrain="9,9,,9"/>
  <tile id="65" terrain=",2,,2"/>
  <tile id="66" terrain="2,2,2,2"/>
  <tile id="67" terrain="2,,2,"/>
@@ -79,6 +85,11 @@
  <tile id="69" terrain=",2,2,2"/>
  <tile id="73" terrain="3,3,3,"/>
  <tile id="74" terrain="3,3,,3"/>
+ <tile id="75" terrain=",9,,9"/>
+ <tile id="76" terrain="9,9,9,9"/>
+ <tile id="77" terrain="9,,9,"/>
+ <tile id="78" terrain="9,,9,9"/>
+ <tile id="79" terrain=",9,9,9"/>
  <tile id="81" terrain=",2,,"/>
  <tile id="82" terrain="2,2,,"/>
  <tile id="83" terrain="2,,,"/>
@@ -87,6 +98,9 @@
  <tile id="87" terrain=",,3,"/>
  <tile id="89" terrain="3,,3,3"/>
  <tile id="90" terrain=",3,3,3"/>
+ <tile id="91" terrain=",9,,"/>
+ <tile id="92" terrain="9,9,,"/>
+ <tile id="93" terrain="9,,,"/>
  <tile id="96" terrain=",,,4"/>
  <tile id="97" terrain=",,4,4"/>
  <tile id="98" terrain=",,4,"/>

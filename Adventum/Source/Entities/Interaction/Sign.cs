@@ -58,7 +58,7 @@ namespace Adventum.Entities.Interaction
 
 		public void Show()
 		{
-			World.GameWorld.gameplayScreen.AddChild(new TextBox(title, text, skin));
+			Main.gameState.screen.AddChild(new TextBox(title, text, skin));
 		}
     }
 }

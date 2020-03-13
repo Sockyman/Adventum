@@ -21,9 +21,9 @@ namespace Adventum.Entities.Mobs
         public float HitFrames { get; private set; }
 
 
-        public virtual string HitSound => "enemyHit0";
-        public virtual string DeathSound => "enemyDeath0";
-        public virtual string AmbientSound => "";
+        public virtual string[] HitSound => new string[] { "enemyHit0", "enemyHit1" };
+        public virtual string[] DeathSound => new string[] { "enemyDeath0" };
+        public virtual string[] AmbientSound => new string[] { };
         public virtual float AmbientChance => 0.035f;
 
 
@@ -75,7 +75,7 @@ namespace Adventum.Entities.Mobs
 
             if (random.NextDouble() < AmbientChance * delta.Seconds)
             {
-                Audio.Play(AmbientSound);
+                Audio.Play(0, AmbientSound);
             }
 
 
@@ -122,7 +122,7 @@ namespace Adventum.Entities.Mobs
                 direction.Revolutions += random.Next(-1, 1) / 10;
                 ApplyDirecionalVelocity(direction, 500);
 
-                Audio.Play(HitSound, 0.4f);
+                Audio.Play(0.4f, HitSound);
 
 				GameWorld.SpawnParticles(random.Next(1, 3), "blood", Position);
             }
@@ -131,7 +131,7 @@ namespace Adventum.Entities.Mobs
 
         public override void Die()
         {
-            Audio.Play(DeathSound, 0.4f);
+            Audio.Play(0.4f, DeathSound);
 
 			GameWorld.SpawnParticles(random.Next(5, 15), "blood", Position);
 
