@@ -27,19 +27,30 @@ namespace Adventum.Core.Collision
 
         public void Update(DeltaTime delta)
         {
-            foreach (ICollidable source in colliders)
+            for (int i = 0; i < colliders.Count; i++)
             {
 
-                Vector2 tempVelocity = source.PreviousVelocity * delta.Seconds;
+				ICollidable source = colliders[i];
+
+
+				Vector2 tempVelocity = source.PreviousVelocity * delta.Seconds;
                 source.Position += tempVelocity;
                 source.PreviousVelocity = source.Velocity;
                 source.Velocity = Vector2.Zero;
 
 				if (!(source is WallColider) && !(source is Tree) && !(source is Particle))
-					foreach (ICollidable other in colliders)
+					for (int j = 0; j < colliders.Count; j++)
 					{
-						if (source.CollisionMask.Intersects(other.CollisionMask) && other != source) // && colliders[j] != colliders[i])
+						ICollidable other = colliders[j];
+
+						Rectangle sourceMask = source.CollisionMask;
+						Rectangle otherMask = other.CollisionMask;
+
+						if (source.CollisionMask.Intersects(other.CollisionMask) && other != source)
 						{
+
+
+
 							source.OnCollision(new CollisionData(other));
 
 							if (!source.Immovable && other.Immovable && source.Solid)
@@ -47,33 +58,35 @@ namespace Adventum.Core.Collision
 								source.Position -= tempVelocity;
 
 
-								if ((tempVelocity.X > 0 && source.CollisionMask.Width + source.CollisionMask.X <= other.CollisionMask.X) ||
-									(tempVelocity.X < 0 && source.CollisionMask.X >= other.CollisionMask.X + other.CollisionMask.Width))
+								if ((tempVelocity.X > 0 && source.CollisionMask.Width + source.CollisionMask.X <= other.CollisionMask.X) || (tempVelocity.X < 0 && source.CollisionMask.X >= other.CollisionMask.X + other.CollisionMask.Width))
 								{
 									source.Position = new Vector2(source.Position.X, source.Position.Y + tempVelocity.Y);
-									if (source is Entities.Entity)
+									if (source is Entity)
 									{
 										Entity e = (Entity)source;
 										e.Motion = new Vector2(0, e.Motion.Y);
 									}
 								}
-								else if ((tempVelocity.Y > 0 && source.CollisionMask.Height + source.CollisionMask.Y <= other.CollisionMask.Y) ||
-									(tempVelocity.Y < 0 && source.CollisionMask.Y >= other.CollisionMask.Y + other.CollisionMask.Height))
+								else if ((tempVelocity.Y > 0 && source.CollisionMask.Height + source.CollisionMask.Y <= other.CollisionMask.Y) || (tempVelocity.Y < 0 && source.CollisionMask.Y >= other.CollisionMask.Y + other.CollisionMask.Height))
 								{
 									source.Position = new Vector2(source.Position.X + tempVelocity.X, source.Position.Y);
-									if (source is Entities.Entity)
+									if (source is Entity)
 									{
 										Entity e = (Entity)source;
 										e.Motion = new Vector2(e.Motion.X, 0);
 									}
 								}
 							}
+
+
+
+
 						}
 					}
             }
 
 
-            Utils.SyncLists<ICollidable>(colliders, collidersToAdd, collidersToRemove);
+            Utils.SyncLists(colliders, collidersToAdd, collidersToRemove);
         }
 
 

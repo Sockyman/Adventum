@@ -12,15 +12,11 @@ namespace Adventum.UI
 {
 	class TitleScreen : Panel
 	{
-		private Vector2 buttonScale = Utils.ScaleToScreen(new Vector2(100, 14));
-
-		
 		public TitleScreen() : base(new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight), PanelSkin.None)
 		{
 			void AddButton(string name, EventCallback onClick)
 			{
-				Button button = new Button(name, anchor: Anchor.AutoCenter, size: buttonScale);
-				button.OnClick += onClick;
+				Button button = new SimpleButton(name, onClick);
 				AddChild(button);
 			}
 

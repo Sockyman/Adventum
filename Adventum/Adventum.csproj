@@ -99,6 +99,7 @@
     <Compile Include="Source\States\State.cs" />
     <Compile Include="Source\States\Trigger.cs" />
     <Compile Include="Source\UI\GameplayScreen.cs" />
+    <Compile Include="Source\UI\SimpleButton.cs" />
     <Compile Include="Source\UI\TextBox.cs" />
     <Compile Include="Source\UI\TitleScreen.cs" />
     <Compile Include="Source\UI\UIHandler.cs" />
