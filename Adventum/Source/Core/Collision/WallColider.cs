@@ -19,8 +19,10 @@ namespace Adventum.Core.Collision
                 return mask;
             }
         }
-        public bool Immovable { get; set; } = true;
-        public bool Solid { get; set; } = false;
+        public bool Immovable => true;
+        public bool Solid => false;
+        public bool CheckCollisions => true;
+        public bool ReactToCollisions => false;
 
 
         public WallColider(Point position, Point size)

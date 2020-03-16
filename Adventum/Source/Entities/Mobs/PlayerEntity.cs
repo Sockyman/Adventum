@@ -18,6 +18,8 @@ namespace Adventum.Entities.Mobs
         public int LightRadius => 75;
         public Color LightColor => Color.White;
 
+        public override string[] DeathSound => new string[] { "playerDeath0" };
+
         public PlayerEntity(Vector2 position) : base(position, "playerBase", "HumanoidBase", maxHealth: 10)
         {
             input = new Input();
@@ -30,15 +32,15 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left)).AddStateTrigger(EState.Walk, () =>
+            state.AddState(EState.Idle).AddStateTrigger(EState.Attack, () => input.KeyCheck(Control.Attack)).AddStateTrigger(EState.Walk, () =>
                 PreviousVelocity != Vector2.Zero
-            ).AddStateTrigger(EState.Interact, () => input.KeyCheck(MouseButton.Right));
+            ).AddStateTrigger(EState.Interact, () => input.KeyCheck(Control.Interact));
 
             Trigger<EState> t = state.AddState(EState.Idle).RecentTrigger();
 
             state.AddState(EState.Walk).AttachTrigger(t).AddStateTrigger(EState.Idle, () =>
                 PreviousVelocity == Vector2.Zero
-            ).AddStateTrigger(EState.Attack, () => input.KeyCheck(MouseButton.Left)).AddStateTrigger(EState.Interact, () => input.KeyCheck(MouseButton.Right));
+            ).AddStateTrigger(EState.Attack, () => input.KeyCheck(Control.Attack)).AddStateTrigger(EState.Interact, () => input.KeyCheck(Control.Interact));
 
             
 
@@ -52,8 +54,8 @@ namespace Adventum.Entities.Mobs
 			maxHitFrames = 0.6f;
 
             Vector2 movement = new Vector2();
-            movement.X += input.CheckAxis(Keys.A, Keys.D);
-            movement.Y += input.CheckAxis(Keys.W, Keys.S);
+            movement.X += input.CheckAxis(Control.Left, Control.Right);
+            movement.Y += input.CheckAxis(Control.Up, Control.Down);
 
             Move(movement, MaxMovementSpeed, false);
 
@@ -66,10 +68,8 @@ namespace Adventum.Entities.Mobs
         {
             base.OnCollision(collisionData);
 
-			if (collisionData.Other is Door)
+			if (collisionData.Other is Door door)
 			{
-                Door door = (Door)collisionData.Other;
-
                 Core.Audio.Play("LevelChange");
 				GameWorld.LoadLevel(door.level, door.cacheLevel, this);
 			}
@@ -79,6 +79,22 @@ namespace Adventum.Entities.Mobs
         public override void UseMain()
         {
             base.UseMain();
+        }
+
+
+        public override void Die()
+        {
+            base.Die();
+
+            GameWorld.SpawnParticles(random.Next(20, 30), "blood", Position);
+        }
+
+
+        public override void Damage(int damage, Angle direction)
+        {
+            base.Damage(damage, direction);
+
+            Core.Audio.Play("playerHit0");
         }
 
 

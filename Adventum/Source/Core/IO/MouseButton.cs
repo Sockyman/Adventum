@@ -3,8 +3,8 @@ namespace Adventum.Core.IO
 {
     public enum MouseButton
     {
-        Left,
-        Right,
-        Middle
+        Left = -1,
+        Right = -2,
+        Middle = -3
     }
 }

@@ -111,21 +111,31 @@ namespace Adventum.Entities.Mobs
         }
 
 
-        public void Hurt(int damage, Angle direction)
+        /// <summary>
+        /// Checks for invinsibility frames before calling damage.
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <param name="direction"></param>
+        public void TryHurt(int damage, Angle direction)
         {
             if (HitFrames <= 0)
             {
-                Health -= damage;
-
-                HitFrames = maxHitFrames;
-
-                direction.Revolutions += random.Next(-1, 1) / 10;
-                ApplyDirecionalVelocity(direction, 500);
-
-                Audio.Play(0.4f, HitSound);
-
-				GameWorld.SpawnParticles(random.Next(1, 3), "blood", Position);
+                Damage(damage, direction);
             }
+        }
+
+        public virtual void Damage(int damage, Angle direction)
+        {
+            Health -= damage;
+
+            HitFrames = maxHitFrames;
+
+            direction.Revolutions += random.Next(-1, 1) / 10;
+            ApplyDirecionalVelocity(direction, 500);
+
+            Audio.Play(0.4f, HitSound);
+
+            GameWorld.SpawnParticles(random.Next(1, 3), "blood", Position);
         }
 
 
@@ -134,6 +144,8 @@ namespace Adventum.Entities.Mobs
             Audio.Play(0.4f, DeathSound);
 
 			GameWorld.SpawnParticles(random.Next(5, 15), "blood", Position);
+
+            GameWorld.DisolveToParticles(this);
 
             base.Die();
         }

@@ -24,6 +24,7 @@ namespace Adventum.UI
 			AddChild(line);
 
 			AddButton("Play", OnPlayButtonClick);
+			//AddButton("Options", (Entity target) => { });
 			AddButton("Exit", OnExitButtonClick);
 		}
 

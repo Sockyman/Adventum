@@ -9,12 +9,14 @@ namespace Adventum.Entities
 {
     class Tree : Entity
     {
+        public override bool Immovable => true;
+        public override bool ReactToCollisions => false;
+
         public Tree(Vector2 position) : base(position)
         {
             Sprite = new Animator("Tree", "tree");
             Sprite.FrameNumber += (float)random.NextDouble() * 4;
 
-            Immovable = true;
 			Solid = false;
 
             SetBounds(new Point(16));

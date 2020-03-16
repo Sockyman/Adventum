@@ -15,12 +15,19 @@ namespace Adventum.UI
 		{
 			OnClick += onClick;
 			OnMouseEnter += OnMouseHover;
+			OnClick += OnMouseClick;
 		}
 
 
 		private void OnMouseHover(Entity entity)
 		{
 			Audio.Play("buttonHover");
+		}
+
+
+		private void OnMouseClick(Entity entity)
+		{
+			Audio.Play("buttonClick");
 		}
 	}
 }

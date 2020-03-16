@@ -51,7 +51,9 @@ namespace Adventum.Entities
         }
         public EntityState state;
 
-        public bool Immovable { get; set; } = false;
+        public virtual bool Immovable => false;
+        public virtual bool CheckCollisions => true;
+        public virtual bool ReactToCollisions => true;
         public bool Solid { get; set; }
         public Animator Sprite { get; set; }
 

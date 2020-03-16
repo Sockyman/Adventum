@@ -27,6 +27,8 @@ namespace Adventum.Core.Collision
 
         public void Update(DeltaTime delta)
         {
+			//TODO: Rewrite to make faster
+
             for (int i = 0; i < colliders.Count; i++)
             {
 
@@ -38,7 +40,8 @@ namespace Adventum.Core.Collision
                 source.PreviousVelocity = source.Velocity;
                 source.Velocity = Vector2.Zero;
 
-				if (!(source is WallColider) && !(source is Tree) && !(source is Particle))
+				if (source.ReactToCollisions)
+				{
 					for (int j = 0; j < colliders.Count; j++)
 					{
 						ICollidable other = colliders[j];
@@ -46,7 +49,7 @@ namespace Adventum.Core.Collision
 						Rectangle sourceMask = source.CollisionMask;
 						Rectangle otherMask = other.CollisionMask;
 
-						if (source.CollisionMask.Intersects(other.CollisionMask) && other != source)
+						if (sourceMask.Intersects(otherMask) && other != source)
 						{
 
 
@@ -61,18 +64,16 @@ namespace Adventum.Core.Collision
 								if ((tempVelocity.X > 0 && source.CollisionMask.Width + source.CollisionMask.X <= other.CollisionMask.X) || (tempVelocity.X < 0 && source.CollisionMask.X >= other.CollisionMask.X + other.CollisionMask.Width))
 								{
 									source.Position = new Vector2(source.Position.X, source.Position.Y + tempVelocity.Y);
-									if (source is Entity)
+									if (source is Entity e)
 									{
-										Entity e = (Entity)source;
 										e.Motion = new Vector2(0, e.Motion.Y);
 									}
 								}
 								else if ((tempVelocity.Y > 0 && source.CollisionMask.Height + source.CollisionMask.Y <= other.CollisionMask.Y) || (tempVelocity.Y < 0 && source.CollisionMask.Y >= other.CollisionMask.Y + other.CollisionMask.Height))
 								{
 									source.Position = new Vector2(source.Position.X + tempVelocity.X, source.Position.Y);
-									if (source is Entity)
+									if (source is Entity e)
 									{
-										Entity e = (Entity)source;
 										e.Motion = new Vector2(e.Motion.X, 0);
 									}
 								}
@@ -83,6 +84,7 @@ namespace Adventum.Core.Collision
 
 						}
 					}
+				}
             }
 
 
@@ -92,13 +94,15 @@ namespace Adventum.Core.Collision
 
         public void AddCollider(ICollidable collider)
         {
-            collidersToAdd.Add(collider);
+			if (collider.CheckCollisions)
+				collidersToAdd.Add(collider);
         }
 
 
         public void RemoveCollider(ICollidable collider)
         {
-            collidersToRemove.Add(collider);
+			if (collider.CheckCollisions)
+				collidersToRemove.Add(collider);
         }
     }
 }

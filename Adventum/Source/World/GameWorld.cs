@@ -14,6 +14,7 @@ using Adventum.Core.Resource;
 using Adventum.UI;
 using Adventum.Data;
 using GeonBit.UI;
+using MonoGame.Extended;
 using MonoGame.Extended.Timers;
 
 namespace Adventum.World
@@ -92,9 +93,11 @@ namespace Adventum.World
 			input = new Input();          
 
 			levelCache = new Dictionary<string, Level>();
-			
-			PlayerEntity playerEntity = new PlayerEntity(new Vector2(0f));
-			playerEntity.input = input;
+
+			PlayerEntity playerEntity = new PlayerEntity(new Vector2(0f))
+			{
+				input = input
+			};
 			player = new Player(this, input)
 			{
 				player = playerEntity
@@ -116,7 +119,7 @@ namespace Adventum.World
 			
 			input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
 
-			if (input.KeyCheckPressed(Core.IO.MouseButton.Right))
+			if (input.KeyCheckPressed(Core.IO.Control.Interact))
 				CurrentActiveControl = null;
 
 			player.Update(delta);
@@ -200,6 +203,29 @@ namespace Adventum.World
 				Particle p = Particle.GenerateFromEffect(effect, position);
 				EntityManager.CreateEntity(p);
 			}
+		}
+
+
+		public static void DisolveToParticles(Texture2D texture, Vector2 position)
+		{
+			//Texture2D texture = entity.Sprite.GetTexture();
+
+			Color[] data = new Color[texture.Width * texture.Height];
+
+			texture.GetData(data);
+
+			for(int i = 0; i < data.Length; i++)
+			{
+				if (data[i].A > 127)
+				{
+					EntityManager.CreateEntity(new Particle(position + new Vector2(i % texture.Width, i / texture.Height), "pixel", "None", data[i], new Angle((float)random.NextDouble(), AngleType.Revolution), random.Next(100, 350), random.NextSingle(1, 5)));
+				}
+			}
+		}
+
+		public static void DisolveToParticles(Entity entity)
+		{
+			DisolveToParticles(entity.Sprite.GetTexture(), entity.Position - entity.Sprite.Sprite.origin.ToVector2());
 		}
 	}
 }

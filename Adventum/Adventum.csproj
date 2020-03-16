@@ -17,6 +17,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +30,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Source\Core\Audio.cs" />
     <Compile Include="Source\Core\Collision\WallColider.cs" />
+    <Compile Include="Source\Core\IO\Control.cs" />
     <Compile Include="Source\Core\IO\MouseButton.cs" />
     <Compile Include="Source\Entities\Alignment.cs" />
     <Compile Include="Source\Entities\Decor\Furniture.cs" />

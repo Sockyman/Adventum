@@ -1684,6 +1684,12 @@
 /processorParam:DebugMode=Auto
 /build:Shader/lightEffect.fx
 
+#begin Sound/buttonClick.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/buttonClick.wav
+
 #begin Sound/buttonHover.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1725,6 +1731,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/openTextbox.wav
+
+#begin Sound/playerDeath0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/playerDeath0.wav
+
+#begin Sound/playerHit0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/playerHit0.wav
 
 #begin SpriteSheet/AttackSwish.xml
 /importer:XmlImporter

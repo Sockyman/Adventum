@@ -11,10 +11,14 @@ namespace Adventum.Entities.Particles
 	public class Particle : Entity
 	{
 
-		CountdownTimer life;
+		private CountdownTimer life;
+
+		// This should be false as the particles don't need to be collided but velocity and position is updated in the collision manager so it has to be true for now
+		public override bool CheckCollisions => true;
+		public override bool ReactToCollisions => false;
 
 
-		public Particle(Vector2 position, string texture, string sprite, Color color, Angle direction, float speed, float lifeSpan) : base(position)
+		public Particle(Vector2 position, string texture, string sprite, Color color, Angle direction, float speed, float lifeSpan, Direction facing = Direction.Down) : base(position)
 		{
 			Sprite = new Sprite.Animator(sprite, texture);
 
@@ -23,6 +27,8 @@ namespace Adventum.Entities.Particles
 			life = new CountdownTimer(lifeSpan);
 
 			drawColor = color;
+
+			state.Facing = facing;
 
 			Solid = false;
 		}
@@ -50,10 +56,14 @@ namespace Adventum.Entities.Particles
 
 		public static Particle GenerateFromEffect(ParticleEffect effect, Vector2 position)
 		{
+
 			Particle particle = new Particle(position, effect.texture, effect.sprite, Color.Lerp(effect.color, effect.mixColor, (float)Utils.random.NextDouble()),
-				new Angle(Utils.RandomRange(effect.direction), AngleType.Revolution), Utils.RandomRange(effect.speed), Utils.RandomRange(effect.lifeSpan));
+				new Angle(Utils.RandomRange(effect.direction), AngleType.Revolution), Utils.RandomRange(effect.speed), Utils.RandomRange(effect.lifeSpan), (Direction)(Utils.random.Next(8)));
 
 			return particle;
 		}
+
+
+
 	}
 }

@@ -30,7 +30,7 @@ namespace Adventum.Entities.Interaction
 
             if (Velocity.LengthSquared() == 0 || piercing <= 0)
             {
-                Destroy();
+                Die();
             }
         }
 
@@ -61,6 +61,14 @@ namespace Adventum.Entities.Interaction
             base.OnInteract(entity);
 
 
+        }
+
+
+        public override void Die()
+        {
+            base.Die();
+
+            GameWorld.DisolveToParticles(this);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Adventum.Core.Collision
         Vector2 Velocity { get; set; }
         Vector2 PreviousVelocity { get; set; }
 
-
         Rectangle BoundingBox { get; set; }
         
 
@@ -20,6 +19,15 @@ namespace Adventum.Core.Collision
 
         bool Solid { get; }
         bool Immovable { get; }
+
+        /// <summary>
+        /// Whether or not the collider should be added to the list of colliders to collide with stuff.
+        /// </summary>
+        bool CheckCollisions { get; }
+        /// <summary>
+        /// Whether or not the collder runs any logic on a collision.
+        /// </summary>
+        bool ReactToCollisions { get; }
 
 
         void OnCollision(CollisionData collisionData);
