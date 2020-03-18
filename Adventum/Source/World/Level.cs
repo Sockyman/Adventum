@@ -43,8 +43,6 @@ namespace Adventum.World
 
 			if (!cached)
 			{
-				
-
 				foreach(Entity e in toAdd)
 				{
 					entityManager.CreateEntity(e);

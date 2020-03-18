@@ -11,7 +11,7 @@ namespace Adventum.UI
 {
     public class TextBox : Panel
     {
-        private Header head;
+        private readonly Header head;
 
 
         public Color TitleColor

@@ -60,6 +60,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Source\Core\Audio.cs" />
     <Compile Include="Source\Core\Collision\WallColider.cs" />
     <Compile Include="Source\Core\IO\Control.cs" />
@@ -100,6 +105,7 @@
     <Compile Include="Source\States\State.cs" />
     <Compile Include="Source\States\Trigger.cs" />
     <Compile Include="Source\UI\GameplayScreen.cs" />
+    <Compile Include="Source\UI\PauseScreen.cs" />
     <Compile Include="Source\UI\SimpleButton.cs" />
     <Compile Include="Source\UI\TextBox.cs" />
     <Compile Include="Source\UI\TitleScreen.cs" />
@@ -199,6 +205,10 @@
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

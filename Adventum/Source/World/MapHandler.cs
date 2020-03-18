@@ -16,7 +16,7 @@ namespace Adventum.World
     {
         private delegate Entity EntityLoader(TiledMapTileObject mapObject);
 
-        private static Dictionary<int, EntityLoader> loaders = BuildLoaders();
+        private static readonly Dictionary<int, EntityLoader> loaders = BuildLoaders();
 
         private static Random random = new Random();
 
@@ -75,7 +75,7 @@ namespace Adventum.World
             }
 
 
-            Main.LightColor = new Color(uint.Parse(misicLayer.Properties["Light"].Replace("#",""), System.Globalization.NumberStyles.HexNumber));
+            GameWorld.self.LightColor = new Color(uint.Parse(misicLayer.Properties["Light"].Replace("#",""), System.Globalization.NumberStyles.HexNumber));
         }
 
         private static void LoadCollisionObject(TiledMapRectangleObject rectangle)
@@ -97,7 +97,7 @@ namespace Adventum.World
             if (obj.Type == "Player Start")
                 GameWorld.player.player.Position = obj.Position;
 
-			if (obj.Type == "Thought" && obj is TiledMapRectangleObject)
+			else if ((obj.Type == "Thought" || (obj.Type == "Tutorial" && GameWorld.showTutorial) )  && obj is TiledMapRectangleObject)
 			{
 				var rObj = (TiledMapRectangleObject)obj;
 				level.entityManager.CreateEntity(new Thought(new Rectangle(rObj.Position.ToPoint(), new Point((int)rObj.Size.Width,

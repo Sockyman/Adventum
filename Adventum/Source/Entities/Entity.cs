@@ -45,7 +45,8 @@ namespace Adventum.Entities
             get
             {
                 Rectangle mask = BoundingBox;
-                mask.Location += Position.ToPoint();
+                Point pos = new Point((int)Position.X, (int)Position.Y);
+                mask.Location += pos;
                 return mask;
             }
         }
@@ -115,9 +116,6 @@ namespace Adventum.Entities
             if (visible)
                 Sprite.Draw(spriteBatch, Position, drawColor, Position.Y / GameWorld.level.Map.HeightInPixels);
 
-            
-
-            
             /*Texture2D rect = new Texture2D(Main.graphics.GraphicsDevice, CollisionMask.Width, CollisionMask.Height);
             Color[] data = new Color[CollisionMask.Width * CollisionMask.Height];
             for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;

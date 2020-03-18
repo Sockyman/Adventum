@@ -29,12 +29,10 @@ namespace Adventum
 		public static RenderTarget2D uiTarget;
 		public static StringBuilder debugString = new StringBuilder();
 
-		public static Color LightColor { get; set; } = Color.White;
-
 
 		SpriteBatch spriteBatch;
 
-		public static OrthographicCamera Camera { get; set; }
+		public static BoxingViewportAdapter viewPort;
 
 
 
@@ -45,10 +43,10 @@ namespace Adventum
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-			graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-			graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			graphics.PreferredBackBufferWidth = 1280;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			graphics.PreferredBackBufferHeight = 720;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-			graphics.IsFullScreen = false;
+			graphics.IsFullScreen = Properties.Settings.Default.startFullscreen;
 			graphics.SynchronizeWithVerticalRetrace = false;
 
 			IsFixedTimeStep = false;
@@ -64,8 +62,7 @@ namespace Adventum
 		/// </summary>
 		protected override void Initialize()
 		{
-			BoxingViewportAdapter viewPort = new BoxingViewportAdapter(Window, GraphicsDevice, windowSize.X, windowSize.Y);
-			Camera = new OrthographicCamera(viewPort);
+			viewPort = new BoxingViewportAdapter(Window, GraphicsDevice, windowSize.X, windowSize.Y);
 
 			base.Initialize();
 
@@ -120,7 +117,7 @@ namespace Adventum
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+			if (Keyboard.GetState().IsKeyDown(Keys.OemTilde))
 				End();
 
 			if (Keyboard.GetState().IsKeyDown(Keys.F11))
@@ -136,7 +133,8 @@ namespace Adventum
 
 
 			DeltaTime delta = new DeltaTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
-			DebugAdd(((int)delta.FPS).ToString(), "FPS:");
+			if (Properties.Settings.Default.showFps)
+				DebugAdd(((int)delta.FPS).ToString(), "FPS:");
 			gameState.Update(delta);
 
 
@@ -162,7 +160,7 @@ namespace Adventum
 			/// Drawing at world position (Game).
 			GraphicsDevice.SetRenderTarget(renderTarget);
 			{
-				spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
+				spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, transformMatrix: gameState.Camera.GetViewMatrix());
 
 				//ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
 				gameState.Draw(spriteBatch);
@@ -175,13 +173,13 @@ namespace Adventum
 			/// Drawing Lighting effects
 			GraphicsDevice.SetRenderTarget(lightsTarget);
 			{
-				GraphicsDevice.Clear(LightColor);
+				GraphicsDevice.Clear(gameState.LightColor);
 
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, samplerState: SamplerState.PointClamp, transformMatrix: gameState.Camera.GetViewMatrix());
 				var lm = ResourceManager.GetTexture("lightMask");
-				if (gameState is GameWorld)
+				if (gameState is GameWorld gW)
 				{
-					((GameWorld)gameState).DrawLight(spriteBatch, lm);
+					gW.DrawLight(spriteBatch, lm);
 				}
 				
 

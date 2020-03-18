@@ -40,13 +40,14 @@ namespace Adventum.Core.Collision
                 source.PreviousVelocity = source.Velocity;
                 source.Velocity = Vector2.Zero;
 
+				Rectangle sourceMask = source.CollisionMask;
+
 				if (source.ReactToCollisions)
 				{
 					for (int j = 0; j < colliders.Count; j++)
 					{
 						ICollidable other = colliders[j];
 
-						Rectangle sourceMask = source.CollisionMask;
 						Rectangle otherMask = other.CollisionMask;
 
 						if (sourceMask.Intersects(otherMask) && other != source)
@@ -78,10 +79,6 @@ namespace Adventum.Core.Collision
 									}
 								}
 							}
-
-
-
-
 						}
 					}
 				}

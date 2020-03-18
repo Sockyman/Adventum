@@ -13,8 +13,8 @@ namespace Adventum.Entities.Particles
 
 		private CountdownTimer life;
 
-		// This should be false as the particles don't need to be collided but velocity and position is updated in the collision manager so it has to be true for now
-		public override bool CheckCollisions => true;
+		// TODO: This should be false as the particles don't need to be collided but velocity and position is updated in the collision manager so it has to be true for now
+		public override bool CheckCollisions => false;
 		public override bool ReactToCollisions => false;
 
 
@@ -39,6 +39,11 @@ namespace Adventum.Entities.Particles
 			base.Update(delta);
 
 			life.Update(delta);
+
+
+			Position += PreviousVelocity * delta.Seconds;
+			PreviousVelocity = Velocity;
+			Velocity = Vector2.Zero;
 
 
 			if (life.CurrentTime >= life.Interval)

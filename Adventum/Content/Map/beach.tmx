@@ -759,21 +759,21 @@
    <property name="Light" type="color" value="#ff9c9c9c"/>
   </properties>
   <object id="169" template="../mapObjectTemplates/Player Start.tx" type="Player Start" x="1080" y="1912"/>
-  <object id="353" template="../mapObjectTemplates/Thought.tx" x="1056" y="1880" width="48" height="48">
+  <object id="353" template="../mapObjectTemplates/Thought.tx" name="Tutorial" type="Tutorial" x="1056" y="1880" width="48" height="48">
    <properties>
     <property name="Skin" type="int" value="1"/>
     <property name="Text" value="WAS &amp; D to move,/nRight click to close this menu."/>
     <property name="Title" value="Movement:"/>
    </properties>
   </object>
-  <object id="354" template="../mapObjectTemplates/Thought.tx" x="1248" y="1664" width="32" height="352">
+  <object id="354" template="../mapObjectTemplates/Thought.tx" name="Tutorial" type="Tutorial" x="1248" y="1664" width="32" height="352">
    <properties>
     <property name="Skin" type="int" value="1"/>
     <property name="Text" value="Left click to attack,/nRight click to close this menu."/>
     <property name="Title" value="Attacking"/>
    </properties>
   </object>
-  <object id="355" template="../mapObjectTemplates/Thought.tx" x="1664" y="1808" width="280" height="56">
+  <object id="355" template="../mapObjectTemplates/Thought.tx" name="Tutorial" type="Tutorial" x="1664" y="1808" width="280" height="56">
    <properties>
     <property name="Skin" type="int" value="1"/>
     <property name="Text" value="Right click to read signs,/nRight click to close this menu."/>

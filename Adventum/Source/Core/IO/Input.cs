@@ -30,7 +30,7 @@ namespace Adventum.Core.IO
 		{
 			get
 			{
-				return Main.Camera.ScreenToWorld(mouseState.Position.ToVector2());
+				return Main.gameState.Camera.ScreenToWorld(mouseState.Position.ToVector2());
 				//return Main.Camera.Position + mouseState.Position.ToVector2();
 			}
 		}
@@ -39,7 +39,7 @@ namespace Adventum.Core.IO
 			get
 			{
 				//return Main.Camera.ScreenToWorld(mouseState.Position.ToVector2());
-				return Main.Camera.Position + mouseState.Position.ToVector2();
+				return Main.gameState.Camera.Position + mouseState.Position.ToVector2();
 			}
 		}
 

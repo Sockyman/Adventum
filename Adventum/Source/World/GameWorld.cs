@@ -23,14 +23,20 @@ namespace Adventum.World
 	{
 		private const string startingLevel = "beach";
 
+		public static GameWorld self;
 
 		public static Random random;
+
+
+		public static bool Paused { get; set; }
 
 		
 		public static DeltaTime deltaTime;
 
 		public static Player player;
 		public static Input input;
+
+		public static bool showTutorial = Properties.Settings.Default.showTutorial;
 
 
 		public static Level level;
@@ -81,18 +87,28 @@ namespace Adventum.World
 				currentActiveControl = value;
 			}
 		}
-		private static GeonBit.UI.Entities.Entity currentActiveControl = null;
+		private static GeonBit.UI.Entities.Entity currentActiveControl;
 
 		private static Dictionary<string, Level> levelCache;
+
+		private static GeonBit.UI.Entities.Panel menu;
 
 
 
 		public GameWorld() : base(new GameplayScreen())
 		{
-			random = new Random();            
+			self = this;
+
+			random = new Random();
+
+			Paused = false;
+
 			input = new Input();          
 
 			levelCache = new Dictionary<string, Level>();
+
+			currentActiveControl = null;
+			menu = null;
 
 			PlayerEntity playerEntity = new PlayerEntity(new Vector2(0f))
 			{
@@ -114,33 +130,41 @@ namespace Adventum.World
 
 			deltaTime = delta;
 
-			mapRenderer.Update(delta);
 
-			
 			input.Update(!(UserInterface.Active.ActiveEntity is GeonBit.UI.Entities.RootPanel));
 
-			if (input.KeyCheckPressed(Core.IO.Control.Interact))
-				CurrentActiveControl = null;
 
-			player.Update(delta);
+			if (input.KeyCheckPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
+				Pause();
 
-			level.Update(delta);
 
-			if (PlayerExists)
+			if (!Paused)
 			{
-				Main.Camera.LookAt(PlayerMob.Position);
-			}
-			else
-			{
-				deathTimer.Update(deltaTime);
+				mapRenderer.Update(delta);
 
-				if (deathTimer.TimeRemaining.TotalSeconds <= 0)
+				if (input.KeyCheckPressed(Core.IO.Control.Interact))
+					CurrentActiveControl = null;
+
+				player.Update(delta);
+
+				level.Update(delta);
+
+				if (PlayerExists)
 				{
-					player.player = new PlayerEntity(new Vector2())
+					Camera.LookAt(PlayerMob.Position);
+				}
+				else
+				{
+					deathTimer.Update(deltaTime);
+
+					if (deathTimer.TimeRemaining.TotalSeconds <= 0)
 					{
-						input = GameWorld.input
-					};
-					LoadLevel(level.name, false, PlayerMob);
+						player.player = new PlayerEntity(new Vector2())
+						{
+							input = GameWorld.input
+						};
+						LoadLevel(level.name, false, PlayerMob);
+					}
 				}
 			}
 		}
@@ -150,7 +174,7 @@ namespace Adventum.World
 		{
 			base.Draw(spriteBatch);
 
-			mapRenderer.Draw(Main.Camera.GetViewMatrix());
+			mapRenderer.Draw(Camera.GetViewMatrix());
 			EntityManager.Draw(spriteBatch);
 			//spriteBatch.Draw(ResourceManager.GetTexture("pixel"), input.MouseWorldPosition, color: Color.Red, layerDepth: 1f);
 		}
@@ -171,6 +195,7 @@ namespace Adventum.World
 				level.Cache();
 			}
 
+
 			if (levelCache.ContainsKey(levelName))
 			{
 				level = levelCache[levelName];
@@ -181,6 +206,7 @@ namespace Adventum.World
 			}
 
 			level.Load();
+
 
 			mapRenderer = new TiledMapRenderer(Main.graphics.GraphicsDevice, level.Map);
 
@@ -214,11 +240,13 @@ namespace Adventum.World
 
 			texture.GetData(data);
 
+			float maxParticleLife = Properties.Settings.Default.limitParticles ? 3 : 20;
+
 			for(int i = 0; i < data.Length; i++)
 			{
 				if (data[i].A > 127)
 				{
-					EntityManager.CreateEntity(new Particle(position + new Vector2(i % texture.Width, i / texture.Height), "pixel", "None", data[i], new Angle((float)random.NextDouble(), AngleType.Revolution), random.Next(100, 350), random.NextSingle(1, 5)));
+					EntityManager.CreateEntity(new Particle(position + new Vector2(i % texture.Width, i / texture.Height), "pixel", "None", data[i], new Angle((float)random.NextDouble(), AngleType.Revolution), random.Next(100, 350), random.NextSingle(1, maxParticleLife)));
 				}
 			}
 		}
@@ -226,6 +254,22 @@ namespace Adventum.World
 		public static void DisolveToParticles(Entity entity)
 		{
 			DisolveToParticles(entity.Sprite.GetTexture(), entity.Position - entity.Sprite.Sprite.origin.ToVector2());
+		}
+
+
+		public void Pause()
+		{
+			if (!Paused)
+			{
+				Paused = true;
+				menu = (GeonBit.UI.Entities.Panel)UserInterface.Active.AddEntity(new PauseScreen());
+			}
+			else
+			{
+				Paused = false;
+				UserInterface.Active.ActiveEntity = UserInterface.Active.Root;
+				menu.RemoveFromParent();
+			}
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace Adventum.GameStates
 	{
 		private const int titleYMargin = 5;
 
-		private Texture2D gameTitle;
+		private readonly Texture2D gameTitle;
 
 		private Vector2 DrawPosition
 		{
@@ -26,6 +26,8 @@ namespace Adventum.GameStates
 		public TitleState() : base(new TitleScreen())
 		{
 			gameTitle = ResourceManager.GetTexture("title");
+
+			LightColor = Color.White;
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

@@ -40,7 +40,7 @@ namespace Adventum.Entities.Interaction
 
 			
 
-			if (ShowAlert && Vector2.Distance(Position, Main.Camera.Center) < alertDistance)
+			if (ShowAlert && Vector2.Distance(Position, Main.gameState.Camera.Center) < alertDistance)
 			{
 				Texture2D alert = ResourceManager.GetTexture("alert");
 				Vector2 drawPosition = Position;
