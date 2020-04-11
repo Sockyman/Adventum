@@ -12,6 +12,9 @@ namespace Adventum.Entities.Mobs
 {
     public class Enemy : Mob
     {
+        public override string Loot => "SimpleEnemy";
+
+
         public Enemy(Vector2 position, string texture, string spriteSheet = "HumanoidBase", int boundingSize = 16, int maxHealth = 10) : base(position, texture, spriteSheet, boundingSize, maxHealth)
         {
 			alignment = Alignment.Evil;
@@ -22,7 +25,7 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Walk).AddUpdateTrigger(() =>
+            state.AddState("Walk").AddUpdateTrigger(() =>
             {
                 Move(Utils.DirectionToVector(state.Facing), MaxMovementSpeed, true);
             });

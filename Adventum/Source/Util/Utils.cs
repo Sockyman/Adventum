@@ -143,5 +143,11 @@ namespace Adventum.Util
 		{
 			return random.NextSingle(range.X, range.Y);
 		}
+
+
+        public static bool Odds(double odds)
+        {
+            return random.NextDouble() < odds;
+        }
     }
 }

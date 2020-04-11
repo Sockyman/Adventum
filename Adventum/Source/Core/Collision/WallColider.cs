@@ -19,8 +19,7 @@ namespace Adventum.Core.Collision
                 return mask;
             }
         }
-        public bool Immovable => true;
-        public bool Solid => false;
+        public CollisionType CollisionType => CollisionType.Immovable;
         public bool CheckCollisions => true;
         public bool ReactToCollisions => false;
 

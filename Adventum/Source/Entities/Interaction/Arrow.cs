@@ -16,11 +16,21 @@ namespace Adventum.Entities.Interaction
         public static int acuracy = 20;
         public int offset = GameWorld.random.Next(-acuracy, acuracy);
 
+        public override int Dampening => 100;
 
-        public Arrow(Entity parent, Vector2 direction, float speed = 2000, int offset = 0) 
-            : base(parent, new Point(16), new Angle(Angle.FromVector(direction).Degrees + offset, AngleType.Degree).ToUnitVector(), 2000, speed, false, "woodArrow", 1)
+        private Bouncer bouncer;
+        public override float Z
         {
-            Solid = true;
+            get { return bouncer.Z; }
+        }
+
+        public override CollisionType CollisionType => CollisionType.Solid;
+
+
+        public Arrow(Entity parent, Vector2 direction, float speed = 1000, int offset = 0) 
+            : base(parent, new Point(8), new Angle(Angle.FromVector(direction).Degrees + offset, AngleType.Degree).ToUnitVector(), 2000, speed, false, "woodArrow", 1)
+        {
+            bouncer = new Bouncer(16, zVelocity: 300, bouncines: 0);
         }
 
 
@@ -28,7 +38,9 @@ namespace Adventum.Entities.Interaction
         {
             base.Update(delta);
 
-            if (Velocity.LengthSquared() == 0 || piercing <= 0)
+            bouncer.Update(delta);
+
+            if (Velocity.LengthSquared() == 0 || piercing <= 0 || Math.Round(bouncer.Z * 10) == 0)
             {
                 Die();
             }
@@ -52,6 +64,11 @@ namespace Adventum.Entities.Interaction
                 {
                     piercing--;
                 }
+            }
+
+            if (collisionData.Other.CollisionType == CollisionType.Immovable)
+            {
+                Die();
             }
         }
 

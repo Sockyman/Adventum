@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <object name="Player Start" type="Player Start">
+ <object name="Player Start" type="PlayerStart">
   <point/>
  </object>
 </template>

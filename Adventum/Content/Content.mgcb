@@ -1620,6 +1620,31 @@
 /processor:PassThroughProcessor
 /build:GeonBit.UI/themes/a/ThemeData.xml
 
+#begin LootTable/Chest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:LootTable/Chest.xml
+
+#begin LootTable/Reaper.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:LootTable/Reaper.xml
+
+#begin LootTable/SimpleBoss.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:LootTable/SimpleBoss.xml
+
+#begin LootTable/SimpleEnemy.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:LootTable/SimpleEnemy.xml
+
+#begin LootTable/Slime.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:LootTable/Slime.xml
+
 #begin Map/BaseTile.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
@@ -1640,6 +1665,11 @@
 /processor:TiledMapProcessor
 /build:Map/dungeon_shop.tmx
 
+#begin Map/dungeon_slimeBoss.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/dungeon_slimeBoss.tmx
+
 #begin Map/EntityMarker.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
@@ -1654,6 +1684,11 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:Map/TestMap.tmx
+
+#begin Map/town.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Map/town.tmx
 
 #begin Particle/blood.xml
 /importer:XmlImporter
@@ -1702,6 +1737,12 @@
 /processorParam:Quality=Best
 /build:Sound/closeTextbox.wav
 
+#begin Sound/doorUnlock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/doorUnlock.wav
+
 #begin Sound/enemyDeath0.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1720,17 +1761,59 @@
 /processorParam:Quality=Best
 /build:Sound/enemyHit1.wav
 
+#begin Sound/getUp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/getUp.wav
+
+#begin Sound/heavyObjectFall.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/heavyObjectFall.wav
+
 #begin Sound/levelChange.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/levelChange.wav
 
+#begin Sound/openChest.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/openChest.wav
+
+#begin Sound/openEyes.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/openEyes.wav
+
 #begin Sound/openTextbox.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/openTextbox.wav
+
+#begin Sound/pickupCoin.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/pickupCoin.wav
+
+#begin Sound/pickupKey.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/pickupKey.wav
+
+#begin Sound/pickupPotion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/pickupPotion.wav
 
 #begin Sound/playerDeath0.wav
 /importer:WavImporter
@@ -1754,10 +1837,15 @@
 /processor:PassThroughProcessor
 /build:SpriteSheet/Blood.xml
 
-#begin SpriteSheet/File.xml
+#begin SpriteSheet/Chest.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
-/build:SpriteSheet/File.xml
+/build:SpriteSheet/Chest.xml
+
+#begin SpriteSheet/Coin.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/Coin.xml
 
 #begin SpriteSheet/Furniture2.xml
 /importer:XmlImporter
@@ -1769,6 +1857,11 @@
 /processor:PassThroughProcessor
 /build:SpriteSheet/HumanoidBase.xml
 
+#begin SpriteSheet/KeyDoor.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/KeyDoor.xml
+
 #begin SpriteSheet/None.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -1778,6 +1871,11 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:SpriteSheet/Slime.xml
+
+#begin SpriteSheet/SlimeBoss.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpriteSheet/SlimeBoss.xml
 
 #begin SpriteSheet/Table.xml
 /importer:XmlImporter
@@ -1854,6 +1952,30 @@
 /processorParam:TextureFormat=Color
 /build:Texture/chair.png
 
+#begin Texture/chest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/chest.png
+
+#begin Texture/coin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/coin.png
+
 #begin Texture/cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1865,6 +1987,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/cursor.png
+
+#begin Texture/doorPadlock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/doorPadlock.png
+
+#begin Texture/healthPotion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/healthPotion.png
 
 #begin Texture/humanBase.png
 /importer:TextureImporter
@@ -1926,6 +2072,18 @@
 /processorParam:TextureFormat=Color
 /build:Texture/Item/starterSword.png
 
+#begin Texture/key.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/key.png
+
 #begin Texture/lightMask.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1986,6 +2144,18 @@
 /processorParam:TextureFormat=Color
 /build:Texture/rowboatDamaged.png
 
+#begin Texture/shadowMega.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/shadowMega.png
+
 #begin Texture/slime.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1997,6 +2167,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/slime.png
+
+#begin Texture/slimeBoss.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/slimeBoss.png
 
 #begin Texture/swirl.png
 /importer:TextureImporter
@@ -2057,6 +2239,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Texture/torch.png
+
+#begin Texture/transparentPixel.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Texture/transparentPixel.png
 
 #begin Texture/tree.png
 /importer:TextureImporter

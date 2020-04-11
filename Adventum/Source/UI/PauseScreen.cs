@@ -5,35 +5,27 @@ using Microsoft.Xna.Framework;
 
 namespace Adventum.UI
 {
-	public class PauseScreen : Panel
+	public class PauseScreen : Screen
 	{
-		public PauseScreen() : base(new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight), PanelSkin.None)
+		public PauseScreen() : base()
 		{
-			// TODO: Create a base screen class.
-			Button AddButton(string name, EventCallback onClick)
-			{
-				Button button = new SimpleButton(name, onClick);
-				AddChild(button);
-				return button;
-			}
-
-			Locked = false;
-
-			AddChild(new Header("Paused"));
 			AddChild(new HorizontalLine()).Opacity = 0;
+			AddHeader("Paused", false);
 
 			AddButton("Unpause", OnUnpauseButtonClick);
+			AddButton("Options", OnOptionsButtonClick);
 			AddButton("Exit To Title", OnTitleButtonClick);
 			AddButton("Quit Game", OnExitButtonClick);
 		}
 
 		private void OnUnpauseButtonClick(Entity entity)
 		{
-			RemoveFromParent();
-
-			//World.GameWorld.self.Pause();
-			// TODO: Remove this once it is otherwise working.
 			World.GameWorld.self.Pause();
+		}
+
+		private void OnOptionsButtonClick(Entity entity)
+		{
+			AddChild(new OptionsScreen());
 		}
 
 		private void OnTitleButtonClick(Entity entity)

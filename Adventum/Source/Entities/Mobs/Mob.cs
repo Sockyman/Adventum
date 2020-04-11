@@ -17,14 +17,33 @@ namespace Adventum.Entities.Mobs
     public class Mob : Entity
     {
         public int MaxHealth { get; private set; } = 2;
-        public int Health { get; set; }
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health = Math.Min(MaxHealth, value);
+            }
+        }
+        private int health;
+
+        public int Gold { get; set; } = 0;
+
         public float HitFrames { get; private set; }
 
+
+        public virtual string Loot => "";
 
         public virtual string[] HitSound => new string[] { "enemyHit0", "enemyHit1" };
         public virtual string[] DeathSound => new string[] { "enemyDeath0" };
         public virtual string[] AmbientSound => new string[] { };
         public virtual float AmbientChance => 0.035f;
+
+
+        public virtual bool ShowHealthbar => false;
 
 
         protected float maxHitFrames = 0.2f;
@@ -53,14 +72,14 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddEntranceTrigger(() => Sprite.TryChangeAnimation("idle"));
+            state.AddState("Idle").AddEntranceTrigger(() => Sprite.TryChangeAnimation("idle"));
 
-            state.AddState(EState.Walk).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
-            state.AddState(EState.Attack).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            state.AddState("Walk").AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            state.AddState("Attack").AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
 
-            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Idle, 0.25f).AddEntranceTrigger(() => UseMain());
+            state.AddState("Attack").AddCountdownStateTrigger("Idle", 0.25f).AddEntranceTrigger(() => UseMain());
 
-            state.AddState(EState.Interact).AddCountdownStateTrigger(EState.Idle, 0.25f).AddEntranceTrigger(() => UseSecondary()).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
+            state.AddState("Interact").AddCountdownStateTrigger("Idle", 0.25f).AddEntranceTrigger(() => UseSecondary()).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
         }
 
 
@@ -75,7 +94,7 @@ namespace Adventum.Entities.Mobs
 
             if (random.NextDouble() < AmbientChance * delta.Seconds)
             {
-                Audio.Play(0, AmbientSound);
+                Audio.Play(0, true, AmbientSound);
             }
 
 
@@ -91,12 +110,12 @@ namespace Adventum.Entities.Mobs
                 base.Draw(spriteBatch);
             }
 
-            /*if (Health < MaxHealth)
+            if (ShowHealthbar)
             {
                 Vector2 barCenter = Position;
                 barCenter.Y -= Sprite.Sprite.frameSize.Y;
                 Utils.DrawHealthBar(spriteBatch, barCenter, new Point(10, 2), MaxHealth, Health, Color.Red, Color.LimeGreen, 1f);
-            }*/
+            }
         }
 
 
@@ -116,7 +135,7 @@ namespace Adventum.Entities.Mobs
         /// </summary>
         /// <param name="damage"></param>
         /// <param name="direction"></param>
-        public void TryHurt(int damage, Angle direction)
+        public virtual void TryHurt(int damage, Angle direction)
         {
             if (HitFrames <= 0)
             {
@@ -133,7 +152,7 @@ namespace Adventum.Entities.Mobs
             direction.Revolutions += random.Next(-1, 1) / 10;
             ApplyDirecionalVelocity(direction, 500);
 
-            Audio.Play(0.4f, HitSound);
+            Audio.Play(0.1f, true, HitSound);
 
             GameWorld.SpawnParticles(random.Next(1, 3), "blood", Position);
         }
@@ -141,11 +160,18 @@ namespace Adventum.Entities.Mobs
 
         public override void Die()
         {
-            Audio.Play(0.4f, DeathSound);
+            Audio.Play(0.1f, true, DeathSound);
 
 			GameWorld.SpawnParticles(random.Next(5, 15), "blood", Position);
 
             GameWorld.DisolveToParticles(this);
+
+            /*for (int i = 0; i < Gold; i++)
+            {
+                GameWorld.EntityManager.CreateEntity(new Pickups.Coin(Position));
+            }*/
+
+            GameWorld.RollLootTable(Position, Loot);
 
             base.Die();
         }

@@ -16,7 +16,6 @@ namespace Adventum.Entities.Decor
 
         public Furniture(Vector2 position, string texture, string spriteSheet = "Furniture2", int size = 16, Direction facing = Direction.Down, int lightRadius = 0) : base(position)
         {
-            Solid = true;
             Sprite = new Sprite.Animator(spriteSheet, texture);
             state.Facing = facing;
             LightRadius = lightRadius;

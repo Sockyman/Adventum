@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Adventum.UI;
+using Adventum.Core.Collision;
 using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework.Graphics;
 using Adventum.Core.Resource;
@@ -18,13 +19,13 @@ namespace Adventum.Entities.Interaction
         public string title;
         public string text;
 
+		public override CollisionType CollisionType => CollisionType.NonSolid;
+
 		public Sign(Vector2 position, string title, string text, int skin = 0) : base(position)
         {
             visible = false;
 
             Sprite = new Sprite.Animator("Furniture2", "chair");
-
-			Solid = false;
 
             this.text = text;
             this.title = title;
@@ -36,9 +37,6 @@ namespace Adventum.Entities.Interaction
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			base.Draw(spriteBatch);
-
-
-			
 
 			if (ShowAlert && Vector2.Distance(Position, Main.gameState.Camera.Center) < alertDistance)
 			{

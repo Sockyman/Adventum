@@ -12,8 +12,6 @@
           <cellOfOrigin>0 0</cellOfOrigin>
           <frames>4</frames>
           <FPS>1</FPS>
-          <directionMap>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</directionMap>
-          <flipMap>0 0 0 0 0 0 0 0</flipMap>
         </Value>
       </Item>
     </animations>

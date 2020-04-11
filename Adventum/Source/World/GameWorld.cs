@@ -119,6 +119,8 @@ namespace Adventum.World
 				player = playerEntity
 			};
 
+			//playerEntity.state.SetActiveState(States.EState.Sleep);
+
 
 			LoadLevel(startingLevel, false, playerEntity);
 		}
@@ -159,6 +161,8 @@ namespace Adventum.World
 
 					if (deathTimer.TimeRemaining.TotalSeconds <= 0)
 					{
+						Audio.Play("levelChange");
+
 						player.player = new PlayerEntity(new Vector2())
 						{
 							input = GameWorld.input
@@ -246,7 +250,9 @@ namespace Adventum.World
 			{
 				if (data[i].A > 127)
 				{
-					EntityManager.CreateEntity(new Particle(position + new Vector2(i % texture.Width, i / texture.Height), "pixel", "None", data[i], new Angle((float)random.NextDouble(), AngleType.Revolution), random.Next(100, 350), random.NextSingle(1, maxParticleLife)));
+					float z = texture.Height - (i / texture.Height);
+
+					EntityManager.CreateEntity(new Particle(position + new Vector2(i % texture.Width, /* i / */ texture.Height), "pixel", "None", data[i], new Angle((float)random.NextDouble(), AngleType.Revolution), random.Next(50, 250), random.NextSingle(1, maxParticleLife), z: z));
 				}
 			}
 		}
@@ -269,6 +275,26 @@ namespace Adventum.World
 				Paused = false;
 				UserInterface.Active.ActiveEntity = UserInterface.Active.Root;
 				menu.RemoveFromParent();
+			}
+		}
+
+
+		public static void RollLootTable(Vector2 position, string lootTable)
+		{
+			LootTable lt = ResourceManager.GetLootTable(lootTable);
+
+			foreach (LootEntry e in lt.entries)
+			{
+				if (random.NextDouble() < e.weight)
+				{
+					Type t = Type.GetType("Adventum.Entities.Pickups." + e.type);
+
+					int numb = random.Next(e.range.X, e.range.Y +1);
+					for (int i = 0; i < numb; i++)
+					{
+						EntityManager.CreateEntity((Entity)Activator.CreateInstance(t, position));
+					}
+				}
 			}
 		}
 	}

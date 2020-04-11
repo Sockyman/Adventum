@@ -22,9 +22,10 @@ namespace Adventum.Core.Resource
         private static Dictionary<string, Effect> shadersLoaded;
         private static Dictionary<string, SoundEffect> soundsLoaded;
 		private static Dictionary<string, ParticleEffect> particlesLoaded;
+        private static Dictionary<string, LootTable> lootTablesLoaded;
 
 
-		public static void LoadContent(ContentManager content)
+        public static void LoadContent(ContentManager content)
         {
             ResourceManager.content = content;
 
@@ -35,8 +36,9 @@ namespace Adventum.Core.Resource
             shadersLoaded = new Dictionary<string, Effect>();
             soundsLoaded = new Dictionary<string, SoundEffect>();
 			particlesLoaded = new Dictionary<string, ParticleEffect>();
+            lootTablesLoaded = new Dictionary<string, LootTable>();
 
-			texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
+            texturesLoaded["pixel"] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
             texturesLoaded["pixel"].SetData( new Color[] { Color.White } );
 
             texturesLoaded[""] = new Texture2D(Main.graphics.GraphicsDevice, 1, 1);
@@ -90,6 +92,12 @@ namespace Adventum.Core.Resource
         {
             SoundEffect sound = LoadItem<SoundEffect>("Sound", name, soundsLoaded);
             return sound;
+        }
+
+        public static LootTable GetLootTable(string name)
+        {
+            LootTable table = name == "" ? new LootTable() : LoadItem<LootTable>("LootTable", name, lootTablesLoaded);
+            return table;
         }
 
         public static SpriteSheet GetSpriteSheet(string name)

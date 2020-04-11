@@ -4,6 +4,7 @@ using GeonBit.UI.Entities;
 using Microsoft.Xna.Framework;
 using Adventum.Util;
 using Adventum.Core;
+using MonoGame.Extended;
 
 namespace Adventum.UI
 {
@@ -21,7 +22,8 @@ namespace Adventum.UI
 
 		private void OnMouseHover(Entity entity)
 		{
-			Audio.Play("buttonHover");
+			float h = Main.graphics.PreferredBackBufferHeight;
+			Audio.Play("buttonHover", MathHelper.Clamp((entity.GetActualDestRect().Y / (h / 2) - 0.5f), -1, 1));
 		}
 
 

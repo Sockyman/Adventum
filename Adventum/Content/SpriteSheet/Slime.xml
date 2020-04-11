@@ -13,8 +13,6 @@
           <cellOfOrigin>0 0</cellOfOrigin>
           <frames>1</frames>
           <FPS>0</FPS>
-          <directionMap>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</directionMap>
-          <flipMap>0 0 0 0 0 0 0 0</flipMap>
         </Value>
       </Item>
       
@@ -24,8 +22,6 @@
           <cellOfOrigin>1 0</cellOfOrigin>
           <frames>4</frames>
           <FPS>10</FPS>
-          <directionMap>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</directionMap>
-          <flipMap>0 0 0 0 0 0 0 0</flipMap>
         </Value>
       </Item>
       

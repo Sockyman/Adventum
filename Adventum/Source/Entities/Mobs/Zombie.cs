@@ -23,10 +23,10 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddStateTrigger(EState.Walk, () => true);
+            state.AddState("Idle").AddStateTrigger("Walk", () => true);
 
-            state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () => random.Next(100) > 93 && state.clock.CurrentTime.TotalSeconds > 0.5)
-                .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(8)).AddStateTrigger(EState.Attack, () =>
+            state.AddState("Walk").AddStateTrigger("Idle", () => random.Next(100) > 93 && state.clock.CurrentTime.TotalSeconds > 0.5)
+                .AddEntranceTrigger(() => state.Facing = (Direction)random.Next(8)).AddStateTrigger("Attack", () =>
                 {
                     return GameWorld.PlayerExists && Vector2.Distance(Position, GameWorld.PlayerMob.Position) < 30 &&
                         Utils.AngleToDirection(Angle.FromVector(GameWorld.PlayerMob.Position - Position)) == state.Facing;

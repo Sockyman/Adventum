@@ -70,6 +70,7 @@
     <Compile Include="Source\Core\IO\Control.cs" />
     <Compile Include="Source\Core\IO\MouseButton.cs" />
     <Compile Include="Source\Entities\Alignment.cs" />
+    <Compile Include="Source\Entities\Chest.cs" />
     <Compile Include="Source\Entities\Decor\Furniture.cs" />
     <Compile Include="Source\Entities\Door.cs" />
     <Compile Include="Source\Entities\ILightEmiter.cs" />
@@ -81,17 +82,26 @@
     <Compile Include="Source\Entities\Interaction\MeleeAttack.cs" />
     <Compile Include="Source\Entities\Interaction\Sign.cs" />
     <Compile Include="Source\Entities\Interaction\Thought.cs" />
+    <Compile Include="Source\Entities\KeyDoor.cs" />
+    <Compile Include="Source\Entities\Mobs\Boss.cs" />
     <Compile Include="Source\Entities\Mobs\Enemy.cs" />
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
     <Compile Include="Source\Entities\Mobs\Reaper.cs" />
     <Compile Include="Source\Entities\Mobs\Slime.cs" />
+    <Compile Include="Source\Entities\Mobs\SlimeBoss.cs" />
     <Compile Include="Source\Entities\Mobs\Zombie.cs" />
     <Compile Include="Source\Entities\Particles\Particle.cs" />
+    <Compile Include="Source\Entities\Pickups\Coin.cs" />
+    <Compile Include="Source\Entities\Pickups\CollectablePickup.cs" />
+    <Compile Include="Source\Entities\Pickups\HealthPotion.cs" />
+    <Compile Include="Source\Entities\Pickups\Pickup.cs" />
     <Compile Include="Source\Entities\Torch.cs" />
     <Compile Include="Source\Entities\Tree.cs" />
     <Compile Include="Source\GameStates\GameState.cs" />
     <Compile Include="Source\GameStates\TitleState.cs" />
+    <Compile Include="Source\Item\Collectable.cs" />
+    <Compile Include="Source\Item\KeyCollectable.cs" />
     <Compile Include="Source\Sprite\Animator.cs" />
     <Compile Include="Source\Core\Collision\CollisionData.cs" />
     <Compile Include="Source\Core\Collision\CollisionManager.cs" />
@@ -105,11 +115,14 @@
     <Compile Include="Source\States\State.cs" />
     <Compile Include="Source\States\Trigger.cs" />
     <Compile Include="Source\UI\GameplayScreen.cs" />
+    <Compile Include="Source\UI\OptionsScreen.cs" />
     <Compile Include="Source\UI\PauseScreen.cs" />
+    <Compile Include="Source\UI\Screen.cs" />
     <Compile Include="Source\UI\SimpleButton.cs" />
     <Compile Include="Source\UI\TextBox.cs" />
     <Compile Include="Source\UI\TitleScreen.cs" />
     <Compile Include="Source\UI\UIHandler.cs" />
+    <Compile Include="Source\Util\IBouncable.cs" />
     <Compile Include="Source\World\GameWorld.cs" />
     <Compile Include="Source\Entities\Entity.cs" />
     <Compile Include="Source\Entities\Mobs\Mob.cs" />
@@ -228,9 +241,7 @@
       <Name>Adventum.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Item\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\build\MonoGame.Framework.DesktopGL.targets')" />

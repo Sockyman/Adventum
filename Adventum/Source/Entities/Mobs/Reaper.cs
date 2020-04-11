@@ -14,6 +14,10 @@ namespace Adventum.Entities.Mobs
 {
     class Reaper : Enemy
     {
+        public const float reverseTime = 0.4f;
+
+        public override string Loot => "Reaper";
+
         public override float MaxMovementSpeed => base.MaxMovementSpeed / 4;
 
         public Vector2 pointing = new Vector2();
@@ -28,28 +32,28 @@ namespace Adventum.Entities.Mobs
         {
             base.InitalizeBehavior();
 
-            state.AddState(EState.Idle).AddTrigger(() =>
+            state.AddState("Idle").AddTrigger(() =>
                 {
                     state.Facing = Utils.AngleToDirection(new Angle((float)random.NextDouble(), AngleType.Revolution), true);
-                    state.SetActiveState(EState.Walk);
+                    state.SetActiveState("Walk");
                 }, () => state.clock.CurrentTime.TotalMilliseconds > random.Next(100, 3000))
                 .AddUpdateTrigger(() =>
                 {
                     if (GameWorld.PlayerExists && Vector2.Distance(Position, GameWorld.PlayerMob.Position) < 300)
                     {
                         state.Facing = Utils.AngleToDirection(Angle.FromVector(GameWorld.PlayerMob.Position - Position));
-                        state.SetActiveState(EState.Charging);
+                        state.SetActiveState("Charging");
                     }
                 });
 
-            state.AddState(EState.Charging).AddCountdownStateTrigger(EState.Attack, 1f).AddUpdateTrigger(() =>
+            state.AddState("Charging").AddCountdownStateTrigger("Attack", reverseTime).AddUpdateTrigger(() =>
             {
                 Move(-Utils.DirectionToVector(state.Facing), 100);
             }).AddEntranceTrigger(() => pointing = GameWorld.PlayerMob.Position);
 
-            state.AddState(EState.Attack).AddCountdownStateTrigger(EState.Walk, 0.23f);
+            state.AddState("Attack").AddCountdownStateTrigger("Walk", 0.23f);
 
-            state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () => state.clock.CurrentTime.TotalMilliseconds > random.Next(2000, 20000));
+            state.AddState("Walk").AddStateTrigger("Idle", () => state.clock.CurrentTime.TotalMilliseconds > random.Next(2000, 5000));
         }
 
 

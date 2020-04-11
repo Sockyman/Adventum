@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="../Map/EntityMarker.tsx"/>
- <object type="Entity" gid="9" width="32" height="32">
+ <object type="Sign" gid="9" width="32" height="32">
   <properties>
    <property name="Direction" type="int" value="0"/>
    <property name="Skin" type="int" value="0"/>

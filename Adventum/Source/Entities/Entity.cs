@@ -15,6 +15,7 @@ namespace Adventum.Entities
     public abstract class Entity : ICollidable
     {
         public virtual float MaxMovementSpeed => 200;
+        public virtual int Dampening => 3000;
 
         protected Random random;
 
@@ -52,10 +53,13 @@ namespace Adventum.Entities
         }
         public EntityState state;
 
-        public virtual bool Immovable => false;
+
+        public virtual float Z => 0;
+
+
+        public virtual CollisionType CollisionType => CollisionType.Solid;
         public virtual bool CheckCollisions => true;
         public virtual bool ReactToCollisions => true;
-        public bool Solid { get; set; }
         public Animator Sprite { get; set; }
 
 		public Color drawColor = Color.White;
@@ -68,8 +72,6 @@ namespace Adventum.Entities
         public Entity(Vector2 position)
         {
             random = new Random(World.GameWorld.random.Next(int.MinValue, int.MaxValue));
-
-            Solid = true;
 
             Position = position;
             Collisions = new CollisionData();
@@ -86,7 +88,7 @@ namespace Adventum.Entities
         /// </summary>
         protected virtual void InitalizeBehavior()
         {
-            state = new EntityState(EState.Idle, Direction.Down);
+            state = new EntityState("Idle", Direction.Down);
         }
 
 
@@ -100,7 +102,7 @@ namespace Adventum.Entities
         public virtual void Update(DeltaTime delta)
         {
             Move(Motion);
-            Motion = Utils.Dampen(Motion, 3000 * delta.Seconds);
+            Motion = Utils.Dampen(Motion, Dampening * delta.Seconds);
 
             Collisions.Clear();
 
@@ -112,23 +114,25 @@ namespace Adventum.Entities
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
             if (visible)
-                Sprite.Draw(spriteBatch, Position, drawColor, Position.Y / GameWorld.level.Map.HeightInPixels);
+            {
+                Vector2 dp = Position;
+                dp.Y -= Z;
+                Sprite.Draw(spriteBatch, dp, drawColor, Position.Y / GameWorld.level.Map.HeightInPixels);
+            }
 
             /*Texture2D rect = new Texture2D(Main.graphics.GraphicsDevice, CollisionMask.Width, CollisionMask.Height);
             Color[] data = new Color[CollisionMask.Width * CollisionMask.Height];
             for (int i = 0; i < data.Length; ++i) data[i] = Color.Chocolate;
             rect.SetData(data);
             spriteBatch.Draw(rect, CollisionMask.Location.ToVector2(), Color.White);*/
-            
         }
 
 
         public virtual void OnCollision(CollisionData collisionData)
         {
             Collisions.Merge(collisionData);
-            if (collisionData.Other.Solid && Solid)
+            if (collisionData.Other.CollisionType == CollisionType.Solid && CollisionType == CollisionType.Solid)
             {
                 ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 5000 * GameWorld.deltaTime.Seconds);
             }

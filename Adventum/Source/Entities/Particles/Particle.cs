@@ -5,20 +5,28 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Timers;
 using Adventum.Data;
+using Adventum.Core.Collision;
 
 namespace Adventum.Entities.Particles
 {
 	public class Particle : Entity
 	{
+		public override int Dampening => 1000;
+
 
 		private CountdownTimer life;
 
-		// TODO: This should be false as the particles don't need to be collided but velocity and position is updated in the collision manager so it has to be true for now
 		public override bool CheckCollisions => false;
-		public override bool ReactToCollisions => false;
+		public override CollisionType CollisionType => CollisionType.NonSolid;
+
+		private Bouncer bouncer;
+		public override float Z
+		{
+			get { return bouncer.Z; }
+		}
 
 
-		public Particle(Vector2 position, string texture, string sprite, Color color, Angle direction, float speed, float lifeSpan, Direction facing = Direction.Down) : base(position)
+		public Particle(Vector2 position, string texture, string sprite, Color color, Angle direction, float speed, float lifeSpan, Direction facing = Direction.Down, float z = 0) : base(position)
 		{
 			Sprite = new Sprite.Animator(sprite, texture);
 
@@ -26,11 +34,11 @@ namespace Adventum.Entities.Particles
 
 			life = new CountdownTimer(lifeSpan);
 
+			bouncer = new Bouncer(z: z);
+
 			drawColor = color;
 
 			state.Facing = facing;
-
-			Solid = false;
 		}
 
 
@@ -40,6 +48,7 @@ namespace Adventum.Entities.Particles
 
 			life.Update(delta);
 
+			bouncer.Update(delta);
 
 			Position += PreviousVelocity * delta.Seconds;
 			PreviousVelocity = Velocity;
@@ -56,6 +65,7 @@ namespace Adventum.Entities.Particles
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			base.Draw(spriteBatch);
+			Sprite.Draw(spriteBatch, Position, new Color(Color.Black, 30));
 		}
 
 

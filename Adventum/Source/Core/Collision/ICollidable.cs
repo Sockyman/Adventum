@@ -16,9 +16,8 @@ namespace Adventum.Core.Collision
 
         Rectangle CollisionMask { get; }
 
+        CollisionType CollisionType { get; }
 
-        bool Solid { get; }
-        bool Immovable { get; }
 
         /// <summary>
         /// Whether or not the collider should be added to the list of colliders to collide with stuff.
@@ -31,5 +30,13 @@ namespace Adventum.Core.Collision
 
 
         void OnCollision(CollisionData collisionData);
+    }
+
+    public enum CollisionType : byte
+    {
+        NonSolid,
+        NoPush,
+        Solid,
+        Immovable
     }
 }

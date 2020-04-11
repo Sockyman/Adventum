@@ -1,0 +1,24 @@
+ToDo:
+
+	Current:
+		- Slime boss
+			- Sounds
+		- Keydoors
+			- Key Pickups
+
+	Technical:
+		- Make an interface for bouncer
+		- State machines
+			- Add inheritance
+		- Add inheritance to spritesheets (and loot tables)
+
+	Features:
+		- Add bosses
+		- Shadows more widespread
+		- More levels
+		- Skeleton
+		- Exclamation marks over key doors
+		- Collectables list on screen
+
+Bugs:
+	- Chest in room on left in dungeon doesn't spawn

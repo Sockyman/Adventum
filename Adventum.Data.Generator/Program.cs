@@ -13,10 +13,10 @@ namespace Adventum.Data.Generator
     {
         static void Main(string[] args)
         {
-			//DirectionMap data = DirectionMap.standardMobMap;
+            //DirectionMap data = DirectionMap.standardMobMap;
 
 
-			SerializeParticleEffect();
+            SerializeLootTable();
         }
 
 
@@ -72,5 +72,13 @@ namespace Adventum.Data.Generator
 
 			Serialize(data);
 		}
+
+
+        static void SerializeLootTable()
+        {
+            LootTable data = new LootTable();
+
+            Serialize(data);
+        }
     }
 }

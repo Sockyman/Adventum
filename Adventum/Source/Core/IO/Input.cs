@@ -64,6 +64,7 @@ namespace Adventum.Core.IO
 			AddControl(Control.Down, Keys.S);
 			AddControl(Control.Left, Keys.A);
 			AddControl(Control.Right, Keys.D);
+			AddControl(Control.Dodge, Keys.Space);
 			AddControl(Control.Attack, MouseButton.Left);
 			AddControl(Control.Interact, MouseButton.Right);
 		}

@@ -112,8 +112,8 @@
  <tile id="104" terrain=",,,5"/>
  <tile id="105" terrain=",,5,5"/>
  <tile id="106" terrain=",,5,"/>
- <tile id="107" terrain="7,7,7,"/>
- <tile id="108" terrain="7,7,,7"/>
+ <tile id="107" terrain="5,5,5,"/>
+ <tile id="108" terrain="5,5,,5"/>
  <tile id="112" terrain=",4,,4"/>
  <tile id="113" terrain="4,4,4,4"/>
  <tile id="114" terrain="4,,4,"/>
@@ -125,8 +125,8 @@
  <tile id="120" terrain=",5,,5"/>
  <tile id="121" terrain="5,5,5,5"/>
  <tile id="122" terrain="5,,5,"/>
- <tile id="123" terrain="7,,7,7"/>
- <tile id="124" terrain=",7,7,7"/>
+ <tile id="123" terrain="5,,5,5"/>
+ <tile id="124" terrain=",5,5,5"/>
  <tile id="128" terrain=",4,,"/>
  <tile id="129" terrain="4,4,,"/>
  <tile id="130" terrain="4,,,"/>

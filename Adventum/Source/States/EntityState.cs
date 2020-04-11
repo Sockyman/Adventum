@@ -7,18 +7,18 @@ using Microsoft.Xna.Framework;
 
 namespace Adventum.States
 {
-    public class EntityState : Fsm<EState>
+    public class EntityState : Fsm<string>
     {
         public Direction Facing { get; set; }
 
 
-        public EntityState(EState state, Direction facing = Direction.Down) : base()
+        public EntityState(string state, Direction facing = Direction.Down) : base()
         {
             Facing = facing;
 
-            AddState(EState.Idle);
+            AddState("Idle");
 
-            SetActiveState(EState.Idle);
+            SetActiveState("Idle");
         }
 
 

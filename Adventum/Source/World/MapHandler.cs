@@ -16,7 +16,7 @@ namespace Adventum.World
     {
         private delegate Entity EntityLoader(TiledMapTileObject mapObject);
 
-        private static readonly Dictionary<int, EntityLoader> loaders = BuildLoaders();
+        private static readonly Dictionary<string, EntityLoader> loaders = BuildLoaders();
 
         private static Random random = new Random();
 
@@ -24,26 +24,29 @@ namespace Adventum.World
 
 
 
-        private static Dictionary<int, EntityLoader> BuildLoaders()
+        private static Dictionary<string, EntityLoader> BuildLoaders()
         {
-            var d = new Dictionary<int, EntityLoader>();
+            var d = new Dictionary<string, EntityLoader>();
 
             Vector2 offset = new Vector2(16, 0);
-            d[0] = (TiledMapTileObject t) => new Mob(t.Position + offset);
-            d[1] = (TiledMapTileObject t) => new Zombie(t.Position + offset);
-            d[2] = (TiledMapTileObject t) => new Reaper(t.Position + offset);
-            d[3] = (TiledMapTileObject t) => new Tree(t.Position + offset);
-            d[4] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "Chair", facing: (Direction)Int32.Parse(t.Properties["Direction"]));
-            d[5] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
-                Int32.Parse(t.Properties["Radius"]));
-            d[6] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
-                Int32.Parse(t.Properties["Radius"]), false);
-            d[7] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"], int.Parse(t.Properties["Skin"]));
-            d[8] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
-			d[9] = (TiledMapTileObject t) => new Slime(t.Position + offset);
-			d[10] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
+            d["Entity"] = (TiledMapTileObject t) => new Mob(t.Position + offset);
+            d["Zombie"] = (TiledMapTileObject t) => new Zombie(t.Position + offset);
+            d["Reaper"] = (TiledMapTileObject t) => new Reaper(t.Position + offset);
+            d["Tree"] = (TiledMapTileObject t) => new Tree(t.Position + offset);
+            d["Chair"] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "Chair", facing: (Direction)int.Parse(t.Properties["Direction"]));
+            d["Torch"] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
+                int.Parse(t.Properties["Radius"]));
+            d["LightEmitter"] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
+                int.Parse(t.Properties["Radius"]), false);
+            d["Sign"] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"], int.Parse(t.Properties["Skin"]));
+            d["Table"] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
+			d["Slime"] = (TiledMapTileObject t) => new Slime(t.Position + offset);
+			d["Door"] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
+            d["Chest"] = (TiledMapTileObject t) => new Chest(t.Position + offset, t.Properties["LootTable"]);
+            d["Boss"] = (TiledMapTileObject t) => new SlimeBoss(t.Position + offset);
+            d["KeyDoor"] = (TiledMapTileObject t) => new KeyDoor(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
 
-			return d;
+            return d;
         }
 
 
@@ -87,14 +90,13 @@ namespace Adventum.World
 
         private static void LoadEntityObject(TiledMapTileObject entity)
         {
-            TiledMapTilesetTile tile = entity.Tile;
-            if (tile != null)
-                level.entityManager.CreateEntity(loaders[tile.LocalTileIdentifier - 1].Invoke(entity));
+            if (loaders.ContainsKey(entity.Type))
+                level.entityManager.CreateEntity(loaders[entity.Type].Invoke(entity));
         }
 
         private static void LoadMisicObject(TiledMapObject obj)
         {
-            if (obj.Type == "Player Start")
+            if (obj.Type == "PlayerStart")
                 GameWorld.player.player.Position = obj.Position;
 
 			else if ((obj.Type == "Thought" || (obj.Type == "Tutorial" && GameWorld.showTutorial) )  && obj is TiledMapRectangleObject)

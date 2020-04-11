@@ -6,8 +6,11 @@ sampler lightSampler = sampler_state{Texture = (lightMask);};
 float4 PixelShaderLight(float2 coords: TEXCOORD0) : COLOR0  
 {  
     float4 color = tex2D(s0, coords);  
-    float4 lightColor = tex2D(lightSampler, coords);  
-    return color * lightColor * 1.05;
+    float4 lightColor = tex2D(lightSampler, coords); 
+    int levels = 4;
+
+    return color * (round(lightColor * levels) / levels);
+    
 }  
 
 	      

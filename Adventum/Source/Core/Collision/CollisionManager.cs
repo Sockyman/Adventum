@@ -52,12 +52,9 @@ namespace Adventum.Core.Collision
 
 						if (sourceMask.Intersects(otherMask) && other != source)
 						{
-
-
-
 							source.OnCollision(new CollisionData(other));
 
-							if (!source.Immovable && other.Immovable && source.Solid)
+							if ((source.CollisionType == CollisionType.Solid || source.CollisionType == CollisionType.NoPush) && other.CollisionType == CollisionType.Immovable)
 							{
 								source.Position -= tempVelocity;
 

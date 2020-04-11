@@ -28,6 +28,25 @@
           <flipMap>0 0 0 0 0 0 1 0</flipMap>
         </Value>
       </Item>
+
+      <Item>
+        <Key>lie</Key>
+        <Value>
+          <cellOfOrigin>0 5</cellOfOrigin>
+          <frames>2</frames>
+          <FPS>1</FPS>
+        </Value>
+      </Item>
+
+      <Item>
+        <Key>roll</Key>
+        <Value>
+          <cellOfOrigin>6 1</cellOfOrigin>
+          <frames>7</frames>
+          <FPS>14</FPS>
+          <flipMap>0 0 0 0 0 0 1 0</flipMap>
+        </Value>
+      </Item>
       
     </animations>
   </Asset>

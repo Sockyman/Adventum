@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="Tutorial" type="Tutorial" width="32" height="32">
+  <properties>
+   <property name="Skin" type="int" value="1"/>
+   <property name="Text" value=""/>
+   <property name="Title" value=""/>
+  </properties>
+ </object>
+</template>

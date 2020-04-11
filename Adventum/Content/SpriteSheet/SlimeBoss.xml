@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Data="Adventum.Data">
+  <Asset Type="Data:SpriteSheet">
+    <name>SlimeBoss</name>
+    <defaultAnimation>idle</defaultAnimation>
+    <frameSize>128 128</frameSize>
+    <origin>64 113</origin>
+    <animations>
+      
+      <Item>
+        <Key>idle</Key>
+        <Value>
+          <cellOfOrigin>0 0</cellOfOrigin>
+          <frames>2</frames>
+          <FPS>4</FPS>
+        </Value>
+      </Item>
+      
+      <Item>
+        <Key>stretch</Key>
+        <Value>
+          <cellOfOrigin>0 2</cellOfOrigin>
+          <frames>2</frames>
+          <FPS>8</FPS>
+        </Value>
+      </Item>
+
+      <Item>
+        <Key>deStretch</Key>
+        <Value>
+          <cellOfOrigin>0 2</cellOfOrigin>
+          <frames>2</frames>
+          <FPS>-8</FPS>
+        </Value>
+      </Item>
+
+      <Item>
+        <Key>compress</Key>
+        <Value>
+          <cellOfOrigin>0 1</cellOfOrigin>
+          <frames>2</frames>
+          <FPS>8</FPS>
+        </Value>
+      </Item>
+
+      <Item>
+        <Key>deCompress</Key>
+        <Value>
+          <cellOfOrigin>0 1</cellOfOrigin>
+          <frames>2</frames>
+          <FPS>-8</FPS>
+        </Value>
+      </Item>
+
+      <Item>
+        <Key>jump</Key>
+        <Value>
+          <cellOfOrigin>1 2</cellOfOrigin>
+          <frames>1</frames>
+          <FPS>0</FPS>
+        </Value>
+      </Item>
+      
+    </animations>
+  </Asset>
+</XnaContent>

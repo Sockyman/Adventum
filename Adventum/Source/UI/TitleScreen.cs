@@ -10,27 +10,26 @@ using Adventum.Core.Resource;
 
 namespace Adventum.UI
 {
-	class TitleScreen : Panel
+	class TitleScreen : Screen
 	{
-		public TitleScreen() : base(new Vector2(Main.graphics.PreferredBackBufferWidth, Main.graphics.PreferredBackBufferHeight), PanelSkin.None)
+		public TitleScreen() : base()
 		{
-			void AddButton(string name, EventCallback onClick)
-			{
-				Button button = new SimpleButton(name, onClick);
-				AddChild(button);
-			}
-
 			HorizontalLine line = new HorizontalLine(Anchor.AutoCenter, Utils.ScaleToScreen(new Vector2(0, 100))) { Opacity = 0 };
 			AddChild(line);
 
 			AddButton("Play", OnPlayButtonClick);
-			AddButton("Options", (Entity target) => { });
+			AddButton("Options", OnOptionsButtonClick);
 			AddButton("Exit", OnExitButtonClick);
 		}
 
 		private void OnPlayButtonClick(Entity entity)
 		{
 			Main.ChangeState<GameWorld>();
+		}
+
+		private void OnOptionsButtonClick(Entity entity)
+		{
+			UserInterface.Active.AddEntity(new OptionsScreen());
 		}
 
 		private void OnExitButtonClick(Entity entity)

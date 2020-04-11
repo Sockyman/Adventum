@@ -5,7 +5,7 @@
     <texture>blood</texture>
     <color>FFAC3232</color>
     <mixColor>FFFF0000</mixColor>
-    <speed>300 500</speed>
+    <speed>100 300</speed>
     <direction>0 1</direction>
     <lifeSpan>2 5</lifeSpan>
   </Asset>

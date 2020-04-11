@@ -24,9 +24,12 @@ namespace Adventum
 		public static Point windowSize = new Point(640, 360);
 		public static GraphicsDeviceManager graphics;
 		public static GameState gameState;
+
 		public static RenderTarget2D renderTarget;
 		public static RenderTarget2D lightsTarget;
 		public static RenderTarget2D uiTarget;
+		public static RenderTarget2D gameTarget;
+
 		public static StringBuilder debugString = new StringBuilder();
 
 
@@ -43,8 +46,8 @@ namespace Adventum
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-			graphics.PreferredBackBufferWidth = 1280;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-			graphics.PreferredBackBufferHeight = 720;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
 			graphics.IsFullScreen = Properties.Settings.Default.startFullscreen;
 			graphics.SynchronizeWithVerticalRetrace = false;
@@ -81,6 +84,7 @@ namespace Adventum
 			renderTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
 			lightsTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
 			uiTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
+			gameTarget = new RenderTarget2D(GraphicsDevice, windowSize.X, windowSize.Y);
 
 
 			ResourceManager.LoadContent(Content);
@@ -95,6 +99,8 @@ namespace Adventum
 
 
 			ChangeState<TitleState>();
+
+			Microsoft.Xna.Framework.Audio.SoundEffect.MasterVolume = Properties.Settings.Default.volume;
 		}
 
 
@@ -162,17 +168,17 @@ namespace Adventum
 			{
 				spriteBatch.Begin(SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, transformMatrix: gameState.Camera.GetViewMatrix());
 
-				//ResourceManager.GetShader("fullWhite").CurrentTechnique.Passes[0].Apply();
 				gameState.Draw(spriteBatch);
-
 
 				spriteBatch.End();
 			}
 
-			
+
 			/// Drawing Lighting effects
-			GraphicsDevice.SetRenderTarget(lightsTarget);
+			if (Properties.Settings.Default.lightingEffects)
 			{
+				GraphicsDevice.SetRenderTarget(lightsTarget);
+
 				GraphicsDevice.Clear(gameState.LightColor);
 
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, samplerState: SamplerState.PointClamp, transformMatrix: gameState.Camera.GetViewMatrix());
@@ -181,7 +187,6 @@ namespace Adventum
 				{
 					gW.DrawLight(spriteBatch, lm);
 				}
-				
 
 				spriteBatch.End();
 			}
@@ -201,21 +206,39 @@ namespace Adventum
 			}
 
 
-			/// Drawing render targets to screen and debug.
-			/// 
-			GraphicsDevice.SetRenderTarget(null);
+
+			GraphicsDevice.SetRenderTarget(gameTarget);
 			{
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
-				
-				ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
 
-				ResourceManager.GetShader("lightEffect").Parameters["lightMask"].SetValue(lightsTarget);
-				ResourceManager.GetShader("lightEffect").CurrentTechnique.Passes[0].Apply();
-				spriteBatch.Draw(renderTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+				if (Properties.Settings.Default.desaturate)
+					ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
+
+				if (Properties.Settings.Default.lightingEffects)
+				{
+					ResourceManager.GetShader("lightEffect").Parameters["lightMask"].SetValue(lightsTarget);
+
+					ResourceManager.GetShader("lightEffect").CurrentTechnique.Passes[0].Apply();
+				}
+
+				spriteBatch.Draw(renderTarget, new Rectangle(0, 0, windowSize.X, windowSize.Y), Color.White);
+				//spriteBatch.Draw(lightsTarget, new Rectangle(0, 0, windowSize.X, windowSize.Y), Color.White);
+
 				spriteBatch.End();
+			}
+
+
+			/// Drawing render targets to screen and debug.
+			GraphicsDevice.SetRenderTarget(null);
+			{
+				
 
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp);
-				ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
+
+				spriteBatch.Draw(gameTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
+
+				if (Properties.Settings.Default.desaturate)
+					ResourceManager.GetShader("deSaturate").CurrentTechnique.Passes[0].Apply();
 
 				spriteBatch.Draw(UserInterface.Active.RenderTarget, new Rectangle(0, 0, UserInterface.Active.ScreenWidth, UserInterface.Active.ScreenHeight), Color.White);
 				spriteBatch.Draw(uiTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);

@@ -74,9 +74,8 @@ namespace Adventum.Core
         {
             foreach(Entity e in entities)
             {
-                if (e is ILightEmiter)
+                if (e is ILightEmiter emiter)
                 {
-                    ILightEmiter emiter = (ILightEmiter)e;
                     spriteBatch.Draw(lightMask, new Rectangle(emiter.Position.ToPoint() - new Point(emiter.LightRadius) - new Point(0, 16), new Point(emiter.LightRadius * 2)), emiter.LightColor);
                 }
             }

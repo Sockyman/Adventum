@@ -8,6 +8,8 @@ namespace Adventum.States
         Walk,
         Attack,
         Charging,
-        Interact
+        Interact,
+        Sleep,
+        Dodge
     }
 }

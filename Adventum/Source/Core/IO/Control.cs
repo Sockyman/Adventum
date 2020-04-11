@@ -13,6 +13,7 @@ namespace Adventum.Core.IO
 		Left,
 		Right,
 		Attack,
-		Interact
+		Interact,
+		Dodge
 	}
 }

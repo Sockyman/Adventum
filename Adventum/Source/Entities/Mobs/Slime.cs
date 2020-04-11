@@ -12,6 +12,8 @@ namespace Adventum.Entities.Mobs
     {
 		public override float MaxMovementSpeed => base.MaxMovementSpeed / 2;
 
+		public override string Loot => "Slime";
+
 
 		public Slime(Vector2 position) : base(position, "slime", "Slime", 32, 3)
         {
@@ -24,9 +26,9 @@ namespace Adventum.Entities.Mobs
             base.InitalizeBehavior();
 
             
-            state.AddState(EState.Idle).AddCountdownStateTrigger(EState.Walk, 0.5f);
+            state.AddState("Idle").AddCountdownStateTrigger("Walk", 0.5f);
 
-			state.AddState(EState.Walk).AddStateTrigger(EState.Idle, () =>  Sprite != null ? state.clock.CurrentTime.TotalSeconds > Sprite.Sprite.animations["walk"].frames * (1 / (float)Sprite.Sprite.animations["walk"].FPS) : false)
+			state.AddState("Walk").AddStateTrigger("Idle", () =>  Sprite != null ? state.clock.CurrentTime.TotalSeconds > Sprite.Sprite.animations["walk"].frames * (1 / (float)Sprite.Sprite.animations["walk"].FPS) : false)
 				.AddEntranceTrigger(() =>
 				{
 					if (World.GameWorld.PlayerExists && Vector2.Distance(Position, World.GameWorld.PlayerMob.Position) < 100)
@@ -42,9 +44,9 @@ namespace Adventum.Entities.Mobs
 		{
 			base.OnCollision(collisionData);
 
-			if (collisionData.Other == World.GameWorld.PlayerMob && state.ActiveState == EState.Idle)
+			if (collisionData.Other == World.GameWorld.PlayerMob && state.ActiveState == "Idle")
 			{
-				state.SetActiveState(EState.Attack);
+				state.SetActiveState("Attack");
 			}
 		}
 

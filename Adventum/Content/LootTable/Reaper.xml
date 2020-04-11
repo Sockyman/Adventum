@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Data="Adventum.Data">
+  <Asset Type="Data:LootTable">
+    <Item>Coin<weight>1</weight><range>1 3</range></Item>
+    <Item>Coin<weight>0.2</weight><range>1 2</range></Item>
+    <Item>HealthPotion<weight>0.25</weight><range>1 1</range></Item>
+  </Asset>
+</XnaContent>

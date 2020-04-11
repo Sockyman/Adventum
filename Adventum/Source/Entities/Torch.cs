@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Adventum.Util;
+using Adventum.Core.Collision;
 using Microsoft.Xna.Framework;
 
 namespace Adventum.Entities
@@ -14,10 +15,10 @@ namespace Adventum.Entities
 
         public int startingRadius;
 
+        public override CollisionType CollisionType => CollisionType.NonSolid;
+
         public Torch(Vector2 position, Color lightColor, int lightRadius = 150, bool visible = true) : base(position)
         {
-            Solid = false;
-
             this.visible = visible;
 
             LightRadius = lightRadius;
