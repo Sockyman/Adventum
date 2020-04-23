@@ -39,10 +39,16 @@ namespace Adventum.World
             d["LightEmitter"] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
                 int.Parse(t.Properties["Radius"]), false);
             d["Sign"] = (TiledMapTileObject t) => new Sign(t.Position + offset, t.Properties["Title"], t.Properties["Text"], int.Parse(t.Properties["Skin"]));
-            d["Table"] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50);
+            d["Table"] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "table", "Table", 45, lightRadius: 50)
+            {
+                collisionType = CollisionType.Stationary
+            };
 			d["Slime"] = (TiledMapTileObject t) => new Slime(t.Position + offset);
 			d["Door"] = (TiledMapTileObject t) => new Door(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
-            d["Chest"] = (TiledMapTileObject t) => new Chest(t.Position + offset, t.Properties["LootTable"]);
+            d["Chest"] = (TiledMapTileObject t) =>
+            {
+                return new Chest(t.Position + offset, t.Properties["LootTable"]);
+            };
             d["Boss"] = (TiledMapTileObject t) => new SlimeBoss(t.Position + offset);
             d["KeyDoor"] = (TiledMapTileObject t) => new KeyDoor(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
 

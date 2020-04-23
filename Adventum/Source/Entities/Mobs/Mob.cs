@@ -75,9 +75,8 @@ namespace Adventum.Entities.Mobs
             state.AddState("Idle").AddEntranceTrigger(() => Sprite.TryChangeAnimation("idle"));
 
             state.AddState("Walk").AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
-            state.AddState("Attack").AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
-
-            state.AddState("Attack").AddCountdownStateTrigger("Idle", 0.25f).AddEntranceTrigger(() => UseMain());
+            state.AddState("Attack").AddEntranceTrigger(() => Sprite.TryChangeAnimation("attack"))
+                .AddCountdownStateTrigger("Idle", 0.25f).AddEntranceTrigger(() => UseMain());
 
             state.AddState("Interact").AddCountdownStateTrigger("Idle", 0.25f).AddEntranceTrigger(() => UseSecondary()).AddEntranceTrigger(() => Sprite.TryChangeAnimation("walk"));
         }

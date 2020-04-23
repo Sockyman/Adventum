@@ -132,7 +132,7 @@ namespace Adventum.Entities
         public virtual void OnCollision(CollisionData collisionData)
         {
             Collisions.Merge(collisionData);
-            if (collisionData.Other.CollisionType == CollisionType.Solid && CollisionType == CollisionType.Solid)
+            if ((collisionData.Other.CollisionType == CollisionType.Solid || collisionData.Other.CollisionType == CollisionType.Stationary) && CollisionType == CollisionType.Solid)
             {
                 ApplyDirecionalVelocity(Angle.FromVector(Position - collisionData.Other.Position), 5000 * GameWorld.deltaTime.Seconds);
             }

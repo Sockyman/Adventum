@@ -8,6 +8,8 @@ using Adventum.Item;
 using Adventum.States;
 using Adventum.Core.Collision;
 using Adventum.World;
+using Microsoft.Xna.Framework.Graphics;
+using Adventum.Core.Resource;
 
 namespace Adventum.Entities.Mobs
 {
@@ -103,6 +105,16 @@ namespace Adventum.Entities.Mobs
 			base.Die();
 
 			GameWorld.SpawnParticles(random.Next(20, 30), "blood", Position);
+		}
+
+		public override void Draw(SpriteBatch spriteBatch)
+		{
+			base.Draw(spriteBatch);
+
+			/*if (state.ActiveState == "Attack")
+			{
+				spriteBatch.Draw(ResourceManager.GetTexture("Item/starterSword"), Position - new Vector2(0, 16), Color.White);
+			}*/
 		}
 
 

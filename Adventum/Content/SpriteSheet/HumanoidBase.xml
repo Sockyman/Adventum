@@ -30,6 +30,17 @@
       </Item>
 
       <Item>
+        <Key>attack</Key>
+        <Value>
+          <cellOfOrigin>1 0</cellOfOrigin>
+          <frames>4</frames>
+          <FPS>16</FPS>
+          <directionMap>0 0 0 0 0 1 0 2 0 2 0 2 0 1 0 0</directionMap>
+          <flipMap>0 0 0 0 0 0 1 0</flipMap>
+        </Value>
+      </Item>
+
+      <Item>
         <Key>lie</Key>
         <Value>
           <cellOfOrigin>0 5</cellOfOrigin>

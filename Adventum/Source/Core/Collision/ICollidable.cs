@@ -36,6 +36,7 @@ namespace Adventum.Core.Collision
     {
         NonSolid,
         NoPush,
+        Stationary,
         Solid,
         Immovable
     }
