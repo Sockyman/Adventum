@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Adventum.Util;
 using Adventum.Entities;
 using Adventum.Entities.Particles;
+using MonoGame.Extended.Collisions;
 
 namespace Adventum.Core.Collision
 {

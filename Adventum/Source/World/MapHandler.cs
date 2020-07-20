@@ -32,7 +32,7 @@ namespace Adventum.World
             d["Entity"] = (TiledMapTileObject t) => new Mob(t.Position + offset);
             d["Zombie"] = (TiledMapTileObject t) => new Zombie(t.Position + offset);
             d["Reaper"] = (TiledMapTileObject t) => new Reaper(t.Position + offset);
-            d["Tree"] = (TiledMapTileObject t) => new Tree(t.Position + offset);
+            d["Tree"] = (TiledMapTileObject t) => new Tree(t.Position + offset, bool.Parse(t.Properties["Collision"]));
             d["Chair"] = (TiledMapTileObject t) => new Furniture(t.Position + offset, "Chair", facing: (Direction)int.Parse(t.Properties["Direction"]));
             d["Torch"] = (TiledMapTileObject t) => new Torch(t.Position + offset, new Color(uint.Parse(t.Properties["Color"].Replace("#", ""), System.Globalization.NumberStyles.HexNumber)),
                 int.Parse(t.Properties["Radius"]));
@@ -51,6 +51,9 @@ namespace Adventum.World
             };
             d["Boss"] = (TiledMapTileObject t) => new SlimeBoss(t.Position + offset);
             d["KeyDoor"] = (TiledMapTileObject t) => new KeyDoor(t.Position + offset, t.Properties["Level"], t.Properties["Cache Level"] == "true");
+            d["Skeleton"] = (TiledMapTileObject t) => new Skeleton(t.Position + offset);
+            d["Bush"] = (TiledMapTileObject t) => new Bush(t.Position + offset);
+            d["BigTree"] = (TiledMapTileObject t) => new BigTree(t.Position + offset, bool.Parse(t.Properties["Collision"]));
 
             return d;
         }

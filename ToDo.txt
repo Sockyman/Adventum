@@ -11,6 +11,7 @@ ToDo:
 		- State machines
 			- Add inheritance
 		- Add inheritance to spritesheets (and loot tables)
+		- Remake collision detection.
 
 	Features:
 		- Add bosses

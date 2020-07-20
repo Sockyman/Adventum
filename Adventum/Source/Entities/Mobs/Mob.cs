@@ -30,6 +30,18 @@ namespace Adventum.Entities.Mobs
         }
         private int health;
 
+        protected float flashTime = 0.02f;
+
+        public bool Flash
+        {
+            get
+            {
+                return (flash < flashTime) && HitFrames > 0;
+            }
+        }
+        private float flash = 0;
+
+
         public int Gold { get; set; } = 0;
 
         public float HitFrames { get; private set; }
@@ -43,6 +55,7 @@ namespace Adventum.Entities.Mobs
         public virtual float AmbientChance => 0.035f;
 
 
+
         public virtual bool ShowHealthbar => false;
 
 
@@ -51,12 +64,8 @@ namespace Adventum.Entities.Mobs
 		public Alignment alignment = Alignment.Neutral;
 
 
-        public Mob(Vector2 position) : base(position)
+        public Mob(Vector2 position) : this(position, "humanBase", "HumanoidBase", 16, 10)
         {
-            Sprite = new Animator("HumanoidBase", "humanBase");
-            SetBounds(new Point(16));
-
-            Health = MaxHealth;
         }
         public Mob(Vector2 position, string texture, string spriteSheet, int boundingSize = 16, int maxHealth = 10) : base(position)
         {
@@ -98,12 +107,16 @@ namespace Adventum.Entities.Mobs
 
 
             HitFrames -= delta.Seconds;
+
+            flash += delta.Seconds;
+            if (flash > flashTime * 2)
+                flash = 0;
         }
 
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (HitFrames < 0 || random.Next(2) != 0)
+            if (!Flash)
             {
                 //Sprite.Draw(spriteBatch, Position + new Vector2(-2, -2), new Color(Color.Black, 100));
                 base.Draw(spriteBatch);
@@ -165,10 +178,6 @@ namespace Adventum.Entities.Mobs
 
             GameWorld.DisolveToParticles(this);
 
-            /*for (int i = 0; i < Gold; i++)
-            {
-                GameWorld.EntityManager.CreateEntity(new Pickups.Coin(Position));
-            }*/
 
             GameWorld.RollLootTable(Position, Loot);
 

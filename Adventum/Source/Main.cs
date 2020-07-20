@@ -217,7 +217,6 @@ namespace Adventum
 				if (Properties.Settings.Default.lightingEffects)
 				{
 					ResourceManager.GetShader("lightEffect").Parameters["lightMask"].SetValue(lightsTarget);
-
 					ResourceManager.GetShader("lightEffect").CurrentTechnique.Passes[0].Apply();
 				}
 
@@ -243,10 +242,12 @@ namespace Adventum
 				spriteBatch.Draw(UserInterface.Active.RenderTarget, new Rectangle(0, 0, UserInterface.Active.ScreenWidth, UserInterface.Active.ScreenHeight), Color.White);
 				spriteBatch.Draw(uiTarget, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
 
-				spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), debugString, new Vector2(40, 40), Color.White);
+
+				spriteBatch.DrawString(ResourceManager.GetFont("fontMain"), debugString, new Vector2(10, 10), Color.White);
 				debugString = new StringBuilder("Adventum ");
 
 				DebugAdd(System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString());    
+
 
 				spriteBatch.End();
 			}

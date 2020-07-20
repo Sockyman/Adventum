@@ -70,6 +70,8 @@
     <Compile Include="Source\Core\IO\Control.cs" />
     <Compile Include="Source\Core\IO\MouseButton.cs" />
     <Compile Include="Source\Entities\Alignment.cs" />
+    <Compile Include="Source\Entities\BigTree.cs" />
+    <Compile Include="Source\Entities\Bush.cs" />
     <Compile Include="Source\Entities\Chest.cs" />
     <Compile Include="Source\Entities\Decor\Furniture.cs" />
     <Compile Include="Source\Entities\Door.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Source\Entities\EState.cs" />
     <Compile Include="Source\Entities\Mobs\PlayerEntity.cs" />
     <Compile Include="Source\Entities\Mobs\Reaper.cs" />
+    <Compile Include="Source\Entities\Mobs\Skeleton.cs" />
     <Compile Include="Source\Entities\Mobs\Slime.cs" />
     <Compile Include="Source\Entities\Mobs\SlimeBoss.cs" />
     <Compile Include="Source\Entities\Mobs\Zombie.cs" />

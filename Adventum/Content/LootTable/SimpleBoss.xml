@@ -2,7 +2,7 @@
 <XnaContent xmlns:Data="Adventum.Data">
 	<Asset Type="Data:LootTable">
 		<Item>Coin<weight>1</weight><range>20 20</range></Item>
-		<Item>HealthPotion<weight>1</weight><range>3 4</range></Item>
+		<Item>HealthPotion<weight>1</weight><range>2 4</range></Item>
 		<Item>CollectablePickup<weight>1</weight><range>1 1</range></Item>
 	</Asset>
 </XnaContent>

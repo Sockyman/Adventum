@@ -7,15 +7,20 @@ using Adventum.Core.Resource;
 
 namespace Adventum.Entities
 {
-    class Tree : Entity
+    public class Tree : Entity
     {
         public override CollisionType CollisionType => CollisionType.Immovable;
         public override bool ReactToCollisions => false;
 
-        public Tree(Vector2 position) : base(position)
+
+        public override bool CheckCollisions { get; }
+
+        public Tree(Vector2 position, bool collides) : base(position)
         {
             Sprite = new Animator("Tree", "tree");
             Sprite.FrameNumber += (float)random.NextDouble() * 4;
+
+            CheckCollisions = collides;
 
             SetBounds(new Point(16));
         }

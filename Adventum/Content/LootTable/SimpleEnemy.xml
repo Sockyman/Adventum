@@ -3,6 +3,6 @@
 	<Asset Type="Data:LootTable">
 		<Item>Coin<weight>0.5</weight><range>1 1</range></Item>
 		<Item>Coin<weight>0.15</weight><range>1 2</range></Item>
-		<Item>HealthPotion<weight>0.1</weight><range>1 1</range></Item>
+		<Item>HealthPotion<weight>0.05</weight><range>1 1</range></Item>
 	</Asset>
 </XnaContent>
